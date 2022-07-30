@@ -1,0 +1,10 @@
+{
+ 	"type": "uni",
+ 	"uni": {
+ 		"url": "http://api.php.asai.cc/api"
+ 	},
+ 	"web": {
+ 		"url": "http://localhost:909"
+ 	},
+ 	"timeout": 6000000
+ }

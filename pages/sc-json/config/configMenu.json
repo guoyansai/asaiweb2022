@@ -1,0 +1,255 @@
+{
+	"menus": [{
+			"name": "测试一",
+			"value": "test1",
+			"file": "test1",
+			"type": 2
+		},
+		{
+			"name": "测试二",
+			"value": "test2",
+			"file": "test2",
+			"type": 2
+		},
+		{
+			"name": "账单",
+			"value": "bill",
+			"file": "bill",
+			"type": 2
+		},
+		{
+			"name": "配置",
+			"value": "config",
+			"file": "config",
+			"type": 2
+		},
+		{
+			"name": "信息",
+			"value": "info",
+			"file": "info",
+			"type": 2
+		},
+		{
+			"name": "日志",
+			"value": "infolog",
+			"file": "infolog",
+			"type": 2
+		},
+		{
+			"name": "消息",
+			"value": "msg",
+			"file": "msg",
+			"type": 2
+		},
+		{
+			"name": "用户",
+			"value": "user",
+			"file": "user",
+			"type": 2
+		},
+		{
+			"name": "网站主页",
+			"value": "home",
+			"file": "home/index",
+			"type": 1
+		},
+		{
+			"name": "分类列表",
+			"value": "classlist",
+			"file": "article/class/list",
+			"type": 1
+		},
+		{
+			"name": "添加分类",
+			"value": "classadd",
+			"file": "article/class/add",
+			"type": 7
+		},
+		{
+			"name": "编辑分类",
+			"value": "classedit",
+			"file": "article/class/edit",
+			"type": 8
+		},
+		{
+			"name": "分类展示",
+			"value": "classview",
+			"file": "article/class/view",
+			"type": 1
+		},
+		{
+			"name": "信息列表",
+			"value": "infolist",
+			"file": "article/info/list",
+			"type": 1
+		},
+		{
+			"name": "添加信息",
+			"value": "infoadd",
+			"file": "article/info/add",
+			"type": 7
+		},
+		{
+			"name": "编辑信息",
+			"value": "infoedit",
+			"file": "article/info/edit",
+			"type": 8
+		},
+		{
+			"name": "展示信息",
+			"value": "infoview",
+			"file": "article/info/view",
+			"type": 1
+		},
+		{
+			"name": "会员列表",
+			"value": "memberlist",
+			"file": "user/member/list",
+			"type": 1
+		},
+		{
+			"name": "添加会员",
+			"value": "memberadd",
+			"file": "user/member/add",
+			"type": 4
+		},
+		{
+			"name": "编辑会员",
+			"value": "memberedit",
+			"file": "user/member/edit",
+			"type": 7
+		},
+		{
+			"name": "会员展示",
+			"value": "memberview",
+			"file": "user/member/view",
+			"type": 1
+		},
+		{
+			"name": "会员更新",
+			"value": "membereditme",
+			"file": "user/member/editme",
+			"type": 1
+		},
+		{
+			"name": "会员退出",
+			"value": "memberexit",
+			"file": "user/member/exit",
+			"type": 1
+		},
+		{
+			"name": "短信列表",
+			"value": "messagelist",
+			"file": "user/message/list",
+			"type": 1
+		},
+		{
+			"name": "发送短信",
+			"value": "messageadd",
+			"file": "user/message/add",
+			"type": 1
+		},
+		{
+			"name": "编辑短信",
+			"value": "messageedit",
+			"file": "user/message/edit",
+			"type": 7
+		},
+		{
+			"name": "短信展示",
+			"value": "messageview",
+			"file": "user/message/view",
+			"type": 1
+		},
+		{
+			"name": "记录列表",
+			"value": "recordlist",
+			"file": "user/record/list",
+			"type": 1
+		},
+		{
+			"name": "添加记录",
+			"value": "recordadd",
+			"file": "user/record/add",
+			"type": 1
+		},
+		{
+			"name": "编辑记录",
+			"value": "recordedit",
+			"file": "user/record/edit",
+			"type": 1
+		},
+		{
+			"name": "记录展示",
+			"value": "recordview",
+			"file": "user/record/view",
+			"type": 1
+		},
+		{
+			"name": "好友列表",
+			"value": "friendlist",
+			"file": "user/friend/list",
+			"type": 1
+		},
+		{
+			"name": "添加好友",
+			"value": "friendadd",
+			"file": "user/friend/add",
+			"type": 1
+		},
+		{
+			"name": "编辑好友",
+			"value": "friendedit",
+			"file": "user/friend/edit",
+			"type": 1
+		},
+		{
+			"name": "好友展示",
+			"value": "friendview",
+			"file": "user/friend/view",
+			"type": 1
+		},
+		{
+			"name": "群聚列表",
+			"value": "grouplist",
+			"file": "user/group/list",
+			"type": 1
+		},
+		{
+			"name": "添加群聚",
+			"value": "groupadd",
+			"file": "user/group/add",
+			"type": 4
+		},
+		{
+			"name": "编辑群聚",
+			"value": "groupedit",
+			"file": "user/group/edit",
+			"type": 4
+		},
+		{
+			"name": "群聚展示",
+			"value": "groupview",
+			"file": "user/group/view",
+			"type": 1
+		},
+		{
+			"name": "会员登录",
+			"value": "memberlogin",
+			"file": "user/member/login",
+			"type": 1
+		},
+		{
+			"name": "会员注册",
+			"value": "memberreg",
+			"file": "user/member/reg",
+			"type": 1
+		},
+		{
+			"name": "找回账户",
+			"value": "memberfind",
+			"file": "user/member/find",
+			"type": 1
+		}
+	]
+}
