@@ -17,7 +17,7 @@
 		methods: {
 			api() {
 				console.log(666.331, 'api')
-				this.classApi.scApi('/t.php', {}, {}).then(res => {
+				this.$api('/t.php', {}, {}).then(res => {
 					console.log(666.333, res)
 					this.res = res
 				}).catch(err => {

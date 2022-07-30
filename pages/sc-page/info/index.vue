@@ -21,7 +21,7 @@
 		},
 		computed: {
 			lists() {
-				return this.jsonDb.info
+				return this.mJson.db.info
 			},
 			keys() {
 				return Object.keys(this.lists)

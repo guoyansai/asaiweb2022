@@ -33,23 +33,23 @@
 				console.log(666.111, this.jsonDb)
 			},
 			tJsonGet() {
-				this.mClass.api.scApi('http://appdata.fu.asai.cc/data/app.json', {}, {method:'get'}).then(res => {
+				this.$api('http://appdata.fu.asai.cc/data/app.json', {}, {method:'get'}).then(res => {
 					this.tRes = res
 					console.log(666.001, this.tRes)
 				})
 			},
 			tJson1Get() {
-				this.mClass.api.scApi('http://appdata.fu.asai.cc/data/tools/co/study/g-naojing/co.json', {}, {method:'get'}).then(res => {
+				this.$api('http://appdata.fu.asai.cc/data/tools/co/study/g-naojing/co.json', {}, {method:'get'}).then(res => {
 					this.tRes = res
 					console.log(666.001, this.tRes)
 				})},
 			tApiGet() {
-				this.mClass.api.scApi('http://api.php.asai.cc/api/s.php', {}, {}).then(res => {
+				this.$api('http://api.php.asai.cc/api/s.php', {}, {}).then(res => {
 					this.tRes = res
 					console.log(666.001, this.tRes)
 				})},
 			tApi1Get() {
-				this.mClass.api.scApi('http://api.php.asai.cc/api/t.php', {}, {}).then(res => {
+				this.$api('http://api.php.asai.cc/api/t.php', {}, {}).then(res => {
 					this.tRes = res
 					console.log(666.001, this.tRes)
 				})},

@@ -10,4 +10,9 @@ export default {
 			mClass: classFun,
 		}
 	},
+	methods:{
+		$api(vUrl, vParams, vConfig){
+			return this.mClass.api.scApi(vUrl, vParams, vConfig)
+		}
+	}
 }
