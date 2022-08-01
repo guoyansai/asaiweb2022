@@ -1,273 +1,227 @@
 {
-	"menus": [{
-			"title": "测试一",
-			"url": "test1",
-			"file": "test1",
-			"type": 2
-		},
-		{
-			"title": "测试二",
-			"url": "test2",
-			"file": "test2",
-			"type": 2
-		},
-		{
-			"title": "通用1",
-			"url": "haha1",
-			"file": "scInfo",
-			"type": 1
-		},
-		{
-			"title": "通用2",
-			"url": "haha2",
-			"file": "scInfo",
-			"type": 2
-		},
-		{
-			"title": "通用3",
-			"url": "haha3",
-			"file": "scInfo",
-			"type": 3
-		},
-		{
-			"title": "账单",
-			"url": "bill",
-			"file": "bill",
-			"type": 2
-		},
-		{
-			"title": "配置",
-			"url": "config",
-			"file": "config",
-			"type": 2
-		},
-		{
-			"title": "信息",
-			"url": "info",
-			"file": "info",
-			"type": 2
-		},
-		{
-			"title": "日志",
-			"url": "infolog",
-			"file": "infolog",
-			"type": 2
-		},
-		{
-			"title": "消息",
-			"url": "msg",
-			"file": "msg",
-			"type": 2
-		},
-		{
-			"title": "用户",
-			"url": "user",
-			"file": "user",
-			"type": 2
-		},
-		{
-			"title": "网站主页",
-			"url": "home",
-			"file": "home/index",
-			"type": 1
-		},
-		{
-			"title": "分类列表",
-			"url": "classlist",
-			"file": "article/class/list",
-			"type": 1
-		},
-		{
-			"title": "添加分类",
-			"url": "classadd",
-			"file": "article/class/add",
-			"type": 7
-		},
-		{
-			"title": "编辑分类",
-			"url": "classedit",
-			"file": "article/class/edit",
-			"type": 8
-		},
-		{
-			"title": "分类展示",
-			"url": "classview",
-			"file": "article/class/view",
-			"type": 1
-		},
-		{
-			"title": "信息列表",
-			"url": "infolist",
-			"file": "article/info/list",
-			"type": 1
-		},
-		{
-			"title": "添加信息",
-			"url": "infoadd",
-			"file": "article/info/add",
-			"type": 7
-		},
-		{
-			"title": "编辑信息",
-			"url": "infoedit",
-			"file": "article/info/edit",
-			"type": 8
-		},
-		{
-			"title": "展示信息",
-			"url": "infoview",
-			"file": "article/info/view",
-			"type": 1
-		},
-		{
-			"title": "会员列表",
-			"url": "memberlist",
-			"file": "user/member/list",
-			"type": 1
-		},
-		{
-			"title": "添加会员",
-			"url": "memberadd",
-			"file": "user/member/add",
-			"type": 4
-		},
-		{
-			"title": "编辑会员",
-			"url": "memberedit",
-			"file": "user/member/edit",
-			"type": 7
-		},
-		{
-			"title": "会员展示",
-			"url": "memberview",
-			"file": "user/member/view",
-			"type": 1
-		},
-		{
-			"title": "会员更新",
-			"url": "membereditme",
-			"file": "user/member/editme",
-			"type": 1
-		},
-		{
-			"title": "会员退出",
-			"url": "memberexit",
-			"file": "user/member/exit",
-			"type": 1
-		},
-		{
-			"title": "短信列表",
-			"url": "messagelist",
-			"file": "user/message/list",
-			"type": 1
-		},
-		{
-			"title": "发送短信",
-			"url": "messageadd",
-			"file": "user/message/add",
-			"type": 1
-		},
-		{
-			"title": "编辑短信",
-			"url": "messageedit",
-			"file": "user/message/edit",
-			"type": 7
-		},
-		{
-			"title": "短信展示",
-			"url": "messageview",
-			"file": "user/message/view",
-			"type": 1
-		},
-		{
-			"title": "记录列表",
-			"url": "recordlist",
-			"file": "user/record/list",
-			"type": 1
-		},
-		{
-			"title": "添加记录",
-			"url": "recordadd",
-			"file": "user/record/add",
-			"type": 1
-		},
-		{
-			"title": "编辑记录",
-			"url": "recordedit",
-			"file": "user/record/edit",
-			"type": 1
-		},
-		{
-			"title": "记录展示",
-			"url": "recordview",
-			"file": "user/record/view",
-			"type": 1
-		},
-		{
-			"title": "好友列表",
-			"url": "friendlist",
-			"file": "user/friend/list",
-			"type": 1
-		},
-		{
-			"title": "添加好友",
-			"url": "friendadd",
-			"file": "user/friend/add",
-			"type": 1
-		},
-		{
-			"title": "编辑好友",
-			"url": "friendedit",
-			"file": "user/friend/edit",
-			"type": 1
-		},
-		{
-			"title": "好友展示",
-			"url": "friendview",
-			"file": "user/friend/view",
-			"type": 1
-		},
-		{
-			"title": "群聚列表",
-			"url": "grouplist",
-			"file": "user/group/list",
-			"type": 1
-		},
-		{
-			"title": "添加群聚",
-			"url": "groupadd",
-			"file": "user/group/add",
-			"type": 4
-		},
-		{
-			"title": "编辑群聚",
-			"url": "groupedit",
-			"file": "user/group/edit",
-			"type": 4
-		},
-		{
-			"title": "群聚展示",
-			"url": "groupview",
-			"file": "user/group/view",
-			"type": 1
-		},
-		{
-			"title": "会员登录",
-			"url": "memberlogin",
-			"file": "user/member/login",
-			"type": 1
-		},
-		{
-			"title": "会员注册",
-			"url": "memberreg",
-			"file": "user/member/reg",
-			"type": 1
-		},
-		{
-			"title": "找回账户",
-			"url": "memberfind",
-			"file": "user/member/find",
-			"type": 1
-		}
-	]
+	"test1": {
+		"title": "测试一",
+		"file": "test1",
+		"type": 2
+	},
+	"test2": {
+		"title": "测试二",
+		"file": "test2",
+		"type": 2
+	},
+	"haha1": {
+		"title": "通用1",
+		"file": "scInfo",
+		"type": 1
+	},
+	"haha2": {
+		"title": "通用2",
+		"file": "scInfo",
+		"type": 2
+	},
+	"haha3": {
+		"title": "通用3",
+		"file": "scInfo",
+		"type": 3
+	},
+	"bill": {
+		"title": "账单",
+		"file": "bill",
+		"type": 2
+	},
+	"config": {
+		"title": "配置",
+		"file": "config",
+		"type": 2
+	},
+	"info": {
+		"title": "信息",
+		"file": "info",
+		"type": 2
+	},
+	"infolog": {
+		"title": "日志",
+		"file": "infolog",
+		"type": 2
+	},
+	"msg": {
+		"title": "消息",
+		"file": "msg",
+		"type": 2
+	},
+	"user": {
+		"title": "用户",
+		"file": "user",
+		"type": 2
+	},
+	"home": {
+		"title": "网站主页",
+		"file": "home/index",
+		"type": 1
+	},
+	"classlist": {
+		"title": "分类列表",
+		"file": "article/class/list",
+		"type": 1
+	},
+	"classadd": {
+		"title": "添加分类",
+		"file": "article/class/add",
+		"type": 7
+	},
+	"classedit": {
+		"title": "编辑分类",
+		"file": "article/class/edit",
+		"type": 8
+	},
+	"classview": {
+		"title": "分类展示",
+		"file": "article/class/view",
+		"type": 1
+	},
+	"infolist": {
+		"title": "信息列表",
+		"file": "article/info/list",
+		"type": 1
+	},
+	"infoadd": {
+		"title": "添加信息",
+		"file": "article/info/add",
+		"type": 7
+	},
+	"infoedit": {
+		"title": "编辑信息",
+		"file": "article/info/edit",
+		"type": 8
+	},
+	"infoview": {
+		"title": "展示信息",
+		"file": "article/info/view",
+		"type": 1
+	},
+	"memberlist": {
+		"title": "会员列表",
+		"file": "user/member/list",
+		"type": 1
+	},
+	"memberadd": {
+		"title": "添加会员",
+		"file": "user/member/add",
+		"type": 4
+	},
+	"memberedit": {
+		"title": "编辑会员",
+		"file": "user/member/edit",
+		"type": 7
+	},
+	"memberview": {
+		"title": "会员展示",
+		"file": "user/member/view",
+		"type": 1
+	},
+	"membereditme": {
+		"title": "会员更新",
+		"file": "user/member/editme",
+		"type": 1
+	},
+	"memberexit": {
+		"title": "会员退出",
+		"file": "user/member/exit",
+		"type": 1
+	},
+	"messagelist": {
+		"title": "短信列表",
+		"file": "user/message/list",
+		"type": 1
+	},
+	"messageadd": {
+		"title": "发送短信",
+		"file": "user/message/add",
+		"type": 1
+	},
+	"messageedit": {
+		"title": "编辑短信",
+		"file": "user/message/edit",
+		"type": 7
+	},
+	"messageview": {
+		"title": "短信展示",
+		"file": "user/message/view",
+		"type": 1
+	},
+	"recordlist": {
+		"title": "记录列表",
+		"file": "user/record/list",
+		"type": 1
+	},
+	"recordadd": {
+		"title": "添加记录",
+		"file": "user/record/add",
+		"type": 1
+	},
+	"recordedit": {
+		"title": "编辑记录",
+		"file": "user/record/edit",
+		"type": 1
+	},
+	"recordview": {
+		"title": "记录展示",
+		"file": "user/record/view",
+		"type": 1
+	},
+	"friendlist": {
+		"title": "好友列表",
+		"file": "user/friend/list",
+		"type": 1
+	},
+	"friendadd": {
+		"title": "添加好友",
+		"file": "user/friend/add",
+		"type": 1
+	},
+	"friendedit": {
+		"title": "编辑好友",
+		"file": "user/friend/edit",
+		"type": 1
+	},
+	"friendview": {
+		"title": "好友展示",
+		"file": "user/friend/view",
+		"type": 1
+	},
+	"grouplist": {
+		"title": "群聚列表",
+		"file": "user/group/list",
+		"type": 1
+	},
+	"groupadd": {
+		"title": "添加群聚",
+		"file": "user/group/add",
+		"type": 4
+	},
+	"groupedit": {
+		"title": "编辑群聚",
+		"file": "user/group/edit",
+		"type": 4
+	},
+	"groupview": {
+		"title": "群聚展示",
+		"file": "user/group/view",
+		"type": 1
+	},
+	"memberlogin": {
+		"title": "会员登录",
+		"file": "user/member/login",
+		"type": 1
+	},
+	"memberreg": {
+		"title": "会员注册",
+		"file": "user/member/reg",
+		"type": 1
+	},
+	"memberfind": {
+		"title": "找回账户",
+		"file": "user/member/find",
+		"type": 1
+	}
 }

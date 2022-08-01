@@ -5,5 +5,7 @@ export default {
 	api: {
 		...configApi
 	},
-	menu: configMenu.menus,
+	menu: {
+		...configMenu
+	},
 }

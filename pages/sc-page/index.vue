@@ -1,5 +1,5 @@
 <template>
-	<component :is="provGlobal.file"></component>
+	<component :is="mMenu[provGlobal.menu].file"></component>
 </template>
 
 <script>

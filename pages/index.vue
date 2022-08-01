@@ -20,10 +20,7 @@
 				isPath: 'bill',
 				isPage: null,
 				provGlobal: {
-					title: '',
-					url: 'test1',
-					file: 'scInfo',
-					type: 0,
+					menu: 'test1',
 					haha: '试试看 ',
 					params: {}
 				},
@@ -37,7 +34,7 @@
 		},
 		onLoad() {
 			const locations = (window.location.hash.substring(2) + '/').split('/')
-			this.provGlobal.url = locations[0]
+			this.provGlobal.menu = locations[0]
 			this.provGlobal.params = this.classParams.paramsUrl(locations[1])
 			console.log(666.001, locations, this.provGlobal)
 		},
