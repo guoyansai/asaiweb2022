@@ -1,6 +1,6 @@
 <template>
-	<div v-for="item in mJson.config.menu" :key="item.value" @click="go(item.value)" :class="{cur:provGlobal.url === item.value}">
-		{{item.name}}
+	<div v-for="item in mJson.config.menu" :key="item.url" @click="go(item)" :class="{cur:provGlobal.url === item.url}">
+		{{item.title}}
 	</div>
 </template>
 
@@ -8,8 +8,8 @@
 	export default {
 		inject: ['provGlobal'],
 		methods: {
-			go(url) {
-				this.provGlobal.url = url
+			go(item) {
+				Object.assign(this.provGlobal, item)
 				location.href = '/#/' + url;
 			}
 		}

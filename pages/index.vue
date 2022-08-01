@@ -20,8 +20,11 @@
 				isPath: 'bill',
 				isPage: null,
 				provGlobal: {
-					haha: '试试看 ',
+					title: '',
 					url: 'test1',
+					file: 'scInfo',
+					type: 0,
+					haha: '试试看 ',
 					params: {}
 				},
 				component: null

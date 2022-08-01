@@ -1,10 +1,11 @@
 <template>
-	<component :is="provGlobal.url"></component>
+	<component :is="provGlobal.file"></component>
 </template>
 
 <script>
 	import test1 from "./test1/index.vue";
 	import test2 from "./test2/index.vue";
+	import scInfo from "./sc-info/index.vue";
 	import bill from "./bill/index.vue";
 	import config from "./config/index.vue";
 	import home from "./home/index.vue";
@@ -18,6 +19,7 @@
 		components: {
 			test1,
 			test2,
+			scInfo,
 			bill,
 			config,
 			home,
