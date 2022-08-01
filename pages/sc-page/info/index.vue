@@ -4,8 +4,8 @@
 	</scInput>
 
 	<h1>表单</h1>
-	<div v-for="(item,index) in keys" :key="'info'+index">{{lists[item].fv}}
-		<scInput :scitem="lists[item]"></scInput>
+	<div v-for="(item,index) in keys" :key="'info'+index" class="inline">
+	{{lists[item].fv}}	<scInput :scitem="lists[item]"></scInput>
 	</div>
 </template>
 

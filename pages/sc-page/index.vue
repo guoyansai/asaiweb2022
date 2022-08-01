@@ -1,5 +1,5 @@
 <template>
-	<component :is="mMenu[provGlobal.menu].file"></component>
+	<component :is="curFile"></component>
 </template>
 
 <script>
@@ -16,6 +16,15 @@
 
 	export default {
 		inject: ["provGlobal"],
+		computed: {
+			curFile() {
+				if (this.mMenu && this.mMenu[this.provGlobal.menu]) {
+					return this.mMenu[this.provGlobal.menu].file
+				} else {
+					return 'test1'
+				}
+			}
+		},
 		components: {
 			test1,
 			test2,

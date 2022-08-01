@@ -33,10 +33,7 @@
 			}
 		},
 		onLoad() {
-			const locations = (window.location.hash.substring(2) + '/').split('/')
-			this.provGlobal.menu = locations[0]
-			this.provGlobal.params = this.classParams.paramsUrl(locations[1])
-			console.log(666.001, locations, this.provGlobal)
+			this.$getUrl(this.provGlobal)
 		},
 	}
 </script>

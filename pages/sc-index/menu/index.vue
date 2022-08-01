@@ -9,8 +9,7 @@
 		inject: ['provGlobal'],
 		methods: {
 			go(item) {
-				this.provGlobal.menu = item
-				location.href = '/#/' + item;
+				this.$setUrl(this.provGlobal, item, {})
 			}
 		}
 	}
