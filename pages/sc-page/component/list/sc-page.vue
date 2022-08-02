@@ -1,20 +1,15 @@
 <template>
 	<div id="page" v-if="params.pa">
-		搜索类型:<select v-model="params.sl">
-			<option value="">全部</option>
-			<option value="0">编码</option>
-			<option value="1">标题</option>
-			<option value="2">内容</option>
-		</select>
-		关键词:<input v-model="params.ss">
-		<span @click="params.pg=1" v-if="params.pg>3">首页</span>
-		<span @click="params.pg=params.pg-1" v-if="params.pg>1">上一页</span>
-		<span v-for="i in arrPage" :key="'page'+i" @click="params.pg=i" :class="{curPage:i===+params.pg}">
+		搜索类型:<input v-model="params.sl" @input="setUrl()">
+		关键词:<input v-model="params.ss" @input="setUrl()">
+		<span @click="toPage(1)" v-if="params.pg>3">首页</span>
+		<span @click="toPage(params.pg-1)" v-if="params.pg>1">上一页</span>
+		<span v-for="i in arrPage" :key="'page'+i" @click="toPage(i)" :class="{curPage:i===+params.pg}">
 			{{i}}
 		</span>
-		<span @click="params.pg=params.pg+1" v-if="params.pg<params.pc">下一页</span>
-		<span @click="params.pg=params.pc" v-if="params.pg<params.pc-2">尾页</span>
-		第<input v-model="params.pg">页，每页<input v-model="params.ps">条
+		<span @click="toPage(params.pg+1)" v-if="params.pg<params.pc">下一页</span>
+		<span @click="toPage(params.pc)" v-if="params.pg<params.pc-2">尾页</span>
+		第<input v-model="params.pg" @input="setUrl()">页，每页<input v-model="params.ps" @input="setUrl()">条
 	</div>
 </template>
 
@@ -40,12 +35,16 @@
 				}
 			}
 		},
-		watch: {
-			"provGlobal.params": {
-				handler(newVal, oldVal) {
-					this.$setUrl(this.provGlobal, this.provGlobal.menu, newVal)
-				},
-				deep: true
+		methods: {
+			toPage(i) {
+				Object.assign(this.provGlobal.params, {
+					pg: i
+				})
+				this.setUrl()
+			},
+			setUrl() {
+				console.log(666.999)
+				this.$setUrl(this.provGlobal, this.provGlobal.menu, this.provGlobal.params)
 			}
 		}
 	}

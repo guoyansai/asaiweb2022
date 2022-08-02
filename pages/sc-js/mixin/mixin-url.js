@@ -5,13 +5,14 @@ export default {
 			provGlobal.menu = locations[0]
 			provGlobal.params = this.paramsUrl(locations[1])
 			// Object.assign(provGlobal.params, this.paramsUrl(locations[1]))
-
 			provGlobal.params = this.paramsUrl(locations[1])
 		},
 		$setUrl(provGlobal, menu, params) {
 			provGlobal.menu = menu;
 			Object.assign(provGlobal.params, params)
-			location.href = '/#/' + menu + '/' + this.paramsObj(provGlobal.params);
+			if (location) {
+				location.href = '/#/' + menu + '/' + this.paramsObj(provGlobal.params);
+			}
 		},
 		paramsObj(obj) {
 			let tmpStr = ''
