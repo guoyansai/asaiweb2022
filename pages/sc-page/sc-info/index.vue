@@ -1,16 +1,19 @@
 <template>
 	<div>{{title}}</div>
 	<div>{{JSON.stringify(provGlobal)}}</div>
-	<div class="inline"><button @click="setParams({ty:'list',pg:1,ps:20,ss:'',sl:''});">获取数据</button></div>
+	<button @click="tJsonGet();">获取歇后语数据</button>
+	<button @click="tJson1Get();">获取脑筋急转弯数据</button>
+	<div class="inline"><button @click="setParams({ty:'list'});">获取数据</button></div>
 	<div class="inline"><button @click="setParams({ty:'view',sn:'2'});">预览数据</button></div>
 	<div class="inline"><button @click="setParams({ty:'form',sn:'2'});">编辑数据</button></div>
 	<div v-if="provGlobal.params.ty==='list'">
-		<dl v-for="item in arrList" :key="item">
-			<dt>{{lists[item][1]}}</dt>
-			<dd>{{lists[item][2]}}</dd>
+		<scPage></scPage>
+		<dl v-for="item in arrData" :key="item[0]">
+			<dt>{{item[1]}}</dt>
+			<dd>{{item[2]}}</dd>
 			<dd>
-				<button @click="setParams({ty:'view',sn:item});">预览</button>
-				<button @click="setParams({ty:'form',sn:item});">编辑</button>
+				<button @click="setParams({ty:'view',sn:item[0]});">预览</button>
+				<button @click="setParams({ty:'form',sn:item[0]});">编辑</button>
 			</dd>
 		</dl>
 	</div>
@@ -31,7 +34,10 @@
 </template>
 
 <script>
+	import mixinList from '../component/list/mixin-list.js'
+
 	export default {
+		mixins: [mixinList],
 		inject: ["provGlobal"],
 		data() {
 			return {
@@ -47,28 +53,39 @@
 				return {}
 			},
 			arrList() {
-				return Object.keys(this.lists)
+				return Object.values(this.lists)
+			},
+			arrData() {
+				return this.$getList(this.arrList, this.provGlobal.params)
 			},
 			curView() {
 				return this.lists[this.provGlobal.params.sn] || [, ]
 			}
 		},
 		created() {
-			console.log(666.98789)
 			if (!this.tRes || !this.tRes.li) {
 				this.tJson1Get();
 			}
 		},
 		methods: {
 			setParams(params) {
-				this.$setUrl(this.provGlobal, this.provGlobal.menu, params)
+				Object.assign(this.provGlobal.params, params)
+				this.$setUrl(this.provGlobal, this.provGlobal.menu, this.provGlobal.params)
+			},
+			tJsonGet() {
+				this.$api('http://appdata.fu.asai.cc/data/tools/co/study/g-xiehouyu/co.json', {}, {
+					method: 'get'
+				}).then(res => {
+					this.tRes = res
+					console.log(666.101, this.tRes)
+				})
 			},
 			tJson1Get() {
 				this.$api('http://appdata.fu.asai.cc/data/tools/co/study/g-naojing/co.json', {}, {
 					method: 'get'
 				}).then(res => {
 					this.tRes = res
-					console.log(666.001, this.tRes)
+					console.log(666.102, this.tRes)
 				})
 			},
 		}

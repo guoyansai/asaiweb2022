@@ -1,20 +1,19 @@
 export default class {
 	constructor(jsonConf) {
 		this.jsonConf = jsonConf;
-		this.isUni = jsonConf.type === 'uni'
+		this.isUni = jsonConf.type === 'uni';
+		this.dataObj = {};
 	}
 	scApi(vUrl, vParams, vConfig) {
 		const [url, params, config] = [this.scUrl(vUrl), this.scParams(vParams), this.scConfig(vConfig)]
 		this.scLoadShow({
 			title: "数据加载中",
 		});
-		console.log(666.9, url, params, config)
 		return new Promise((resolve, reject) => {
 			if (this.isUni) {
 				this.uniApi(url, params, config).then(res => {
 					this.scMsgShow('加载成功')
-					console.log(res.data);
-					resolve(res.data);
+					resolve(res);
 				}).catch(err => {
 					this.scMsgShow('失败了')
 					reject(err)
@@ -68,25 +67,72 @@ export default class {
 
 		}
 	}
+	scGetData(dataKey) {
+		return this.dataObj[dataKey] || null
+	}
+	scSetData(dataKey, objRes) {
+		this.dataObj[dataKey] = objRes
+	}
+	scToKey(str) {
+		return this.jsonConf.dataStart + this.scStr(str)
+	}
+	scToObj(val) {
+		if (val && typeof val === 'string') {
+			return JSON.parse(val)
+		}
+		return val
+	}
 	scStr(str) {
 		return ((str + '').replace(/[^a-zA-Z0-9]/g, '') || '').substr(-20)
 	}
 	// uni-app封装
 	uniApi(url, params, config) {
 		return new Promise((resolve, reject) => {
-			uni.request({
-				url: url,
-				data: params,
-				method: config.method || 'POST', // 'GET'||'POST'
-				header: config.header,
-				timeout: config.timeout || this.jsonConf.timeout,
-				success: (res) => {
-					resolve(res);
-				},
-				fail: (err) => {
-					reject(err)
-				}
-			});
+			const dataKey = this.scToKey(url)
+			let objRes = this.scGetData(dataKey)
+			if (objRes) {
+				console.log(666.001, objRes);
+				resolve(objRes)
+			} else {
+				uni.getStorage({
+					key: dataKey,
+					success: (resSto) => {
+						objRes = this.scToObj(resSto)
+						objRes = objRes.data
+						console.log(666.002, objRes);
+						this.scGetData(dataKey, objRes)
+						resolve(objRes)
+					},
+					fail: (errSto) => {
+						uni.request({
+							url: url,
+							data: params,
+							method: config.method || 'POST', // 'GET'||'POST'
+							header: config.header,
+							timeout: config.timeout || this.jsonConf.timeout,
+							success: (res) => {
+								objRes = this.scToObj(res)
+								objRes = objRes.data
+								console.log(666.003, objRes);
+								uni.setStorage({
+									key: dataKey,
+									data: objRes,
+									success: () => {},
+									complete: () => {
+										this.scGetData(dataKey, objRes)
+										resolve(objRes);
+									}
+								});
+							},
+							fail: (err) => {
+								reject(err)
+							}
+						});
+					}
+				});
+
+
+			}
 		})
 	}
 	uniLoadShow(obj) {

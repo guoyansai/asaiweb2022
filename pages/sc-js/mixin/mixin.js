@@ -1,5 +1,6 @@
-import mixinGlobal from './mixin-global.js'
+import mixinUrl from './mixin-url.js'
+import mixinList from './mixin-list.js'
 
 export default {
-	mixins: [mixinGlobal],
+	mixins: [mixinUrl, mixinList],
 }
