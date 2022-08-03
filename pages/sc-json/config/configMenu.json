@@ -1,18 +1,50 @@
 {
-	"test1": {
-		"title": "测试一",
-		"file": "test1",
-		"type": 2
-	},
-	"test2": {
-		"title": "测试二",
-		"file": "test2",
-		"type": 2
-	},
-	"haha1": {
-		"title": "通用1",
+	"miyu": {
+		"title": "谜语",
 		"file": "scInfo",
-		"type": 1
+		"data": "/info/c-g-miyu",
+		"type": 2
+	},
+	"naojin": {
+		"title": "脑筋",
+		"file": "scInfo",
+		"data": "/info/c-g-naojin",
+		"type": 2
+	},
+	"xiehouyu": {
+		"title": "歇后语",
+		"file": "scInfo",
+		"data": "/info/c-g-xiehouyu",
+		"type": 2
+	},
+	"gushici": {
+		"title": "古诗词",
+		"file": "scInfo",
+		"data": "/info/c-s-gushici",
+		"type": 2
+	},
+	"chengyu": {
+		"title": "成语",
+		"file": "scInfo",
+		"data": "/info/c-s-chengyu",
+		"type": 2
+	},
+	"duanxin": {
+		"title": "短信",
+		"file": "scInfo",
+		"data": "/info/c-s-duanxin",
+		"type": 2
+	},
+	"mingyan": {
+		"title": "名言",
+		"file": "scInfo",
+		"data": "/info/c-s-mingyan",
+		"type": 2
+	},
+	"test": {
+		"title": "测试",
+		"file": "test",
+		"type": 2
 	},
 	"haha2": {
 		"title": "通用2",
@@ -23,205 +55,5 @@
 		"title": "通用3",
 		"file": "scInfo",
 		"type": 3
-	},
-	"bill": {
-		"title": "账单",
-		"file": "bill",
-		"type": 2
-	},
-	"config": {
-		"title": "配置",
-		"file": "config",
-		"type": 2
-	},
-	"info": {
-		"title": "信息",
-		"file": "info",
-		"type": 2
-	},
-	"infolog": {
-		"title": "日志",
-		"file": "infolog",
-		"type": 2
-	},
-	"msg": {
-		"title": "消息",
-		"file": "msg",
-		"type": 2
-	},
-	"user": {
-		"title": "用户",
-		"file": "user",
-		"type": 2
-	},
-	"home": {
-		"title": "网站主页",
-		"file": "home/index",
-		"type": 1
-	},
-	"classlist": {
-		"title": "分类列表",
-		"file": "article/class/list",
-		"type": 1
-	},
-	"classadd": {
-		"title": "添加分类",
-		"file": "article/class/add",
-		"type": 7
-	},
-	"classedit": {
-		"title": "编辑分类",
-		"file": "article/class/edit",
-		"type": 8
-	},
-	"classview": {
-		"title": "分类展示",
-		"file": "article/class/view",
-		"type": 1
-	},
-	"infolist": {
-		"title": "信息列表",
-		"file": "article/info/list",
-		"type": 1
-	},
-	"infoadd": {
-		"title": "添加信息",
-		"file": "article/info/add",
-		"type": 7
-	},
-	"infoedit": {
-		"title": "编辑信息",
-		"file": "article/info/edit",
-		"type": 8
-	},
-	"infoview": {
-		"title": "展示信息",
-		"file": "article/info/view",
-		"type": 1
-	},
-	"memberlist": {
-		"title": "会员列表",
-		"file": "user/member/list",
-		"type": 1
-	},
-	"memberadd": {
-		"title": "添加会员",
-		"file": "user/member/add",
-		"type": 4
-	},
-	"memberedit": {
-		"title": "编辑会员",
-		"file": "user/member/edit",
-		"type": 7
-	},
-	"memberview": {
-		"title": "会员展示",
-		"file": "user/member/view",
-		"type": 1
-	},
-	"membereditme": {
-		"title": "会员更新",
-		"file": "user/member/editme",
-		"type": 1
-	},
-	"memberexit": {
-		"title": "会员退出",
-		"file": "user/member/exit",
-		"type": 1
-	},
-	"messagelist": {
-		"title": "短信列表",
-		"file": "user/message/list",
-		"type": 1
-	},
-	"messageadd": {
-		"title": "发送短信",
-		"file": "user/message/add",
-		"type": 1
-	},
-	"messageedit": {
-		"title": "编辑短信",
-		"file": "user/message/edit",
-		"type": 7
-	},
-	"messageview": {
-		"title": "短信展示",
-		"file": "user/message/view",
-		"type": 1
-	},
-	"recordlist": {
-		"title": "记录列表",
-		"file": "user/record/list",
-		"type": 1
-	},
-	"recordadd": {
-		"title": "添加记录",
-		"file": "user/record/add",
-		"type": 1
-	},
-	"recordedit": {
-		"title": "编辑记录",
-		"file": "user/record/edit",
-		"type": 1
-	},
-	"recordview": {
-		"title": "记录展示",
-		"file": "user/record/view",
-		"type": 1
-	},
-	"friendlist": {
-		"title": "好友列表",
-		"file": "user/friend/list",
-		"type": 1
-	},
-	"friendadd": {
-		"title": "添加好友",
-		"file": "user/friend/add",
-		"type": 1
-	},
-	"friendedit": {
-		"title": "编辑好友",
-		"file": "user/friend/edit",
-		"type": 1
-	},
-	"friendview": {
-		"title": "好友展示",
-		"file": "user/friend/view",
-		"type": 1
-	},
-	"grouplist": {
-		"title": "群聚列表",
-		"file": "user/group/list",
-		"type": 1
-	},
-	"groupadd": {
-		"title": "添加群聚",
-		"file": "user/group/add",
-		"type": 4
-	},
-	"groupedit": {
-		"title": "编辑群聚",
-		"file": "user/group/edit",
-		"type": 4
-	},
-	"groupview": {
-		"title": "群聚展示",
-		"file": "user/group/view",
-		"type": 1
-	},
-	"memberlogin": {
-		"title": "会员登录",
-		"file": "user/member/login",
-		"type": 1
-	},
-	"memberreg": {
-		"title": "会员注册",
-		"file": "user/member/reg",
-		"type": 1
-	},
-	"memberfind": {
-		"title": "找回账户",
-		"file": "user/member/find",
-		"type": 1
 	}
 }

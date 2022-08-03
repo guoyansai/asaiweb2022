@@ -1,11 +1,10 @@
 {
- 	"type": "uni",
- 	"uni": {
- 		"url": "http://api.php.asai.cc/api"
- 	},
- 	"web": {
- 		"url": "http://localhost:909"
- 	},
- 	"timeout": 60000000,
-	"dataStart":"SC-"
- }
+	"type": "uni",
+	"urls": {
+		"uni": "http://appdata.fu.asai.cc/data",
+		"gitee": "http://appdata.gitee.asai.cc/data",
+		"github": "http://appdata.github.asai.cc/data",
+	},
+	"timeout": 60000000,
+	"dataStart": "SC-"
+}

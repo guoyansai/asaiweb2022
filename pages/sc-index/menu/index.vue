@@ -1,6 +1,6 @@
 <template>
-	<div v-for="item in mMenuKeys" :key="item" @click="go(item)" :class="{cur:provGlobal.menu === item}">
-		{{mMenu[item].title}}
+	<div v-for="item in mMenuArr" :key="item[0]" @click="go(item[0])" :class="{cur:provGlobal.menu === item[0]}">
+		{{item[1].title}}
 	</div>
 </template>
 

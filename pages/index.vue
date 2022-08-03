@@ -20,7 +20,7 @@
 				isPath: 'bill',
 				isPage: null,
 				provGlobal: {
-					menu: 'haha1',
+					menu: 'test',
 					haha: '试试看 ',
 					params: {}
 				},

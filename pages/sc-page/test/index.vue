@@ -1,7 +1,11 @@
 <template>
 	<div>{{title}}</div>
 	<div>{{JSON.stringify(provGlobal)}}</div>
+	<button @click="tJsonGet();">获取歇后语数据</button>
+	<button @click="tJson1Get();">获取脑筋急转弯数据</button>
 	<div class="inline"><button @click="setParams({ty:'list'});">获取数据</button></div>
+	<div class="inline"><button @click="setParams({ty:'view',sn:'2'});">预览数据</button></div>
+	<div class="inline"><button @click="setParams({ty:'form',sn:'2'});">编辑数据</button></div>
 	<div v-if="provGlobal.params.ty==='list'">
 		<scPage></scPage>
 		<dl v-for="item in arrData" :key="item[0]">
@@ -55,19 +59,12 @@
 				return this.$getList(this.arrList, this.provGlobal.params)
 			},
 			curView() {
-				return [this.provGlobal.params.sn, ...(this.lists[this.provGlobal.params.sn] || [])]
+				return [this.provGlobal.params.sn, ...(this.lists[this.provGlobal.params.sn]||[])]
 			}
 		},
 		created() {
 			if (!this.tRes || !this.tRes.li) {
-				this.fetchJson();
-			}
-		},
-		watch: {
-			"provGlobal.menu": {
-				handler(newVal, oldVal) {
-					this.fetchJson()
-				}
+				this.tJson1Get();
 			}
 		},
 		methods: {
@@ -75,9 +72,20 @@
 				Object.assign(this.provGlobal.params, params)
 				this.$setUrl(this.provGlobal, this.provGlobal.menu, this.provGlobal.params)
 			},
-			fetchJson() {
-				this.$apiJson(this.$infoUrl(this.provGlobal.menu)).then(res => {
+			tJsonGet() {
+				this.$api('http://appdata.fu.asai.cc/data/info/c-g-xiehouyu/co.json', {}, {
+					method: 'get'
+				}).then(res => {
 					this.tRes = res
+					console.log(666.101, this.tRes)
+				})
+			},
+			tJson1Get() {
+				this.$api('http://appdata.fu.asai.cc/data/info/c-g-naojin/co.json', {}, {
+					method: 'get'
+				}).then(res => {
+					this.tRes = res
+					console.log(666.102, this.tRes)
 				})
 			},
 		}
