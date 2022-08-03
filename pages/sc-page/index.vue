@@ -5,6 +5,7 @@
 <script>
 	import test from "./test/index.vue";
 	import scInfo from "./sc-info/index.vue";
+	import sySetting from "./sy-setting/index.vue";
 
 	export default {
 		inject: ["provGlobal"],
@@ -19,6 +20,7 @@
 		},
 		components: {
 			scInfo,
+			sySetting,
 			test,
 		},
 	};

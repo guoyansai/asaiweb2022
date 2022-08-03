@@ -3,14 +3,15 @@ export default class {
 		this.jsonConf = jsonConf;
 		this.isUni = jsonConf.type === 'uni';
 		this.dataObj = {};
+		this.loadDom = null
 	}
 	scApi(vUrl, vParams, vConfig) {
 		const [url, params, config] = [this.scUrl(vUrl), this.scParams(vParams), this.scConfig(vConfig)]
-		this.scLoadShow({
-			title: "数据加载中",
-		});
 		return new Promise((resolve, reject) => {
 			if (this.isUni) {
+				this.scLoadShow({
+					title: "数据加载中",
+				});
 				this.uniApi(url, params, config).then(res => {
 					this.scMsgShow('加载成功')
 					resolve(res);
@@ -29,7 +30,7 @@ export default class {
 		if (vUrl.startsWith('http')) {
 			return vUrl
 		}
-		return this.jsonConf.uni.url + vUrl
+		return this.jsonConf.url.keys[this.jsonConf.url.key] + vUrl
 	}
 	scParams(vParams) {
 		return vParams
@@ -136,10 +137,16 @@ export default class {
 		})
 	}
 	uniLoadShow(obj) {
-		uni.showLoading(obj);
+		this.loadDom = uni.showLoading({
+			mask: true,
+			...obj
+		});
 	}
 	uniLoadClose() {
-		uni.hideLoading();
+		if (this.loadDom) {
+			uni.hideLoading();
+			this.loadDom = null
+		}
 	}
 	uniMsgShow(title, duration) {
 		uni.showToast({

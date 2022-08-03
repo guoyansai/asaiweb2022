@@ -3,9 +3,7 @@ export default {
 		$getUrl(provGlobal) {
 			const locations = (window.location.hash.substring(2) + '/').split('/')
 			provGlobal.menu = locations[0]
-			provGlobal.params = this.paramsUrl(locations[1])
-			// Object.assign(provGlobal.params, this.paramsUrl(locations[1]))
-			provGlobal.params = this.paramsUrl(locations[1])
+			Object.assign(provGlobal.params, this.paramsUrl(locations[1]))
 		},
 		$setUrl(provGlobal, menu, params) {
 			provGlobal.menu = menu;
@@ -24,7 +22,7 @@ export default {
 						if (tmpStr) {
 							tmpStr += '_'
 						}
-						tmpStr += el[0] + '-' + val
+						tmpStr += el[0] + '=' + val
 					}
 				}
 			})
@@ -36,7 +34,7 @@ export default {
 			const len = arr.length
 			if (len > 1) {
 				for (let i = 0; i < len; i++) {
-					const tmpArr = (arr[i] + '-').split("-")
+					const tmpArr = (arr[i] + '=').split("=")
 					if (tmpArr[0]) {
 						tmpObj[tmpArr[0]] = this.paramsCode(tmpArr[1], 1) || ''
 					}
@@ -52,11 +50,11 @@ export default {
 				if (type === 1) {
 					tmpStr = decodeURI(tmpStr)
 					tmpStr = tmpStr.replace(/G\%/g, '_')
-					tmpStr = tmpStr.replace(/D\%/g, '-')
+					tmpStr = tmpStr.replace(/D\%/g, '=')
 				} else {
 					tmpStr = encodeURI(tmpStr)
 					tmpStr = tmpStr.replace(/_/g, 'G%')
-					tmpStr = tmpStr.replace(/\-/g, 'D%')
+					tmpStr = tmpStr.replace(/\=/g, 'D%')
 				}
 			}
 			return tmpStr

@@ -37,6 +37,7 @@
 		inject: ["provGlobal"],
 		data() {
 			return {
+				fileDir: 'info',
 				title: 'sc-info',
 				tRes: null
 			}
@@ -76,7 +77,7 @@
 				this.$setUrl(this.provGlobal, this.provGlobal.menu, this.provGlobal.params)
 			},
 			fetchJson() {
-				this.$apiJson(this.$infoUrl(this.provGlobal.menu)).then(res => {
+				this.$apiJson(this.provGlobal.menu).then(res => {
 					this.tRes = res
 				})
 			},
