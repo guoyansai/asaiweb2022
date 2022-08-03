@@ -47,19 +47,19 @@
 		},
 		computed: {
 			lists() {
-				if (this.tRes && this.tRes.li) {
-					return this.tRes.li.dt || {}
+				if (this.tRes && this.tRes.ll) {
+					return this.tRes.ll || {}
 				}
 				return {}
 			},
 			arrList() {
-				return Object.values(this.lists)
+				return Object.entries(this.lists).map(el => [el[0], ...el[1]])
 			},
 			arrData() {
 				return this.$getList(this.arrList, this.provGlobal.params)
 			},
 			curView() {
-				return this.lists[this.provGlobal.params.sn] || [, ]
+				return [this.provGlobal.params.sn, ...(this.lists[this.provGlobal.params.sn]||[])]
 			}
 		},
 		created() {
@@ -73,7 +73,7 @@
 				this.$setUrl(this.provGlobal, this.provGlobal.menu, this.provGlobal.params)
 			},
 			tJsonGet() {
-				this.$api('http://appdata.fu.asai.cc/data/tools/co/study/g-xiehouyu/co.json', {}, {
+				this.$api('http://appdata.fu.asai.cc/data/info/c-g-xiehouyu/co.json', {}, {
 					method: 'get'
 				}).then(res => {
 					this.tRes = res
@@ -81,7 +81,7 @@
 				})
 			},
 			tJson1Get() {
-				this.$api('http://appdata.fu.asai.cc/data/tools/co/study/g-naojing/co.json', {}, {
+				this.$api('http://appdata.fu.asai.cc/data/info/c-g-naojin/co.json', {}, {
 					method: 'get'
 				}).then(res => {
 					this.tRes = res

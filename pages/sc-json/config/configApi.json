@@ -6,6 +6,6 @@
  	"web": {
  		"url": "http://localhost:909"
  	},
- 	"timeout": 6000000,
+ 	"timeout": 60000000,
 	"dataStart":"SC-"
  }

@@ -51,7 +51,11 @@
 </script>
 
 <style scoped>
-	#page {}
+	#page {
+		display: flex;
+		align-items: center;
+		flex-wrap: wrap;
+	}
 
 	#page span {
 		border: 1px solid #d8d8d8;
