@@ -20,9 +20,10 @@
 				isPath: 'bill',
 				isPage: null,
 				provGlobal: {
-					menu: 'test',
 					haha: '试试看 ',
-					params: {}
+					menu: 'test',
+					params: {},
+					dataModel: {}
 				},
 				component: null
 			}

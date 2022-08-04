@@ -1,7 +1,7 @@
-import scPage from './sc-page'
+import saPage from './sa-page'
 
 export default {
 	components: {
-		scPage,
+		saPage,
 	}
 }

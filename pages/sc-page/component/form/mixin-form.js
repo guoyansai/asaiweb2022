@@ -1,9 +1,9 @@
-import scInput from './sc-input'
-import scModel from './sc-model'
+import saInput from './sa-input'
+import saModel from './sa-model'
 
 export default {
 	components: {
-		scInput,
-		scModel,
+		saInput,
+		saModel,
 	}
 }

@@ -7,7 +7,7 @@
 	<div class="inline"><button @click="setParams({ty:'view',sn:'2'});">预览数据</button></div>
 	<div class="inline"><button @click="setParams({ty:'form',sn:'2'});">编辑数据</button></div>
 	<div v-if="provGlobal.params.ty==='list'">
-		<scPage></scPage>
+		<saPage></saPage>
 		<dl v-for="item in arrData" :key="item[0]">
 			<dt>{{item[1]}}</dt>
 			<dd>{{item[2]}}</dd>

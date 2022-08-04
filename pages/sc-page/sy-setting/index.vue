@@ -1,6 +1,6 @@
 <template>
 	<div>{{title}}</div>
-	<scModel label="网址" v-model="mJson.config.api.url.key"></scModel>
+	<saModel label="网址" v-model="mJson.config.api.url.key"></saModel>
 </template>
 
 <script>

@@ -1,66 +1,23 @@
 <template>
-	<div>{{title}}</div>
-	<div>{{JSON.stringify(provGlobal)}}</div>
 	<div class="inline"><button @click="setParams({ty:'list'});">获取数据</button></div>
-	<div v-if="provGlobal.params.ty==='list'">
-		<scPage></scPage>
-		<dl v-for="item in arrData" :key="item[0]">
-			<dt>{{item[1]}}</dt>
-			<dd>{{item[2]}}</dd>
-			<dd>
-				<button @click="setParams({ty:'view',sn:item[0]});">预览</button>
-				<button @click="setParams({ty:'form',sn:item[0]});">编辑</button>
-			</dd>
-		</dl>
-	</div>
-
-	<div v-if="provGlobal.params.ty==='view'">
-		<dl>
-			<dt>{{curView[1]}}</dt>
-			<dd>{{curView[2]}}</dd>
-			<button @click="setParams({ty:'form',sn:provGlobal.params.sn});">编辑</button>
-		</dl>
-	</div>
-
-	<div v-if="provGlobal.params.ty==='form'">
-		<input v-model="curView[1]" />
-		<input v-model="curView[2]" />
-		<button @click="setParams({ty:'view',sn:provGlobal.params.sn});">预览</button>
-	</div>
+	<scForm></scForm>
+	<scList></scList>
+	<scShow></scShow>
 </template>
 
 <script>
-	import mixinList from '../component/list/mixin-list.js'
+	import mixinComponent from '../component/mixin-component.js'
 
 	export default {
-		mixins: [mixinList],
+		mixins: [mixinComponent],
 		inject: ["provGlobal"],
 		data() {
 			return {
-				fileDir: 'info',
 				title: 'sc-info',
-				tRes: null
-			}
-		},
-		computed: {
-			lists() {
-				if (this.tRes && this.tRes.ll) {
-					return this.tRes.ll || {}
-				}
-				return {}
-			},
-			arrList() {
-				return Object.entries(this.lists).map(el => [el[0], ...el[1]])
-			},
-			arrData() {
-				return this.$getList(this.arrList, this.provGlobal.params)
-			},
-			curView() {
-				return [this.provGlobal.params.sn, ...(this.lists[this.provGlobal.params.sn] || [])]
 			}
 		},
 		created() {
-			if (!this.tRes || !this.tRes.li) {
+			if (!this.provGlobal.dataModel || !this.provGlobal.dataModel.li) {
 				this.fetchJson();
 			}
 		},
@@ -78,7 +35,7 @@
 			},
 			fetchJson() {
 				this.$apiJson(this.provGlobal.menu).then(res => {
-					this.tRes = res
+					this.provGlobal.dataModel = res
 				})
 			},
 		}
