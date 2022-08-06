@@ -3,17 +3,17 @@
 	<div>{{JSON.stringify(provGlobal)}}</div>
 	<button @click="tJsonGet();">获取歇后语数据</button>
 	<button @click="tJson1Get();">获取脑筋急转弯数据</button>
-	<div class="inline"><button @click="setParams({ty:'list'});">获取数据</button></div>
-	<div class="inline"><button @click="setParams({ty:'view',sn:'2'});">预览数据</button></div>
-	<div class="inline"><button @click="setParams({ty:'form',sn:'2'});">编辑数据</button></div>
+	<div class="inline"><button @click="$setParams(provGlobal,{ty:'list'});">获取数据</button></div>
+	<div class="inline"><button @click="$setParams(provGlobal,{ty:'view',sn:'2'});">预览数据</button></div>
+	<div class="inline"><button @click="$setParams(provGlobal,{ty:'form',sn:'2'});">编辑数据</button></div>
 	<div v-if="provGlobal.params.ty==='list'">
 		<saPage></saPage>
 		<dl v-for="item in arrData" :key="item[0]">
 			<dt>{{item[1]}}</dt>
 			<dd>{{item[2]}}</dd>
 			<dd>
-				<button @click="setParams({ty:'view',sn:item[0]});">预览</button>
-				<button @click="setParams({ty:'form',sn:item[0]});">编辑</button>
+				<button @click="$setParams(provGlobal,{ty:'view',sn:item[0]});">预览</button>
+				<button @click="$setParams(provGlobal,{ty:'form',sn:item[0]});">编辑</button>
 			</dd>
 		</dl>
 	</div>
@@ -22,14 +22,14 @@
 		<dl>
 			<dt>{{curView[1]}}</dt>
 			<dd>{{curView[2]}}</dd>
-			<button @click="setParams({ty:'form',sn:provGlobal.params.sn});">编辑</button>
+			<button @click="$setParams(provGlobal,{ty:'form',sn:provGlobal.params.sn});">编辑</button>
 		</dl>
 	</div>
 
 	<div v-if="provGlobal.params.ty==='form'">
 		<input v-model="curView[1]" />
 		<input v-model="curView[2]" />
-		<button @click="setParams({ty:'view',sn:provGlobal.params.sn});">预览</button>
+		<button @click="$setParams(provGlobal,{ty:'view',sn:provGlobal.params.sn});">预览</button>
 	</div>
 </template>
 
@@ -68,10 +68,6 @@
 			}
 		},
 		methods: {
-			setParams(params) {
-				Object.assign(this.provGlobal.params, params)
-				this.$setUrl(this.provGlobal, this.provGlobal.menu, this.provGlobal.params)
-			},
 			tJsonGet() {
 				this.$api('http://appdata.fu.asai.cc/data/info/c-g-xiehouyu/co.json', {}, {
 					method: 'get'

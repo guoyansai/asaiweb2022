@@ -1,3 +1,9 @@
+/* 调色板
+
+#003338|#288c78|#61736f|#ccddd8|#eff5f8
+
+ */
+
 /* CSS初始化 */
 body,
 ol,
@@ -21,7 +27,7 @@ input,
 textarea,
 select {
 	margin: 0;
-	padding: 0
+	padding: 0;
 }
 
 img {
@@ -48,12 +54,12 @@ body {
 }
 
 a {
-	color: #333;
+	color: #003338;
 	text-decoration: none
 }
 
 a:hover {
-	color: #0c82ff
+	color: #288c78
 }
 
 .inline {
@@ -62,21 +68,103 @@ a:hover {
 	min-width: 300px;
 }
 
-.form-item {
+.form li {
 	display: flex;
-	padding: 6px 12px;
+	padding: 6px 22px 6px 12px;
 	align-items: center;
 }
 
-label {
+.form li label {
 	width: 100px;
 	min-width: 100px;
 	padding-right: 12px;
 	text-align: right;
 }
 
-input {
+.form li input,
+.form li textarea {
 	flex-grow: 1;
-	border: #d8d8d8 1px solid;
+	border: #ccddd8 1px solid;
+	padding: 6px 12px;
+}
+
+.pos {
+	padding: 6px 12px;
+}
+
+.pos em {
+	font-style: normal;
+	cursor: pointer;
+}
+
+.list {
+	border-top: #ccddd8 1px solid;
+}
+
+.list dl {
+	padding: 6px 12px;
+	cursor: pointer;
+	border-bottom: #ccddd8 1px solid;
+}
+
+.list dl:hover {
+	background-color: #eff5f8;
+}
+
+.list dl dt {
+	color: #288c78;
+}
+
+.list dl dd {
+	color: #61736f;
+	font-size: small;
+}
+
+
+.search,
+.page {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	font-size: small;
+}
+
+.search picker {
+	display: inline-block;
+	height: 26px;
+	border: 1px solid #ccddd8;
+	margin: 0px 6px;
+	padding: 0 12px;
+	font-size: small;
+}
+
+.search input,
+.page input {
+	display: inline-block;
+	padding: 0;
+	height: 26px;
+	width: 58px;
+	max-width: 58px;
+	text-align: center;
+	border: 1px solid #ccddd8;
+	margin: 0px 6px;
+	font-size: small;
+}
+
+.page span {
+	border: 1px solid #ccddd8;
+	display: inline-block;
+	height: 26px;
+	padding: 0 6px;
+	margin: 6px 12px 6px 0;
+	cursor: pointer;
+}
+
+.curPage {
+	font-weight: bold;
+	background-color: #eff5f8;
+}
+
+.show {
 	padding: 6px 12px;
 }

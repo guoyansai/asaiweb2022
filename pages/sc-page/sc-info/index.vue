@@ -1,5 +1,7 @@
 <template>
-	<div class="inline"><button @click="setParams({ty:'list'});">获取数据</button></div>
+	<nav class="pos">
+		<em @click="$setParams(provGlobal,{ty:'list'});">列表</em> / <em @click="$setParams(provGlobal,{ty:'show'});">预览</em> / <em @click="$setParams(provGlobal,{ty:'form'});">编辑</em>
+	</nav>
 	<scForm></scForm>
 	<scList></scList>
 	<scShow></scShow>
@@ -29,10 +31,6 @@
 			}
 		},
 		methods: {
-			setParams(params) {
-				Object.assign(this.provGlobal.params, params)
-				this.$setUrl(this.provGlobal, this.provGlobal.menu, this.provGlobal.params)
-			},
 			fetchJson() {
 				this.$apiJson(this.provGlobal.menu).then(res => {
 					this.provGlobal.dataModel = res

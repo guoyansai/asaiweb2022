@@ -1,7 +1,5 @@
 <template>
-	<div id="page" v-if="params.pa">
-		搜索类型:<input v-model="params.sl" @input="setUrl()">
-		关键词:<input v-model="params.ss" @input="setUrl()">
+	<dl class="page" v-if="params.pa">
 		<span @click="toPage(1)" v-if="params.pg>3">首页</span>
 		<span @click="toPage(params.pg-1)" v-if="params.pg>1">上一页</span>
 		<span v-for="i in arrPage" :key="'page'+i" @click="toPage(i)" :class="{curPage:i===+params.pg}">
@@ -10,7 +8,7 @@
 		<span @click="toPage(params.pg+1)" v-if="params.pg<params.pc">下一页</span>
 		<span @click="toPage(params.pc)" v-if="params.pg<params.pc-2">尾页</span>
 		第<input v-model="params.pg" @input="setUrl()">页，每页<input v-model="params.ps" @input="setUrl()">条
-	</div>
+	</dl>
 </template>
 
 <script>
@@ -37,9 +35,7 @@
 		},
 		methods: {
 			toPage(i) {
-				Object.assign(this.provGlobal.params, {
-					pg: i
-				})
+				this.provGlobal.params.pg = i
 				this.setUrl()
 			},
 			setUrl() {
@@ -51,29 +47,4 @@
 </script>
 
 <style scoped>
-	#page {
-		display: flex;
-		align-items: center;
-		flex-wrap: wrap;
-	}
-
-	#page span {
-		border: 1px solid #d8d8d8;
-		display: inline-block;
-		padding: 3px 6px;
-		margin: 3px 6px;
-		cursor: pointer;
-	}
-
-	#page input {
-		display: inline-block;
-		width: 58px;
-		text-align: center;
-		border: 1px solid #d8d8d8;
-	}
-
-	.curPage {
-		font-weight: bold;
-		background-color: #f5f5f5;
-	}
 </style>

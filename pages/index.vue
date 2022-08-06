@@ -1,7 +1,7 @@
 <template>
-	<header>
+	<nav>
 		<indexMenu></indexMenu>
-	</header>
+	</nav>
 	<page></page>
 </template>
 
@@ -40,7 +40,7 @@
 </script>
 
 <style scoped>
-	header {
+	nav {
 		border: 1px solid #d8d8d8;
 		overflow: auto;
 		white-space: nowrap;

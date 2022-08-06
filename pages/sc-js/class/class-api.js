@@ -54,7 +54,7 @@ export default class {
 		}
 	}
 	scMsgShow(title, duration) {
-		duration = duration || 2000
+		duration = duration || 200
 		if (this.isUni) {
 			this.uniMsgShow(title, duration)
 		} else {

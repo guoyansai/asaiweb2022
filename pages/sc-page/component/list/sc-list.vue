@@ -1,14 +1,11 @@
 <template>
-	<div v-if="provGlobal.params.ty==='list'">
-		<saPage></saPage>
-		<dl v-for="item in arrData" :key="item[0]">
+	<div class="list" v-if="provGlobal.params.ty==='list'">
+		<saSearch></saSearch>
+		<dl v-for="item in arrData" :key="item[0]" @click="$setParams(provGlobal,{ty:'show',sn:item[0]});">
 			<dt>{{item[1]}}</dt>
 			<dd>{{item[2]}}</dd>
-			<dd>
-				<button @click="setParams({ty:'view',sn:item[0]});">预览</button>
-				<button @click="setParams({ty:'form',sn:item[0]});">编辑</button>
-			</dd>
 		</dl>
+		<saPage></saPage>
 	</div>
 </template>
 
@@ -32,12 +29,6 @@
 				return this.$getList(this.arrList, this.provGlobal.params)
 			},
 		},
-		methods: {
-			setParams(params) {
-				Object.assign(this.provGlobal.params, params)
-				this.$setUrl(this.provGlobal, this.provGlobal.menu, this.provGlobal.params)
-			},
-		}
 	}
 </script>
 

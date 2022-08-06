@@ -12,6 +12,9 @@ export default {
 				location.href = '/#/' + menu + '/' + this.paramsObj(provGlobal.params);
 			}
 		},
+		$setParams(provGlobal,params) {
+			this.$setUrl(provGlobal, provGlobal.menu, params)
+		},
 		paramsObj(obj) {
 			let tmpStr = ''
 			const arr = Object.entries(obj || {})

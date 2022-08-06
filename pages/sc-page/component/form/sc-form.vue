@@ -1,8 +1,7 @@
 <template>
-	<div v-if="provGlobal.params.ty==='form'">
-		<input v-model="curView[1]" />
-		<input v-model="curView[2]" />
-		<button @click="setParams({ty:'view',sn:provGlobal.params.sn});">预览</button>
+	<div class="form" v-if="provGlobal.params.ty==='form'">
+		<li><label>标题：</label><input v-model="curView[1]" /></li>
+		<li><label>内容：</label><textarea class="textarea" v-model="curView[2]" ></textarea></li>
 	</div>
 </template>
 
@@ -23,12 +22,6 @@
 				return [this.provGlobal.params.sn, ...(this.lists[this.provGlobal.params.sn] || [])]
 			}
 		},
-		methods: {
-			setParams(params) {
-				Object.assign(this.provGlobal.params, params)
-				this.$setUrl(this.provGlobal, this.provGlobal.menu, this.provGlobal.params)
-			},
-		}
 	}
 </script>
 
