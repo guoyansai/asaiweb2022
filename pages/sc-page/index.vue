@@ -8,11 +8,10 @@
 	import sySetting from "./sy-setting/index.vue";
 
 	export default {
-		inject: ["provGlobal"],
 		computed: {
 			curFile() {
-				if (this.mMenu && this.mMenu[this.provGlobal.menu]) {
-					return this.mMenu[this.provGlobal.menu].file
+				if (this.mMenu && this.mMenu[this.mGlobal.menu]) {
+					return this.mMenu[this.mGlobal.menu].file
 				} else {
 					return 'test'
 				}

@@ -1,19 +1,19 @@
 export default {
 	methods: {
-		$getUrl(provGlobal) {
+		$getUrl(mGlobal) {
 			const locations = (window.location.hash.substring(2) + '/').split('/')
-			provGlobal.menu = locations[0]
-			Object.assign(provGlobal.params, this.paramsUrl(locations[1]))
+			mGlobal.menu = locations[0]
+			Object.assign(mGlobal.params, this.paramsUrl(locations[1]))
 		},
-		$setUrl(provGlobal, menu, params) {
-			provGlobal.menu = menu;
-			Object.assign(provGlobal.params, params)
+		$setUrl(mGlobal, menu, params) {
+			mGlobal.menu = menu;
+			Object.assign(mGlobal.params, params)
 			if (location) {
-				location.href = '/#/' + menu + '/' + this.paramsObj(provGlobal.params);
+				location.href = '/#/' + menu + '/' + this.paramsObj(mGlobal.params);
 			}
 		},
-		$setParams(provGlobal,params) {
-			this.$setUrl(provGlobal, provGlobal.menu, params)
+		$setParams(mGlobal,params) {
+			this.$setUrl(mGlobal, mGlobal.menu, params)
 		},
 		paramsObj(obj) {
 			let tmpStr = ''

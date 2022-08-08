@@ -1,5 +1,5 @@
 <template>
-	<div class="form" v-if="provGlobal.params.ty==='form'">
+	<div class="form" v-if="mGlobal.params.ty==='form'">
 		<li><label>标题：</label><input v-model="curView[1]" /></li>
 		<li><label>内容：</label><textarea class="textarea" v-model="curView[2]" ></textarea></li>
 	</div>
@@ -10,16 +10,15 @@
 
 	export default {
 		mixins: [mixinForm],
-		inject: ["provGlobal"],
 		computed: {
 			lists() {
-				if (this.provGlobal.dataModel && this.provGlobal.dataModel.ll) {
-					return this.provGlobal.dataModel.ll || {}
+				if (this.mGlobal.dataModel && this.mGlobal.dataModel.ll) {
+					return this.mGlobal.dataModel.ll || {}
 				}
 				return {}
 			},
 			curView() {
-				return [this.provGlobal.params.sn, ...(this.lists[this.provGlobal.params.sn] || [])]
+				return [this.mGlobal.params.sn, ...(this.lists[this.mGlobal.params.sn] || [])]
 			}
 		},
 	}

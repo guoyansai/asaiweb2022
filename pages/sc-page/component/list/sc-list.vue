@@ -1,7 +1,7 @@
 <template>
-	<div class="list" v-if="provGlobal.params.ty==='list'">
+	<div class="list" v-if="mGlobal.params.ty==='list'">
 		<saSearch></saSearch>
-		<dl v-for="item in arrData" :key="item[0]" @click="$setParams(provGlobal,{ty:'show',sn:item[0]});">
+		<dl v-for="item in arrData" :key="item[0]" @click="$setParams(mGlobal,{ty:'show',sn:item[0]});">
 			<dt>{{item[1]}}</dt>
 			<dd>{{item[2]}}</dd>
 		</dl>
@@ -14,11 +14,10 @@
 
 	export default {
 		mixins: [mixinList],
-		inject: ["provGlobal"],
 		computed: {
 			lists() {
-				if (this.provGlobal.dataModel && this.provGlobal.dataModel.ll) {
-					return this.provGlobal.dataModel.ll || {}
+				if (this.mGlobal.dataModel && this.mGlobal.dataModel.ll) {
+					return this.mGlobal.dataModel.ll || {}
 				}
 				return {}
 			},
@@ -26,7 +25,7 @@
 				return Object.entries(this.lists).map(el => [el[0], ...el[1]])
 			},
 			arrData() {
-				return this.$getList(this.arrList, this.provGlobal.params)
+				return this.$getList(this.arrList, this.mGlobal.params)
 			},
 		},
 	}

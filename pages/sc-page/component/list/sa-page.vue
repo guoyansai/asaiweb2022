@@ -13,10 +13,9 @@
 
 <script>
 	export default {
-		inject: ["provGlobal"],
 		computed: {
 			params() {
-				return this.provGlobal.params
+				return this.mGlobal.params
 			},
 			pageStart() {
 				return 0
@@ -35,12 +34,12 @@
 		},
 		methods: {
 			toPage(i) {
-				this.provGlobal.params.pg = i
+				this.mGlobal.params.pg = i
 				this.setUrl()
 			},
 			setUrl() {
 				console.log(666.999)
-				this.$setUrl(this.provGlobal, this.provGlobal.menu, this.provGlobal.params)
+				this.$setUrl(this.mGlobal, this.mGlobal.menu, this.mGlobal.params)
 			}
 		}
 	}

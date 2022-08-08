@@ -32,34 +32,36 @@ select {
 
 img {
 	border: 0;
-	vertical-align: top
+	vertical-align: top;
 }
 
 li {
-	list-style: none
+	list-style: none;
 }
 
 iframe {
-	border: none
+	border: none;
 }
 
 html {
 	height: 100%;
-	font-size: 16px
+	font-size: 16px;
 }
 
 body {
 	height: 100%;
-	font: 400 1em/1.8 'Microsoft Yahei', 'PingFang SC', 'Avenir', 'Segoe UI', 'Hiragino Sans GB', STHeiti, 'Microsoft Sans Serif', 'WenQuanYi Micro Hei', sans-serif
+	font: 400 1em/1.8 "Microsoft Yahei", "PingFang SC", "Avenir", "Segoe UI",
+		"Hiragino Sans GB", STHeiti, "Microsoft Sans Serif", "WenQuanYi Micro Hei",
+		sans-serif;
 }
 
 a {
 	color: #003338;
-	text-decoration: none
+	text-decoration: none;
 }
 
 a:hover {
-	color: #288c78
+	color: #288c78;
 }
 
 .inline {
@@ -119,7 +121,6 @@ a:hover {
 	color: #61736f;
 	font-size: small;
 }
-
 
 .search,
 .page {
@@ -186,4 +187,20 @@ a:hover {
 
 .mask dd {
 	margin-top: 20px;
+}
+
+.toast {
+	position: fixed;
+	top: 12px;
+	left: 0;
+	width: 100%;
+	text-align: center;
+}
+
+.toast span {
+	background-color: #eff5f8ff;
+	box-shadow: #ccddd8 3px 3px 6px 3px;
+	padding: 6px 28px;
+	border-radius: 6px;
+	font-size: 12px;
 }

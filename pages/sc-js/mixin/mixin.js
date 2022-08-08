@@ -1,6 +1,7 @@
-import mixinUrl from './mixin-url.js'
-import mixinList from './mixin-list.js'
+import mixinApi from "./mixin-api.js";
+import mixinUrl from "./mixin-url.js";
+import mixinList from "./mixin-list.js";
 
 export default {
-	mixins: [mixinUrl, mixinList],
-}
+  mixins: [mixinApi, mixinUrl, mixinList],
+};

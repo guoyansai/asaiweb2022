@@ -2,6 +2,7 @@ export default {
 	methods: {
 		$getList(lists, params) {
 			params.pa = lists.length
+			let tmpLists = []
 			if (params.pa > 0) {
 				this.initPage(params)
 				if (params.ss) {
@@ -15,12 +16,16 @@ export default {
 					}
 					params.pa = tmpArr.length
 					this.initPage(params)
-					return tmpArr.slice((params.pg - 1) * params.ps, params.pg * params.ps)
+					tmpLists = tmpArr
 				} else {
-					return lists.slice((params.pg - 1) * params.ps, params.pg * params.ps)
+					tmpLists = lists
 				}
+				if (params.sp) {
+					tmpLists = tmpLists.sort((a, b) => a[params.sp] - b[params.sp])
+				}
+				tmpLists = tmpLists.slice((params.pg - 1) * params.ps, params.pg * params.ps)
 			}
-			return []
+			return tmpLists
 		},
 		initPage(params) {
 			params.pg = params.pg > 1 ? +params.pg : 1

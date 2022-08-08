@@ -4,17 +4,20 @@
 	</nav>
 	<page></page>
 	<indexMask></indexMask>
+	<indexToast></indexToast>
 </template>
 
 <script>
 	import indexMenu from './sc-index/menu/index.vue'
 	import indexMask from './sc-index/mask/index.vue'
+	import indexToast from './sc-index/toast/index.vue'
 	import page from './sc-page/index.vue'
 
 	export default {
 		components: {
 			indexMenu,
 			indexMask,
+			indexToast,
 			page
 		},
 		data() {
@@ -22,24 +25,11 @@
 				activeIndex: 'index',
 				isPath: 'bill',
 				isPage: null,
-				provGlobal: {
-					haha: '试试看 ',
-					index: {},
-					menu: 'test',
-					params: {},
-					dataModel: {}
-				},
 				component: null
 			}
 		},
-		provide() {
-			return {
-				provGlobal: this.provGlobal
-			}
-		},
 		onLoad() {
-			this.$getUrl(this.provGlobal)
-			this.$apiInit(this.provGlobal)
+			this.$getUrl(this.mGlobal)
 		},
 	}
 </script>

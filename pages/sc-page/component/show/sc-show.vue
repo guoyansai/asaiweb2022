@@ -1,5 +1,5 @@
 <template>
-	<div class="show" v-if="provGlobal.params.ty==='show'">
+	<div class="show" v-if="mGlobal.params.ty==='show'">
 		<h1>{{curView[1]}}</h1>
 		<article>{{curView[2]}}</article>
 	</div>
@@ -10,16 +10,15 @@
 
 	export default {
 		mixins: [mixinShow],
-		inject: ["provGlobal"],
 		computed: {
 			lists() {
-				if (this.provGlobal.dataModel && this.provGlobal.dataModel.ll) {
-					return this.provGlobal.dataModel.ll || {}
+				if (this.mGlobal.dataModel && this.mGlobal.dataModel.ll) {
+					return this.mGlobal.dataModel.ll || {}
 				}
 				return {}
 			},
 			curView() {
-				return [this.provGlobal.params.sn, ...(this.lists[this.provGlobal.params.sn] || [])]
+				return [this.mGlobal.params.sn, ...(this.lists[this.mGlobal.params.sn] || [])]
 			}
 		},
 	}

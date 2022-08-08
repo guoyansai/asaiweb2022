@@ -1,16 +1,15 @@
 <template>
-	<div v-for="item in mMenuArr" :key="item[0]" @click="go(item)" :class="{cur:provGlobal.menu === item[0]}">
+	<div v-for="item in mMenuArr" :key="item[0]" @click="go(item)" :class="{cur:mGlobal.menu === item[0]}">
 		{{item[1].title}}
 	</div>
 </template>
 
 <script>
 	export default {
-		inject: ['provGlobal'],
 		methods: {
 			go(item) {
-				this.provGlobal.params = item[1].params
-				this.$setUrl(this.provGlobal, item[0], {})
+				this.mGlobal.params = item[1].params
+				this.$setUrl(this.mGlobal, item[0], {})
 			}
 		}
 	}
