@@ -1,35 +1,71 @@
 <template>
-	<div class="list" v-if="mGlobal.params.ty==='list'">
-		<saSearch></saSearch>
-		<dl v-for="item in arrData" :key="item[0]" @click="$setParams({ty:'show',sn:item[0]});">
-			<dt>{{item[1]}}</dt>
-			<dd>{{item[2]}}</dd>
-		</dl>
-		<saPage></saPage>
-	</div>
+  <div class="list" v-if="mGlobal.url.params.ty === 'list'">
+    <saSearch></saSearch>
+    <dl v-for="item in arrLists" :key="item[0]" @click="goTo(item)">
+      <dt>{{ getDt(item) }}</dt>
+      <dd>{{ getDd(item) }}</dd>
+    </dl>
+    <saPage></saPage>
+  </div>
 </template>
 
 <script>
-	import mixinList from './mixin-list.js'
+import mixinList from "./mixin-list.js";
 
-	export default {
-		mixins: [mixinList],
-		computed: {
-			lists() {
-				if (this.mGlobal.dataModel && this.mGlobal.dataModel.ll) {
-					return this.mGlobal.dataModel.ll || {}
-				}
-				return {}
-			},
-			arrList() {
-				return Object.entries(this.lists).map(el => [el[0], ...el[1]])
-			},
-			arrData() {
-				return this.$getList(this.arrList, this.mGlobal.params)
-			},
-		},
-	}
+export default {
+  mixins: [mixinList],
+  computed: {
+    objMd() {
+      return (this.mGlobal.dataModel && this.mGlobal.dataModel.md) || {};
+    },
+    arrMd() {
+      return Object.entries(this.objMd);
+    },
+    objLists() {
+      if (this.mGlobal.dataModel && this.mGlobal.dataModel.ll) {
+        return this.mGlobal.dataModel.ll || {};
+      }
+      return {};
+    },
+    arrLists() {
+      return this.$getList(Object.entries(this.objLists));
+    },
+  },
+  methods: {
+    getDt(item) {
+      return this.getUr(item, "tt") || this.getUr(item, "mo");
+    },
+    getDd(item) {
+      return this.getUr(item, "co");
+    },
+    getUr(item, key) {
+      if (this.getIndex(key) > -1) {
+        return item[1][this.getIndex(key)];
+      }
+      return "";
+    },
+    getIndex(str) {
+      return this.arrMd.findIndex((el) => el[0] === str) - 1;
+    },
+    goTo(item) {
+      const ur = this.getUr(item, "ur");
+      if (ur) {
+        this.$setUrl(
+          this.mGlobal.url.dir,
+          ur.replace(`/${this.mGlobal.url.dir}/`, "") + item[0],
+          {
+            ty: "list",
+          }
+        );
+      } else {
+        this.$setParams({
+          ty: "show",
+          sn: item[0],
+        });
+      }
+    },
+  },
+};
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

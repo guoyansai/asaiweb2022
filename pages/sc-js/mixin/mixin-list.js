@@ -1,37 +1,47 @@
+import mixinData from "./mixin-data.js";
+
 export default {
+	mixins: [mixinData],
 	methods: {
-		$getList(lists, params) {
-			params.pa = lists.length
+		$getList(lists) {
+			this.mGlobal.url.params.pa = lists.length
 			let tmpLists = []
-			if (params.pa > 0) {
-				this.initPage(params)
-				if (params.ss) {
+			if (this.mGlobal.url.params.pa > 0) {
+				this.initPage(this.mGlobal.url.params)
+				const arrLen = lists[0][1].length + 1
+				if (this.mGlobal.url.params.ss) {
 					let tmpArr = []
-					if (params.sl || params.sl == 0) {
-						const tmpLen = lists[0].length
-						params.sl = params.sl < tmpLen ? +params.sl : tmpLen - 1
-						tmpArr = lists.filter(el => el[params.sl].includes(params.ss))
+					if (this.mGlobal.url.params.sl == 0) {
+						tmpArr = lists.filter(el => el[0].includes(this.mGlobal.url.params.ss))
+					} else if (this.mGlobal.url.params.sl) {
+						this.mGlobal.url.params.sl = this.mGlobal.url.params.sl < arrLen ? +this.mGlobal.url.params.sl : arrLen - 1
+						tmpArr = lists.filter(el => el[1][this.mGlobal.url.params.sl - 1].includes(this.mGlobal.url.params.ss))
 					} else {
-						tmpArr = lists.filter(el => (el + '').includes(params.ss))
+						tmpArr = lists.filter(el => (el + '').includes(this.mGlobal.url.params.ss))
 					}
-					params.pa = tmpArr.length
-					this.initPage(params)
+					this.mGlobal.url.params.pa = tmpArr.length
+					this.initPage()
 					tmpLists = tmpArr
 				} else {
 					tmpLists = lists
 				}
-				if (params.sp) {
-					tmpLists = tmpLists.sort((a, b) => a[params.sp] - b[params.sp])
+				if (this.mGlobal.url.params.sp === 0) {
+					tmpLists = tmpLists.sort((a, b) => a[0] - b[0])
+				} else if (this.mGlobal.url.params.sp) {
+					this.mGlobal.url.params.sp = this.mGlobal.url.params.sp < arrLen ? +this.mGlobal.url.params.sp : arrLen - 1
+
+					tmpLists = tmpLists.sort((a, b) => a[1][this.mGlobal.url.params.sp] - b[1][this.mGlobal.url.params.sp])
 				}
-				tmpLists = tmpLists.slice((params.pg - 1) * params.ps, params.pg * params.ps)
+				tmpLists = tmpLists.slice((this.mGlobal.url.params.pg - 1) * this.mGlobal.url.params.ps, this.mGlobal.url.params
+					.pg * this.mGlobal.url.params.ps)
 			}
 			return tmpLists
 		},
-		initPage(params) {
-			params.pg = params.pg > 1 ? +params.pg : 1
-			params.ps = params.ps > 1 ? +params.ps : 1
-			params.pc = Math.ceil(params.pa / params.ps) || 1
-			params.pg = Math.min(params.pg, params.pc)
+		initPage() {
+			this.mGlobal.url.params.pg = this.mGlobal.url.params.pg > 1 ? +this.mGlobal.url.params.pg : 1
+			this.mGlobal.url.params.ps = this.mGlobal.url.params.ps > 1 ? +this.mGlobal.url.params.ps : 1
+			this.mGlobal.url.params.pc = Math.ceil(this.mGlobal.url.params.pa / this.mGlobal.url.params.ps) || 1
+			this.mGlobal.url.params.pg = Math.min(this.mGlobal.url.params.pg, this.mGlobal.url.params.pc)
 		}
 	}
 }

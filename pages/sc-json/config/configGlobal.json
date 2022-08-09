@@ -1,7 +1,20 @@
 {
-	"haha": "试试看 ",
-	"index": {},
-	"menu": "test",
-	"params": {},
-	"dataModel": {}
+  "haha": "试试看",
+  "index": {},
+  "dataModel": {},
+  "url": {
+    "dir": "test",
+    "menu": "test",
+    "params": {
+      "ty": "list",
+      "sn": "",
+      "sp": 0,
+      "sl": 0,
+      "ss": "",
+      "ps": 20,
+      "pg": 1,
+      "pa": 0,
+      "pc": 1
+    }
+  }
 }

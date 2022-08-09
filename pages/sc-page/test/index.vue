@@ -6,7 +6,7 @@
 	<div class="inline"><button @click="$setParams({ty:'list'});">获取数据</button></div>
 	<div class="inline"><button @click="$setParams({ty:'view',sn:'2'});">预览数据</button></div>
 	<div class="inline"><button @click="$setParams({ty:'form',sn:'2'});">编辑数据</button></div>
-	<div v-if="mGlobal.params.ty==='list'">
+	<div v-if="mGlobal.url.params.ty==='list'">
 		<saPage></saPage>
 		<dl v-for="item in arrData" :key="item[0]">
 			<dt>{{item[1]}}</dt>
@@ -18,18 +18,18 @@
 		</dl>
 	</div>
 
-	<div v-if="mGlobal.params.ty==='view'">
+	<div v-if="mGlobal.url.params.ty==='view'">
 		<dl>
 			<dt>{{curView[1]}}</dt>
 			<dd>{{curView[2]}}</dd>
-			<button @click="$setParams({ty:'form',sn:mGlobal.params.sn});">编辑</button>
+			<button @click="$setParams({ty:'form',sn:mGlobal.url.params.sn});">编辑</button>
 		</dl>
 	</div>
 
-	<div v-if="mGlobal.params.ty==='form'">
+	<div v-if="mGlobal.url.params.ty==='form'">
 		<input v-model="curView[1]" />
 		<input v-model="curView[2]" />
-		<button @click="$setParams({ty:'view',sn:mGlobal.params.sn});">预览</button>
+		<button @click="$setParams({ty:'view',sn:mGlobal.url.params.sn});">预览</button>
 	</div>
 </template>
 
@@ -55,10 +55,10 @@
 				return Object.entries(this.lists).map(el => [el[0], ...el[1]])
 			},
 			arrData() {
-				return this.$getList(this.arrList, this.mGlobal.params)
+				return this.$getList(this.arrList)
 			},
 			curView() {
-				return [this.mGlobal.params.sn, ...(this.lists[this.mGlobal.params.sn]||[])]
+				return [this.mGlobal.url.params.sn, ...(this.lists[this.mGlobal.url.params.sn]||[])]
 			}
 		},
 		created() {

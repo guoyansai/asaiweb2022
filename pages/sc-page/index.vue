@@ -10,8 +10,8 @@
 	export default {
 		computed: {
 			curFile() {
-				if (this.mMenu && this.mMenu[this.mGlobal.menu]) {
-					return this.mMenu[this.mGlobal.menu].file
+				if (this.mMenu && this.mMenu[this.mGlobal.url.dir]) {
+					return this.mMenu[this.mGlobal.url.dir].file
 				} else {
 					return 'test'
 				}

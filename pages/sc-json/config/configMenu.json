@@ -1,185 +1,62 @@
 {
-	"setting": {
-		"title": "设置",
-		"file": "sySetting",
-		"type": 2,
-		"params": {
-			"ty": "list",
-			"sn": "",
-			"sp": 0,
-			"sl": 0,
-			"ss": "",
-			"ps": 20,
-			"pg": 1,
-			"pa": 0,
-			"pc": 1
-		}
-	},
-	"miyu": {
-		"title": "谜语",
-		"file": "scInfo",
-		"data": "/info/c-g-miyu",
-		"type": 2,
-		"params": {
-			"ty": "list",
-			"sn": "",
-			"sp": 0,
-			"sl": 0,
-			"ss": "",
-			"ps": 20,
-			"pg": 1,
-			"pa": 0,
-			"pc": 1
-		}
-	},
-	"naojin": {
-		"title": "脑筋",
-		"file": "scInfo",
-		"data": "/info/c-g-naojin",
-		"type": 2,
-		"params": {
-			"ty": "list",
-			"sn": "",
-			"sp": 0,
-			"sl": 0,
-			"ss": "",
-			"ps": 20,
-			"pg": 1,
-			"pa": 0,
-			"pc": 1
-		}
-	},
-	"xiehouyu": {
-		"title": "歇后语",
-		"file": "scInfo",
-		"data": "/info/c-g-xiehouyu",
-		"type": 2,
-		"params": {
-			"ty": "list",
-			"sn": "",
-			"sp": 0,
-			"sl": 0,
-			"ss": "",
-			"ps": 20,
-			"pg": 1,
-			"pa": 0,
-			"pc": 1
-		}
-	},
-	"gushici": {
-		"title": "古诗词",
-		"file": "scInfo",
-		"data": "/info/c-s-gushici",
-		"type": 2,
-		"params": {
-			"ty": "list",
-			"sn": "",
-			"sp": 0,
-			"sl": 0,
-			"ss": "",
-			"ps": 20,
-			"pg": 1,
-			"pa": 0,
-			"pc": 1
-		}
-	},
-	"chengyu": {
-		"title": "成语",
-		"file": "scInfo",
-		"data": "/info/c-s-chengyu",
-		"type": 2,
-		"params": {
-			"ty": "list",
-			"sn": "",
-			"sp": 0,
-			"sl": 0,
-			"ss": "",
-			"ps": 20,
-			"pg": 1,
-			"pa": 0,
-			"pc": 1
-		}
-	},
-	"duanxin": {
-		"title": "短信",
-		"file": "scInfo",
-		"data": "/info/c-s-duanxin",
-		"type": 2,
-		"params": {
-			"ty": "list",
-			"sn": "",
-			"sp": 0,
-			"sl": 0,
-			"ss": "",
-			"ps": 20,
-			"pg": 1,
-			"pa": 0,
-			"pc": 1
-		}
-	},
-	"mingyan": {
-		"title": "名言",
-		"file": "scInfo",
-		"data": "/info/c-s-mingyan",
-		"type": 2,
-		"params": {
-			"ty": "list",
-			"sn": "",
-			"sp": 0,
-			"sl": 0,
-			"ss": "",
-			"ps": 20,
-			"pg": 1,
-			"pa": 0,
-			"pc": 1
-		}
-	},
-	"test": {
-		"title": "测试",
-		"file": "test",
-		"type": 2,
-		"params": {
-			"ty": "list",
-			"sn": "",
-			"sp": 0,
-			"sl": 0,
-			"ss": "",
-			"ps": 20,
-			"pg": 1,
-			"pa": 0,
-			"pc": 1
-		}
-	},
-	"haha2": {
-		"title": "通用2",
-		"file": "scInfo",
-		"type": 2,
-		"params": {
-			"ty": "list",
-			"sn": "",
-			"sp": 0,
-			"sl": 0,
-			"ss": "",
-			"ps": 20,
-			"pg": 1,
-			"pa": 0,
-			"pc": 1
-		}
-	},
-	"haha3": {
-		"title": "通用3",
-		"file": "scInfo",
-		"type": 3,
-		"params": {
-			"ty": "list",
-			"sn": "",
-			"sp": 0,
-			"sl": 0,
-			"ss": "",
-			"ps": 20,
-			"pg": 1,
-			"pa": 0,
-			"pc": 1
-		}
-	}
+  "setting": {
+    "title": "设置",
+    "type": 0,
+    "file": "sySetting",
+    "url": {
+      "dir": "setting",
+      "menu": "",
+      "params": {
+        "ty": "list",
+        "sn": "",
+        "sp": 0,
+        "sl": 0,
+        "ss": "",
+        "ps": 20,
+        "pg": 1,
+        "pa": 0,
+        "pc": 1
+      }
+    }
+  },
+  "info": {
+    "title": "信息",
+    "type": 2,
+    "file": "scInfo",
+    "url": {
+      "dir": "info",
+      "menu": "",
+      "params": {
+        "ty": "list",
+        "sn": "",
+        "sp": 0,
+        "sl": 0,
+        "ss": "",
+        "ps": 20,
+        "pg": 1,
+        "pa": 0,
+        "pc": 1
+      }
+    }
+  },
+  "test": {
+    "title": "测试",
+    "type": 0,
+    "file": "test",
+    "url": {
+      "dir": "test",
+      "menu": "",
+      "params": {
+        "ty": "list",
+        "sn": "",
+        "sp": 0,
+        "sl": 0,
+        "ss": "",
+        "ps": 20,
+        "pg": 1,
+        "pa": 0,
+        "pc": 1
+      }
+    }
+  }
 }
