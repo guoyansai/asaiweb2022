@@ -1,7 +1,9 @@
 <template>
-	<div v-for="item in mMenuArr" :key="item[0]" @click="go(item)" :class="{cur:mGlobal.menu === item[0]}">
-		{{item[1].title}}
-	</div>
+	<nav>
+		<div v-for="item in mMenuArr" :key="item[0]" @click="go(item)" :class="{cur:mGlobal.menu === item[0]}">
+			{{item[1].title}}
+		</div>
+	</nav>
 </template>
 
 <script>
@@ -9,7 +11,7 @@
 		methods: {
 			go(item) {
 				this.mGlobal.params = item[1].params
-				this.$setUrl(this.mGlobal, item[0], {})
+				this.$setUrl(item[0], {})
 			}
 		}
 	}

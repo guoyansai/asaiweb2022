@@ -1,19 +1,22 @@
+import mixinData from "./mixin-data.js";
+
 export default {
+	mixins: [mixinData],
 	methods: {
-		$getUrl(mGlobal) {
+		$getUrl() {
 			const locations = (window.location.hash.substring(2) + '/').split('/')
-			mGlobal.menu = locations[0]
-			Object.assign(mGlobal.params, this.paramsUrl(locations[1]))
+			this.mGlobal.menu = locations[0]
+			Object.assign(this.mGlobal.params, this.paramsUrl(locations[1]))
 		},
-		$setUrl(mGlobal, menu, params) {
-			mGlobal.menu = menu;
-			Object.assign(mGlobal.params, params)
+		$setUrl(menu, params) {
+			this.mGlobal.menu = menu;
+			Object.assign(this.mGlobal.params, params)
 			if (location) {
-				location.href = '/#/' + menu + '/' + this.paramsObj(mGlobal.params);
+				location.href = '/#/' + menu + '/' + this.paramsObj(this.mGlobal.params);
 			}
 		},
-		$setParams(mGlobal,params) {
-			this.$setUrl(mGlobal, mGlobal.menu, params)
+		$setParams(params) {
+			this.$setUrl(this.mGlobal.menu, params)
 		},
 		paramsObj(obj) {
 			let tmpStr = ''

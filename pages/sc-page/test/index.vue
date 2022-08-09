@@ -3,17 +3,17 @@
 	<div>{{JSON.stringify(mGlobal)}}</div>
 	<button @click="tJsonGet();">获取歇后语数据</button>
 	<button @click="tJson1Get();">获取脑筋急转弯数据</button>
-	<div class="inline"><button @click="$setParams(mGlobal,{ty:'list'});">获取数据</button></div>
-	<div class="inline"><button @click="$setParams(mGlobal,{ty:'view',sn:'2'});">预览数据</button></div>
-	<div class="inline"><button @click="$setParams(mGlobal,{ty:'form',sn:'2'});">编辑数据</button></div>
+	<div class="inline"><button @click="$setParams({ty:'list'});">获取数据</button></div>
+	<div class="inline"><button @click="$setParams({ty:'view',sn:'2'});">预览数据</button></div>
+	<div class="inline"><button @click="$setParams({ty:'form',sn:'2'});">编辑数据</button></div>
 	<div v-if="mGlobal.params.ty==='list'">
 		<saPage></saPage>
 		<dl v-for="item in arrData" :key="item[0]">
 			<dt>{{item[1]}}</dt>
 			<dd>{{item[2]}}</dd>
 			<dd>
-				<button @click="$setParams(mGlobal,{ty:'view',sn:item[0]});">预览</button>
-				<button @click="$setParams(mGlobal,{ty:'form',sn:item[0]});">编辑</button>
+				<button @click="$setParams({ty:'view',sn:item[0]});">预览</button>
+				<button @click="$setParams({ty:'form',sn:item[0]});">编辑</button>
 			</dd>
 		</dl>
 	</div>
@@ -22,14 +22,14 @@
 		<dl>
 			<dt>{{curView[1]}}</dt>
 			<dd>{{curView[2]}}</dd>
-			<button @click="$setParams(mGlobal,{ty:'form',sn:mGlobal.params.sn});">编辑</button>
+			<button @click="$setParams({ty:'form',sn:mGlobal.params.sn});">编辑</button>
 		</dl>
 	</div>
 
 	<div v-if="mGlobal.params.ty==='form'">
 		<input v-model="curView[1]" />
 		<input v-model="curView[2]" />
-		<button @click="$setParams(mGlobal,{ty:'view',sn:mGlobal.params.sn});">预览</button>
+		<button @click="$setParams({ty:'view',sn:mGlobal.params.sn});">预览</button>
 	</div>
 </template>
 

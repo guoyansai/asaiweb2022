@@ -20,7 +20,7 @@
 		},
 		methods: {
 			setUrl() {
-				this.$setUrl(this.mGlobal, this.mGlobal.menu, this.mGlobal.params)
+				this.$setUrl(this.mGlobal.menu, this.mGlobal.params)
 			},
 			setSp(e) {
 				this.mGlobal.params.sp = e.detail.value

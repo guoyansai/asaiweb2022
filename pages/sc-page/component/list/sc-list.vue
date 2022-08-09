@@ -1,7 +1,7 @@
 <template>
 	<div class="list" v-if="mGlobal.params.ty==='list'">
 		<saSearch></saSearch>
-		<dl v-for="item in arrData" :key="item[0]" @click="$setParams(mGlobal,{ty:'show',sn:item[0]});">
+		<dl v-for="item in arrData" :key="item[0]" @click="$setParams({ty:'show',sn:item[0]});">
 			<dt>{{item[1]}}</dt>
 			<dd>{{item[2]}}</dd>
 		</dl>

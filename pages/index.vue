@@ -1,13 +1,13 @@
 <template>
-	<nav>
-		<indexMenu></indexMenu>
-	</nav>
+	<indexHeader></indexHeader>
+	<indexMenu></indexMenu>
 	<page></page>
 	<indexMask></indexMask>
 	<indexToast></indexToast>
 </template>
 
 <script>
+	import indexHeader from './sc-index/header/index.vue'
 	import indexMenu from './sc-index/menu/index.vue'
 	import indexMask from './sc-index/mask/index.vue'
 	import indexToast from './sc-index/toast/index.vue'
@@ -15,6 +15,7 @@
 
 	export default {
 		components: {
+			indexHeader,
 			indexMenu,
 			indexMask,
 			indexToast,
@@ -29,7 +30,7 @@
 			}
 		},
 		onLoad() {
-			this.$getUrl(this.mGlobal)
+			this.$getUrl()
 		},
 	}
 </script>

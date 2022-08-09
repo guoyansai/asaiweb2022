@@ -1,6 +1,6 @@
 <template>
 	<nav class="pos">
-		<em @click="$setParams(mGlobal,{ty:'list'});">列表</em> / <em @click="$setParams(mGlobal,{ty:'show'});">预览</em> / <em @click="$setParams(mGlobal,{ty:'form'});">编辑</em>
+		<em @click="$setParams({ty:'list'});">列表</em> / <em @click="$setParams({ty:'show'});">预览</em> / <em @click="$setParams({ty:'form'});">编辑</em>
 	</nav>
 	<scForm></scForm>
 	<scList></scList>

@@ -64,6 +64,22 @@ a:hover {
 	color: #288c78;
 }
 
+header{
+	display: flex;
+	padding: 3px 12px;
+	align-items: center;
+}
+header dt{
+	width: 168px;
+}
+header dd{
+	flex-grow: 1;
+	text-align: right;
+}
+header img{
+	max-height: 36px;
+}
+
 .inline {
 	display: inline-block;
 	width: 25%;
