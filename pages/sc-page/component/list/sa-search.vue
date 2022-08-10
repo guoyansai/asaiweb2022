@@ -1,6 +1,6 @@
 <template>
 	<dl class="search" v-if="mGlobal.url.params.pa">
-		排序:
+		<span @click="mGlobal.url.params.st=mGlobal.url.params.st?0:1">排序{{mGlobal.url.params.st}}:</span>
 		<picker @change="setSp" :value="mGlobal.url.params.sp" :range="searchArr">
 			<view class="uni-input">{{searchArr[mGlobal.url.params.sp]}}</view>
 		</picker>

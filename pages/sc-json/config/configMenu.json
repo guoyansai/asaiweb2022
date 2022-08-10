@@ -1,62 +1,65 @@
 {
-  "setting": {
-    "title": "设置",
-    "type": 0,
-    "file": "sySetting",
-    "url": {
-      "dir": "setting",
-      "menu": "",
-      "params": {
-        "ty": "list",
-        "sn": "",
-        "sp": 0,
-        "sl": 0,
-        "ss": "",
-        "ps": 20,
-        "pg": 1,
-        "pa": 0,
-        "pc": 1
-      }
-    }
-  },
-  "info": {
-    "title": "信息",
-    "type": 2,
-    "file": "scInfo",
-    "url": {
-      "dir": "info",
-      "menu": "",
-      "params": {
-        "ty": "list",
-        "sn": "",
-        "sp": 0,
-        "sl": 0,
-        "ss": "",
-        "ps": 20,
-        "pg": 1,
-        "pa": 0,
-        "pc": 1
-      }
-    }
-  },
-  "test": {
-    "title": "测试",
-    "type": 0,
-    "file": "test",
-    "url": {
-      "dir": "test",
-      "menu": "",
-      "params": {
-        "ty": "list",
-        "sn": "",
-        "sp": 0,
-        "sl": 0,
-        "ss": "",
-        "ps": 20,
-        "pg": 1,
-        "pa": 0,
-        "pc": 1
-      }
-    }
-  }
+	"setting": {
+		"title": "设置",
+		"type": 0,
+		"file": "sySetting",
+		"url": {
+			"dir": "setting",
+			"menu": "",
+			"params": {
+				"ty": "list",
+				"sn": "",
+				"sp": 0,
+				"st": 0,
+				"sl": 0,
+				"ss": "",
+				"ps": 20,
+				"pg": 1,
+				"pa": 0,
+				"pc": 1
+			}
+		}
+	},
+	"info": {
+		"title": "信息",
+		"type": 2,
+		"file": "scInfo",
+		"url": {
+			"dir": "info",
+			"menu": "",
+			"params": {
+				"ty": "list",
+				"sn": "",
+				"sp": 0,
+				"st": 0,
+				"sl": 0,
+				"ss": "",
+				"ps": 20,
+				"pg": 1,
+				"pa": 0,
+				"pc": 1
+			}
+		}
+	},
+	"test": {
+		"title": "测试",
+		"type": 0,
+		"file": "test",
+		"url": {
+			"dir": "test",
+			"menu": "",
+			"params": {
+				"ty": "list",
+				"sn": "",
+				"sp": 0,
+				"st": 0,
+				"sl": 0,
+				"ss": "",
+				"ps": 20,
+				"pg": 1,
+				"pa": 0,
+				"pc": 1
+			}
+		}
+	}
 }

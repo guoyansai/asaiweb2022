@@ -31,9 +31,13 @@ export default {
 					this.mGlobal.url.params.sp = this.mGlobal.url.params.sp < arrLen ?
 						+this.mGlobal.url.params.sp :
 						arrLen
-					tmpLists = tmpLists.sort((a, b) =>
-						a[this.mGlobal.url.params.sp - 1].localeCompare(b[this.mGlobal.url.params.sp - 1])
-					)
+					if (this.mGlobal.url.params.st) {
+						tmpLists = tmpLists.sort((a, b) =>
+							b[this.mGlobal.url.params.sp - 1].localeCompare(a[this.mGlobal.url.params.sp - 1]))
+					} else {
+						tmpLists = tmpLists.sort((a, b) =>
+							a[this.mGlobal.url.params.sp - 1].localeCompare(b[this.mGlobal.url.params.sp - 1]))
+					}
 				}
 				tmpLists = tmpLists.slice((this.mGlobal.url.params.pg - 1) * this.mGlobal.url.params.ps,
 					this.mGlobal.url.params.pg * this.mGlobal.url.params.ps)
