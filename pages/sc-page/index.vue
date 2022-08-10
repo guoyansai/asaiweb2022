@@ -1,4 +1,4 @@
-<template>
+<template>{{curFile}}
 	<component :is="curFile"></component>
 </template>
 
@@ -8,6 +8,11 @@
 	import sySetting from "./sy-setting/index.vue";
 
 	export default {
+		components: {
+			scInfo,
+			sySetting,
+			test,
+		},
 		computed: {
 			curFile() {
 				if (this.mMenu && this.mMenu[this.mGlobal.url.dir]) {
@@ -16,11 +21,6 @@
 					return 'test'
 				}
 			}
-		},
-		components: {
-			scInfo,
-			sySetting,
-			test,
 		},
 	};
 </script>

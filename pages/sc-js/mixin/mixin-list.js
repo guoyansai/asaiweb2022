@@ -8,18 +8,18 @@ export default {
 			let tmpLists = []
 			if (this.mGlobal.url.params.pa > 0) {
 				this.initPage(this.mGlobal.url.params)
-				const arrLen = lists[0][1].length + 1
+				const arrLen = lists[0].length
 				if (this.mGlobal.url.params.ss) {
 					let tmpArr = []
-					if (this.mGlobal.url.params.sl == 0) {
-						tmpArr = lists.filter(el => el[0].search(this.mGlobal.url.params.ss) > -1)
-					} else if (this.mGlobal.url.params.sl) {
-						this.mGlobal.url.params.sl = this.mGlobal.url.params.sl < arrLen ? +this.mGlobal.url.params.sl :
-							arrLen - 1
-						tmpArr = lists.filter(el => el[1][this.mGlobal.url.params.sl - 1].search(this.mGlobal.url
-							.params.ss) > -1)
+					if (this.mGlobal.url.params.sl > 0) {
+						this.mGlobal.url.params.sl = this.mGlobal.url.params.sl < arrLen ?
+							+this.mGlobal.url.params.sl :
+							arrLen
+						tmpArr = lists.filter(el =>
+							el[+this.mGlobal.url.params.sl - 1].search(this.mGlobal.url.params.ss) > -1)
 					} else {
-						tmpArr = lists.filter(el => (el + '').search(this.mGlobal.url.params.ss) > -1)
+						tmpArr = lists.filter(el =>
+							(el + '').search(this.mGlobal.url.params.ss) > -1)
 					}
 					this.mGlobal.url.params.pa = tmpArr.length
 					this.initPage()
@@ -27,20 +27,16 @@ export default {
 				} else {
 					tmpLists = lists
 				}
-				if (this.mGlobal.url.params.sp === 0) {
-					tmpLists = tmpLists.sort((a, b) => a[0] - b[0])
-				} else if (this.mGlobal.url.params.sp) {
-					this.mGlobal.url.params.sp = this.mGlobal.url.params.sp < arrLen ? +this.mGlobal.url.params.sp :
-						arrLen - 1
-
-					tmpLists = tmpLists.sort((a, b) => a[1][+this.mGlobal.url.params.sp - 1] -
-						b[1][+this.mGlobal.url.params.sp - 1])
-
-					// tmpLists = tmpLists.sort((a, b) => a.localeCompare(b,'zh-CN'))
+				if (this.mGlobal.url.params.sp > 0) {
+					this.mGlobal.url.params.sp = this.mGlobal.url.params.sp < arrLen ?
+						+this.mGlobal.url.params.sp :
+						arrLen
+					tmpLists = tmpLists.sort((a, b) =>
+						a[this.mGlobal.url.params.sp - 1].localeCompare(b[this.mGlobal.url.params.sp - 1])
+					)
 				}
-				tmpLists = tmpLists.slice((this.mGlobal.url.params.pg - 1) * this.mGlobal.url.params.ps, this.mGlobal
-					.url.params
-					.pg * this.mGlobal.url.params.ps)
+				tmpLists = tmpLists.slice((this.mGlobal.url.params.pg - 1) * this.mGlobal.url.params.ps,
+					this.mGlobal.url.params.pg * this.mGlobal.url.params.ps)
 			}
 			return tmpLists
 		},

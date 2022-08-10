@@ -20,7 +20,7 @@
 		},
 		computed: {
 			searchArr() {
-				return Object.values(this.mGlobal.dataModel.md)
+				return ['请选择', ...Object.values(this.mGlobal.dataModel.md)]
 			}
 		},
 		methods: {

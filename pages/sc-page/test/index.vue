@@ -52,13 +52,13 @@
 				return {}
 			},
 			arrList() {
-				return Object.entries(this.lists).map(el => [el[0], ...el[1]])
+				return Object.values(this.lists)
 			},
 			arrData() {
 				return this.$getList(this.arrList)
 			},
 			curView() {
-				return [this.mGlobal.url.params.sn, ...(this.lists[this.mGlobal.url.params.sn]||[])]
+				return this.lists[this.mGlobal.url.params.sn]||[];
 			}
 		},
 		created() {
