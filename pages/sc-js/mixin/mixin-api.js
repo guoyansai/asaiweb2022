@@ -6,7 +6,8 @@ export default {
 		$api(vUrl, vParams, vConfig) {
 			return this.scApi(vUrl, vParams, vConfig);
 		},
-		$apiJson() {
+		$apiJson(vConfig) {
+			const config = vConfig ? vConfig : {}
 			if (
 				this.mMenu &&
 				this.mMenu[this.mGlobal.url.dir] &&
@@ -20,6 +21,7 @@ export default {
 					this.mGlobal.url.menu +
 					"/co.json", {}, {
 						method: "get",
+						...config
 					}
 				).then((res) => {
 					this.mGlobal.dataModel = res;
@@ -122,7 +124,15 @@ export default {
 		uniApi(url, params, config) {
 			return new Promise((resolve, reject) => {
 				const dataKey = this.scToKey(url);
-				let objRes = this.scGetData(dataKey);
+				let objRes = '';
+				if (config.reload) {
+					this.scSetData(dataKey, null);
+					uni.removeStorage({
+						key: dataKey,
+					})
+				} else {
+					objRes = this.scGetData(dataKey);
+				}
 				if (objRes) {
 					console.log(666.001, objRes);
 					objRes.lv = 1;

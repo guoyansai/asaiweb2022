@@ -2,7 +2,8 @@
   <nav class="pos">
     <em @click="$setParams({ ty: 'list' })">列表</em> /
     <em @click="$setParams({ ty: 'show' })">预览</em> /
-    <em @click="$setParams({ ty: 'form' })">编辑</em>
+    <em @click="$setParams({ ty: 'form' })">编辑</em> /
+    <em @click="$apiJson({reload:1})">刷新</em>
   </nav>
   <scForm></scForm>
   <scList></scList>
