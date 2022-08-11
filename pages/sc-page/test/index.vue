@@ -1,17 +1,20 @@
 <template>
-	<div>{{title}}</div>
-	<div>{{JSON.stringify(mGlobal)}}</div>
-	<button @click="tJsonGet();">获取歇后语数据</button>
-	<button @click="tJson1Get();">获取脑筋急转弯数据</button>
-	<div class="inline"><button @click="$setParams({ty:'list'});">获取数据</button></div>
-	<div class="inline"><button @click="$setParams({ty:'view',sn:'2'});">预览数据</button></div>
-	<div class="inline"><button @click="$setParams({ty:'form',sn:'2'});">编辑数据</button></div>
+	<h1>{{title}}</h1>
+	<div class="btn">
+		<button @click="tJsonGet();">获取歇后语数据</button>
+		<button @click="tJson1Get();">获取脑筋急转弯数据</button>
+	</div>
+	<div class="btn">
+		<button @click="$setParams({ty:'list'});">获取数据</button>
+		<button @click="$setParams({ty:'view',sn:'2'});">预览数据</button>
+		<button @click="$setParams({ty:'form',sn:'2'});">编辑数据</button>
+	</div>
 	<div v-if="mGlobal.url.params.ty==='list'">
 		<saPage></saPage>
 		<dl v-for="item in arrData" :key="item[0]">
 			<dt>{{item[1]}}</dt>
 			<dd>{{item[2]}}</dd>
-			<dd>
+			<dd class="btn">
 				<button @click="$setParams({ty:'view',sn:item[0]});">预览</button>
 				<button @click="$setParams({ty:'form',sn:item[0]});">编辑</button>
 			</dd>
@@ -40,7 +43,7 @@
 		mixins: [mixinList],
 		data() {
 			return {
-				title: 'sc-info',
+				title: '测试',
 				tRes: null
 			}
 		},

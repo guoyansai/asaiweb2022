@@ -64,6 +64,12 @@ a:hover {
 	color: #288c78;
 }
 
+h1{
+	padding: 6px 12px;
+	margin-bottom: 12px;
+	border-bottom: #ccddd8 1px solid;
+}
+
 header {
 	display: flex;
 	padding: 3px 12px;
@@ -103,12 +109,16 @@ header img {
 }
 
 .form li input,
-.form li textarea {
+.form li textarea,
+.form li picker {
 	flex-grow: 1;
 	border: #ccddd8 1px solid;
 	padding: 6px 12px;
 }
-
+.form li picker {
+	height: 26px;
+	font-size: 14px;
+}
 .pos {
 	padding: 6px 12px;
 }
@@ -239,4 +249,9 @@ header img {
 	padding: 28px;
 	border-radius: 6px;
 	font-size: 12px;
+}
+
+.btn{
+	display: flex;
+	padding: 6px 12px;
 }
