@@ -188,34 +188,88 @@ export default {
 							resolve(objRes);
 						},
 						fail: (errSto) => {
-							uni.request({
-								url: url,
-								data: params,
-								method: config.method || "POST", // 'GET'||'POST'
-								header: config.header,
-								timeout: config.timeout || this.mApi.timeout,
-								success: (res) => {
-									objRes = this.scToObj(res);
-									objRes = this.scRes(objRes.data);
-									console.log(666.003, objRes);
-									uni.setStorage({
-										key: dataKey,
-										data: objRes,
-										success: () => {},
-										complete: () => {
-											this.scSetData(dataKey, objRes);
-											objRes.lv = 3;
-											resolve(objRes);
-										},
-									});
-								},
-								fail: (err) => {
-									reject(err);
-								},
-							});
+							let uniRequest;
+							if (this.mApi.typeUni) {
+								uniRequest = this.uniApiJson(url, params, config)
+							} else {
+								uniRequest = this.uniDownJson(url, params, config)
+							}
+							uniRequest.then(res => {
+								objRes = this.scToObj(res);
+								objRes = this.scRes(objRes.data);
+								console.log(666.003, objRes);
+								uni.setStorage({
+									key: dataKey,
+									data: objRes,
+									success: () => {},
+									complete: () => {
+										this.scSetData(dataKey, objRes);
+										objRes.lv = 3;
+										resolve(objRes);
+									},
+								});
+							}).catch(err => {
+								reject(err);
+							})
 						},
 					});
 				}
+			});
+		},
+		uniApiJson(url, params, config) {
+			return new Promise((resolve, reject) => {
+				uni.request({
+					url: url,
+					data: params,
+					method: config.method || "POST", // 'GET'||'POST'
+					header: config.header,
+					timeout: config.timeout || this.mApi.timeout,
+					success: (res) => {
+						resolve(res);
+					},
+					fail: (err) => {
+						reject(err);
+					},
+				});
+			});
+		},
+		uniDownJson(url, params, config) {
+			return new Promise((resolve, reject) => {
+				const downloadTask = uni.downloadFile({
+					url: url,
+					data: params,
+					method: "GET",
+					header: config.header,
+					timeout: config.timeout || this.mApi.timeout,
+					success: (res) => {
+						uni.request({
+							url: res.tempFilePath,
+							method: "GET",
+							timeout: config.timeout || this.mApi.timeout,
+							success: (res) => {
+								if (res.statusCode === 200) {
+									resolve(res)
+								}
+							},
+							fail: (err) => {
+								reject(err);
+							},
+							complete: () => {
+								this.mGlobal.index.progress = "";
+							},
+						});
+					},
+					fail: (err) => {
+						reject(err);
+					},
+					complete: () => {
+						this.mGlobal.index.progress = "";
+					},
+				});
+				downloadTask.onProgressUpdate((res) => {
+					this.mGlobal.index.progress =
+						`${res.progress}% ${res.totalBytesWritten}/${res.totalBytesExpectedToWrite}`
+				});
 			});
 		},
 		// 处理url及obj的参数--------

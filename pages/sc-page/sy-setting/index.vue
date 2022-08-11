@@ -7,6 +7,11 @@
 				<view class="uni-input">{{urlVals[urlIndex]||urlVals[0]}}</view>
 			</picker>
 		</li>
+		<li>
+			<label>数据源：</label>
+			<radio value="0" :checked="mApi.typeUni===0" @click="mApi.typeUni=0" />下载模式
+			<radio value="1" :checked="mApi.typeUni===1" @click="mApi.typeUni=1" />接口请求
+		</li>
 		<li><label>超时：</label><input type="number" v-model="mApi.timeout" /></li>
 		<li><label>缓存前缀：</label><input v-model="mApi.dataStart" /></li>
 		<li><label>项目类型：</label><input v-model="mApi.type" /></li>
