@@ -1,6 +1,16 @@
 import mixinApi from "./mixin-api.js";
-import mixinList from "./mixin-list.js";
+import mixinFun from "./mixin-fun.js";
 
 export default {
-	mixins: [mixinApi, mixinList],
+	mixins: [mixinApi, mixinFun],
+	methods: {
+		$xiMenu(item) {
+			const {
+				dir,
+				menu,
+				params
+			} = item.url;
+			this.$setUrl(dir, menu, params);
+		},
+	}
 };

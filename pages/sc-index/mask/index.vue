@@ -1,7 +1,9 @@
 <template>
 	<div class="mask" v-if="mGlobal.index.mask">
-		<dt>{{mGlobal.index.mask}}</dt>
-		<dd><button @click="close()">关闭</button></dd>
+		<dl>
+			<dt>{{mGlobal.index.mask}}</dt>
+			<dd><button @click="close()">关闭</button></dd>
+		</dl>
 	</div>
 </template>
 

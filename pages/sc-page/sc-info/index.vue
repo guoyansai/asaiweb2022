@@ -1,5 +1,6 @@
 <template>
   <nav class="pos">
+    <em @click="$xiMenu(mMenu)">信息</em> /
     <em @click="$setParams({ ty: 'list' })">列表</em> /
     <em @click="$setParams({ ty: 'show' })">预览</em> /
     <em @click="$setParams({ ty: 'form' })">编辑</em> /

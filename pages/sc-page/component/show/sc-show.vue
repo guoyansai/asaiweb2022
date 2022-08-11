@@ -1,7 +1,7 @@
 <template>
 	<div class="show" v-if="mGlobal.url.params.ty === 'show'">
-		<h1>{{ curView[1] }}</h1>
-		<article>{{ curView[2] }}</article>
+		<h1>{{ mView[1] }}</h1>
+		<article>{{ mView[2] }}</article>
 	</div>
 </template>
 
@@ -10,17 +10,6 @@
 
 	export default {
 		mixins: [mixinShow],
-		computed: {
-			lists() {
-				if (this.mGlobal.dataModel && this.mGlobal.dataModel.ll) {
-					return this.mGlobal.dataModel.ll || {};
-				}
-				return {};
-			},
-			curView() {
-				return this.lists[this.mGlobal.url.params.sn] || [];
-			},
-		},
 	};
 </script>
 

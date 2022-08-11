@@ -3,15 +3,16 @@ import mixinData from "./mixin-data.js";
 export default {
 	mixins: [mixinData],
 	methods: {
+		// $对外函数体--------
 		$api(vUrl, vParams, vConfig) {
 			return this.scApi(vUrl, vParams, vConfig);
 		},
 		$apiJson(vConfig) {
 			const config = vConfig ? vConfig : {}
 			if (
-				this.mMenu &&
-				this.mMenu[this.mGlobal.url.dir] &&
-				+this.mMenu[this.mGlobal.url.dir].type > 1
+				this.mMenus &&
+				this.mMenus[this.mGlobal.url.dir] &&
+				+this.mMenus[this.mGlobal.url.dir].type > 10
 			) {
 				this.$api(
 					this.mUrl +
@@ -57,6 +58,48 @@ export default {
 		$setParams(params) {
 			this.$setUrl(this.mGlobal.url.dir, this.mGlobal.url.menu, params);
 		},
+		$getList(lists) {
+			this.mGlobal.url.params.pa = lists.length
+			let tmpLists = []
+			if (this.mGlobal.url.params.pa > 0) {
+				this.initPage(this.mGlobal.url.params)
+				const arrLen = lists[0].length
+				if (this.mGlobal.url.params.ss) {
+					let tmpArr = []
+					if (this.mGlobal.url.params.sl > 0) {
+						this.mGlobal.url.params.sl = this.mGlobal.url.params.sl < arrLen ?
+							+this.mGlobal.url.params.sl :
+							arrLen
+						tmpArr = lists.filter(el =>
+							el[+this.mGlobal.url.params.sl - 1].search(this.mGlobal.url.params.ss) > -1)
+					} else {
+						tmpArr = lists.filter(el =>
+							(el + '').search(this.mGlobal.url.params.ss) > -1)
+					}
+					this.mGlobal.url.params.pa = tmpArr.length
+					this.initPage()
+					tmpLists = tmpArr
+				} else {
+					tmpLists = lists
+				}
+				if (this.mGlobal.url.params.sp > 0) {
+					this.mGlobal.url.params.sp = this.mGlobal.url.params.sp < arrLen ?
+						+this.mGlobal.url.params.sp :
+						arrLen
+					if (this.mGlobal.url.params.st) {
+						tmpLists = tmpLists.sort((a, b) =>
+							b[this.mGlobal.url.params.sp - 1].localeCompare(a[this.mGlobal.url.params.sp - 1]))
+					} else {
+						tmpLists = tmpLists.sort((a, b) =>
+							a[this.mGlobal.url.params.sp - 1].localeCompare(b[this.mGlobal.url.params.sp - 1]))
+					}
+				}
+				tmpLists = tmpLists.slice((this.mGlobal.url.params.pg - 1) * this.mGlobal.url.params.ps,
+					this.mGlobal.url.params.pg * this.mGlobal.url.params.ps)
+			}
+			return tmpLists
+		},
+		// 接口请求综合部分--------
 		scApi(vUrl, vParams, vConfig) {
 			const [url, params, config] = [
 				this.scUrl(vUrl),
@@ -120,7 +163,7 @@ export default {
 		scStr(str) {
 			return ((str + "").replace(/[^a-zA-Z0-9]/g, "") || "").substr(-20);
 		},
-		// uni-app封装
+		// 接口请求uni-app封装--------
 		uniApi(url, params, config) {
 			return new Promise((resolve, reject) => {
 				const dataKey = this.scToKey(url);
@@ -179,7 +222,7 @@ export default {
 				}
 			});
 		},
-
+		// 处理url及obj的参数--------
 		paramsObj(obj) {
 			let tmpStr = "";
 			const arr = Object.entries(obj || {});
@@ -232,5 +275,12 @@ export default {
 		paramsSafe(str) {
 			return str;
 		},
+		// 初始化list页面--------
+		initPage() {
+			this.mGlobal.url.params.pg = this.mGlobal.url.params.pg > 1 ? +this.mGlobal.url.params.pg : 1
+			this.mGlobal.url.params.ps = this.mGlobal.url.params.ps > 1 ? +this.mGlobal.url.params.ps : 1
+			this.mGlobal.url.params.pc = Math.ceil(this.mGlobal.url.params.pa / this.mGlobal.url.params.ps) || 1
+			this.mGlobal.url.params.pg = Math.min(this.mGlobal.url.params.pg, this.mGlobal.url.params.pc)
+		}
 	},
 };

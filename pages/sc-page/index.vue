@@ -15,8 +15,8 @@
 		},
 		computed: {
 			curFile() {
-				if (this.mMenu && this.mMenu[this.mGlobal.url.dir]) {
-					return this.mMenu[this.mGlobal.url.dir].file
+				if (this.mMenus && this.mMenus[this.mGlobal.url.dir]) {
+					return this.mMenus[this.mGlobal.url.dir].file
 				} else {
 					return 'test'
 				}

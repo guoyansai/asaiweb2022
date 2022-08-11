@@ -64,19 +64,22 @@ a:hover {
 	color: #288c78;
 }
 
-header{
+header {
 	display: flex;
 	padding: 3px 12px;
 	align-items: center;
 }
-header dt{
+
+header dt {
 	width: 168px;
 }
-header dd{
+
+header dd {
 	flex-grow: 1;
 	text-align: right;
 }
-header img{
+
+header img {
 	max-height: 36px;
 }
 
@@ -186,37 +189,54 @@ header img{
 	padding: 6px 12px;
 }
 
-.mask {
+.mask,
+.toast {
 	width: 100%;
 	height: 100%;
-	background-color: #eff5f888;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
 	position: fixed;
 	top: 0;
 	left: 0;
 }
 
-.mask dt {}
+.mask,
+.toast,
+.mask dl {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+}
+
+.mask {
+	background-color: #eff5f888;
+}
+
+.mask dl {
+	border: 1px solid #ccddd8;
+	background-color: #eff5f8aa;
+	padding: 20px;
+	border-radius: 6px;
+}
+
+.mask dt {
+	font-size: 14px;
+	color: #288c78;
+}
 
 .mask dd {
 	margin-top: 20px;
 }
 
-.toast {
-	position: fixed;
-	top: 12px;
-	left: 0;
-	width: 100%;
-	text-align: center;
+.mask button {
+	font-size: 12px;
 }
 
 .toast span {
+	color: #61736f;
 	background-color: #eff5f8ff;
-	box-shadow: #ccddd8 3px 3px 6px 3px;
-	padding: 6px 28px;
+	box-shadow: #ccddd8 2px 2px 2px;
+	padding: 28px;
 	border-radius: 6px;
 	font-size: 12px;
 }

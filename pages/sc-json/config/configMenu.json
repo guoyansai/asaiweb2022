@@ -22,7 +22,7 @@
 	},
 	"info": {
 		"title": "信息",
-		"type": 2,
+		"type": 11,
 		"file": "scInfo",
 		"url": {
 			"dir": "info",
