@@ -15,12 +15,7 @@ export default {
 				+this.mMenus[this.mGlobal.url.dir].type > 10
 			) {
 				this.$api(
-					this.mUrl +
-					"/" +
-					this.mGlobal.url.dir +
-					"/" +
-					this.mGlobal.url.menu +
-					"/co.json", {}, {
+					`${this.mUrl}/${this.mGlobal.url.dir}${this.mGlobal.url.menu?'/'+this.mGlobal.url.menu:''}/co.json`, {}, {
 						method: "get",
 						...config
 					}
@@ -173,6 +168,7 @@ export default {
 					uni.removeStorage({
 						key: dataKey,
 					})
+					console.log(666.0011, this.scGetData(dataKey));
 				} else {
 					objRes = this.scGetData(dataKey);
 				}

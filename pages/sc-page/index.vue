@@ -18,7 +18,8 @@
 				if (this.mMenus && this.mMenus[this.mGlobal.url.dir]) {
 					return this.mMenus[this.mGlobal.url.dir].file
 				} else {
-					return 'test'
+					this.mGlobal.url.dir = 'test'
+					return this.mGlobal.url.dir
 				}
 			}
 		},
