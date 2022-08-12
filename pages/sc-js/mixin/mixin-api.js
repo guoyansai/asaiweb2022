@@ -240,7 +240,8 @@ export default {
 		},
 		uniDownJson(url, params, config) {
 			return new Promise((resolve, reject) => {
-				const downloadTask = uni.downloadFile({
+				const dataKey = this.scToKey(url);
+				this.downTask[dataKey] = uni.downloadFile({
 					url: url,
 					data: params,
 					method: "GET",
@@ -272,12 +273,12 @@ export default {
 						this.mGlobal.index.progress = "";
 					},
 				});
-				downloadTask.onProgressUpdate((res) => {
+				this.downTask[dataKey].onProgressUpdate((res) => {
 					this.mGlobal.index.progress =
 						`${res.progress}% ${res.totalBytesWritten}/${res.totalBytesExpectedToWrite}`
 					if (res.progress === 100) {
-						this.mGlobal.index.mask = "正在处理数据, 请稍等...";
-						this.mGlobal.index.progress = "100%"
+						this.mGlobal.index.mask = "正在处理数据";
+						this.mGlobal.index.progress = "请稍等..."
 					}
 				});
 			});

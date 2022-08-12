@@ -3,6 +3,7 @@ import scJson from "../../sc-json/json.js";
 export default {
 	data() {
 		return {
+			downTask:{},
 			dataObj: {},
 			mJson: scJson,
 		};
