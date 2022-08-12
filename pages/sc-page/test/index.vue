@@ -166,7 +166,7 @@
 				})
 			},
 			tJson1Get() {
-				this.$api('http://appdata.fu.asai.cc/data/info/c-g-naojin/co.json', {}, {
+				this.$api('http://appdata.fu.asai.cc/data/info/co.json', {}, {
 					method: 'get'
 				}).then(res => {
 					this.tRes = res

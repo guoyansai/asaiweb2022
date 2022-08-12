@@ -165,7 +165,6 @@ export default {
 					uni.removeStorage({
 						key: dataKey,
 					})
-					console.log(666.0011, this.scGetData(dataKey));
 				} else {
 					objRes = this.scGetData(dataKey);
 				}
@@ -186,9 +185,7 @@ export default {
 						},
 						fail: (errSto) => {
 							this.mGlobal.index.mask = "正在从网络拉取数据...";
-							uni.setKeepScreenOn({
-								keepScreenOn: true
-							});
+							this.uniLight(true);
 							let uniRequest;
 							if (this.mApi.typeUni) {
 								uniRequest = this.uniApiJson(url, params, config)
@@ -204,16 +201,14 @@ export default {
 									data: objRes,
 									success: () => {},
 									complete: () => {
-										uni.setKeepScreenOn({
-											keepScreenOn: false
-										});
+										this.uniLight(false);
 										this.scSetData(dataKey, objRes);
 										objRes.lv = 3;
 										resolve(objRes);
 									},
 								});
 							}).catch(err => {
-								console.log(666.0011, err);
+								console.log(666.0012, err);
 								reject(err);
 							})
 						},
@@ -241,6 +236,9 @@ export default {
 		uniDownJson(url, params, config) {
 			return new Promise((resolve, reject) => {
 				const dataKey = this.scToKey(url);
+				if (this.downTask.cur && this.downTask.cur !== dataKey) {
+					this.downTask[this.downTask.cur].abort();
+				}
 				this.downTask[dataKey] = uni.downloadFile({
 					url: url,
 					data: params,
@@ -248,23 +246,51 @@ export default {
 					header: config.header,
 					timeout: config.timeout || this.mApi.timeout,
 					success: (res) => {
-						uni.request({
-							url: url,
-							method: "GET",
-							timeout: config.timeout || this.mApi.timeout,
-							sslVerify: false,
-							success: (res) => {
-								if (res.statusCode === 200) {
-									resolve(res)
-								}
-							},
-							fail: (err) => {
-								reject(err);
-							},
-							complete: () => {
-								this.mGlobal.index.progress = "";
-							},
+						let rUrl = res.tempFilePath
+						let isApp = false
+						// #ifdef APP-PLUS
+						isApp = true
+						plus.io.requestFileSystem(plus.io.PRIVATE_DOC, function(fs) {
+							fs.root.getFile(rUrl, {
+								create: false
+							}, function(fileEntry) {
+								fileEntry.file(function(file) {
+									const fileReader = new plus.io
+										.FileReader();
+									fileReader.readAsText(file, 'utf-8');
+									fileReader.onloadend = function(e) {
+										const rVal = {
+											data: JSON.parse(e
+												.target
+												.result)
+										}
+										resolve(rVal)
+									}
+								});
+							});
+						}, function(err) {
+							reject(err);
 						});
+						// #endif
+						if (!isApp) {
+							uni.request({
+								url: rUrl,
+								method: "GET",
+								timeout: config.timeout || this.mApi.timeout,
+								sslVerify: false,
+								success: (res) => {
+									if (res.statusCode === 200) {
+										resolve(res)
+									}
+								},
+								fail: (err) => {
+									reject(err);
+								},
+								complete: () => {
+									this.mGlobal.index.progress = "";
+								},
+							});
+						}
 					},
 					fail: (err) => {
 						reject(err);
@@ -276,12 +302,19 @@ export default {
 				this.downTask[dataKey].onProgressUpdate((res) => {
 					this.mGlobal.index.progress =
 						`${res.progress}% ${res.totalBytesWritten}/${res.totalBytesExpectedToWrite}`
-					if (res.progress === 100) {
-						this.mGlobal.index.mask = "正在处理数据";
-						this.mGlobal.index.progress = "请稍等..."
-					}
+					// if (res.progress === 100) {
+					// 	this.mGlobal.index.mask = "正在处理数据";
+					// 	this.mGlobal.index.progress = "请稍等..."
+					// }
 				});
 			});
+		},
+		uniLight(val) {
+			// #ifdef APP-PLUS
+			uni.setKeepScreenOn({
+				keepScreenOn: val
+			});
+			// #endif
 		},
 		// 处理url及obj的参数--------
 		paramsObj(obj) {
