@@ -9,7 +9,6 @@
 		watch: {
 			'mGlobal.index.toast': {
 				handler(newVal, oldVal) {
-					console.log(666.1005, newVal, oldVal)
 					if (newVal) {
 						let timeFun = null;
 						timeFun = setTimeout(() => {

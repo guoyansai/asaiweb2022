@@ -25,7 +25,7 @@ export default {
 			}
 		},
 		$getUrl() {
-			const locations = (location.hash.substring(2) + "//").split("/");
+			const locations = (((location || {}).hash || '').substring(2) + "//").split("/");
 			this.mGlobal.url.dir = this.paramsCode(locations[0], 1);
 			this.mGlobal.url.menu = this.paramsCode(locations[1], 1);
 			Object.assign(this.mGlobal.url.params, this.paramsUrl(locations[2]));
@@ -103,14 +103,11 @@ export default {
 			];
 			return new Promise((resolve, reject) => {
 				if (this.isUni) {
-					this.mGlobal.index.mask = "数据加载中";
 					this.uniApi(url, params, config)
 						.then((res) => {
-							this.mGlobal.index.toast = "加载成功";
 							resolve(res);
 						})
 						.catch((err) => {
-							this.mGlobal.index.toast = "失败了";
 							reject(err);
 						})
 						.finally(() => {
@@ -188,6 +185,10 @@ export default {
 							resolve(objRes);
 						},
 						fail: (errSto) => {
+							this.mGlobal.index.mask = "正在从网络拉取数据...";
+							uni.setKeepScreenOn({
+								keepScreenOn: true
+							});
 							let uniRequest;
 							if (this.mApi.typeUni) {
 								uniRequest = this.uniApiJson(url, params, config)
@@ -203,12 +204,16 @@ export default {
 									data: objRes,
 									success: () => {},
 									complete: () => {
+										uni.setKeepScreenOn({
+											keepScreenOn: false
+										});
 										this.scSetData(dataKey, objRes);
 										objRes.lv = 3;
 										resolve(objRes);
 									},
 								});
 							}).catch(err => {
+								console.log(666.0011, err);
 								reject(err);
 							})
 						},
@@ -243,9 +248,10 @@ export default {
 					timeout: config.timeout || this.mApi.timeout,
 					success: (res) => {
 						uni.request({
-							url: res.tempFilePath,
+							url: url,
 							method: "GET",
 							timeout: config.timeout || this.mApi.timeout,
+							sslVerify: false,
 							success: (res) => {
 								if (res.statusCode === 200) {
 									resolve(res)
@@ -269,6 +275,10 @@ export default {
 				downloadTask.onProgressUpdate((res) => {
 					this.mGlobal.index.progress =
 						`${res.progress}% ${res.totalBytesWritten}/${res.totalBytesExpectedToWrite}`
+					if (res.progress === 100) {
+						this.mGlobal.index.mask = "正在处理数据, 请稍等...";
+						this.mGlobal.index.progress = "100%"
+					}
 				});
 			});
 		},
