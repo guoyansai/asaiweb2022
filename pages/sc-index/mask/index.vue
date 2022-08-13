@@ -13,6 +13,12 @@
 		methods: {
 			close() {
 				this.mGlobal.index.mask = ""
+				if (this.isUni) {
+					if (this.downTask.cur) {
+						this.downTask.cur = '';
+						this.mGlobal.index.progress = "";
+					}
+				}
 			}
 		}
 	}

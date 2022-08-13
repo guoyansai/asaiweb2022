@@ -3,23 +3,29 @@ import scJson from "../../sc-json/json.js";
 export default {
 	data() {
 		return {
-			downTask:{cur:''},
+			downTask: {
+				cur: '',
+				progress: {}
+			},
 			dataObj: {},
 			mJson: scJson,
 		};
 	},
 	computed: {
+		mDb() {
+			return this.mJson.db;
+		},
 		mApi() {
 			return this.mJson.config.api;
 		},
 		mGlobal() {
 			return this.mJson.config.global;
 		},
-		mMenu() {
-			return this.mMenus[this.mGlobal.url.dir];
-		},
 		mMenus() {
 			return this.mJson.config.menu;
+		},
+		mMenu() {
+			return this.mMenus[this.mGlobal.url.dir];
 		},
 		mMenuArr() {
 			return Object.entries(this.mMenus);
@@ -30,6 +36,9 @@ export default {
 		isUni() {
 			return this.mApi.type === "uni";
 		},
+		mData() {
+			return this.mGlobal.dataModel;
+		},
 		mView() {
 			return this.lists[this.mGlobal.url.params.sn] || [];
 		},
@@ -38,6 +47,23 @@ export default {
 				return this.mGlobal.dataModel.ll || {};
 			}
 			return {};
+		},
+
+
+		mgMds() {
+			return (this.mGlobal.dataModel && this.mGlobal.dataModel.md) || {};
+		},
+		mgMdArr() {
+			return Object.entries(this.mgMds);
+		},
+		mgLists() {
+			if (this.mGlobal.dataModel && this.mGlobal.dataModel.ll) {
+				return this.mGlobal.dataModel.ll || {};
+			}
+			return {};
+		},
+		mgListArr() {
+			return this.$getList(Object.values(this.mgLists));
 		},
 	},
 };

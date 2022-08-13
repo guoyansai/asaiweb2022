@@ -119,9 +119,11 @@ export default {
 			});
 		},
 		scRes(res) {
-			Object.keys(res.ll).forEach(key => {
-				res.ll[key].unshift(key)
-			})
+			if (res && res.ll) {
+				Object.keys(res.ll).forEach(key => {
+					res.ll[key].unshift(key)
+				})
+			}
 			return res
 		},
 		scUrl(vUrl) {
@@ -236,9 +238,10 @@ export default {
 		uniDownJson(url, params, config) {
 			return new Promise((resolve, reject) => {
 				const dataKey = this.scToKey(url);
-				if (this.downTask.cur && this.downTask.cur !== dataKey) {
+				if (this.downTask.cur && this.downTask.cur !== dataKey && this.downTask[this.downTask.cur]) {
 					this.downTask[this.downTask.cur].abort();
 				}
+				this.downTask.cur = dataKey
 				this.downTask[dataKey] = uni.downloadFile({
 					url: url,
 					data: params,
@@ -250,15 +253,15 @@ export default {
 						let isApp = false
 						// #ifdef APP-PLUS
 						isApp = true
-						plus.io.requestFileSystem(plus.io.PRIVATE_DOC, function(fs) {
+						plus.io.requestFileSystem(plus.io.PRIVATE_DOC, (fs) => {
 							fs.root.getFile(rUrl, {
 								create: false
-							}, function(fileEntry) {
-								fileEntry.file(function(file) {
+							}, (fileEntry) => {
+								fileEntry.file((file) => {
 									const fileReader = new plus.io
 										.FileReader();
 									fileReader.readAsText(file, 'utf-8');
-									fileReader.onloadend = function(e) {
+									fileReader.onloadend = (e) => {
 										const rVal = {
 											data: JSON.parse(e
 												.target
@@ -268,11 +271,12 @@ export default {
 									}
 								});
 							});
-						}, function(err) {
+						}, (err) => {
 							reject(err);
 						});
 						// #endif
 						if (!isApp) {
+							console.log(666.111222,rUrl)
 							uni.request({
 								url: rUrl,
 								method: "GET",
@@ -302,10 +306,10 @@ export default {
 				this.downTask[dataKey].onProgressUpdate((res) => {
 					this.mGlobal.index.progress =
 						`${res.progress}% ${res.totalBytesWritten}/${res.totalBytesExpectedToWrite}`
-					// if (res.progress === 100) {
-					// 	this.mGlobal.index.mask = "正在处理数据";
-					// 	this.mGlobal.index.progress = "请稍等..."
-					// }
+					if (res.progress === 100) {
+						this.mGlobal.index.mask = "正在处理数据";
+						this.mGlobal.index.progress = "请稍等...";
+					}
 				});
 			});
 		},
