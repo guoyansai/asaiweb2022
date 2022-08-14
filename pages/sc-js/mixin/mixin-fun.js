@@ -26,9 +26,12 @@ export default {
 			return '';
 		},
 		mgfValue(item, key) {
-			let tmpVal = this.mgfValue(item, key).replace(/<[^>]*>/g, '')
-			if (tmpVal.length > 200) {
-				tmpVal = tmpVal.substr(0, 198) + '...'
+			let tmpVal = this.mgfVal(item, key)
+			if (tmpVal) {
+				tmpVal = tmpVal.replace(/<[^>]*>/g, '')
+				if (tmpVal && tmpVal.length > 200) {
+					tmpVal = tmpVal.substr(0, 198) + '...'
+				}
 			}
 			return tmpVal
 		}
