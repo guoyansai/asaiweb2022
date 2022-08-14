@@ -64,11 +64,6 @@ a:hover {
 	color: #288c78;
 }
 
-h1 {
-	padding: 6px 12px;
-	margin-bottom: 12px;
-	border-bottom: #ccddd8 1px solid;
-}
 
 header {
 	display: flex;
@@ -204,10 +199,6 @@ header img {
 	background-color: #eff5f8;
 }
 
-.show {
-	padding: 6px 12px;
-}
-
 .mask,
 .toast {
 	width: 100%;
@@ -263,4 +254,40 @@ header img {
 .btn {
 	display: flex;
 	padding: 6px 12px;
+}
+
+
+.show {
+	padding: 6px 12px;
+}
+
+.show h1,
+.show dt,
+.show dd,
+.show article{
+	padding: 6px 12px;
+}
+.show dt,
+.show dd {
+	display: block;
+	font-size: 12px;
+}
+
+.show dt {
+	border-top: #ccddd8 1px solid;
+	border-bottom: #ccddd8 1px solid;
+	color: #61736f;
+}
+
+.show dd {
+	color: #288c78;
+}
+
+.show .pic {
+	display: block;
+	text-align: center;
+}
+
+.show .pic img {
+	max-width: 100%;
 }

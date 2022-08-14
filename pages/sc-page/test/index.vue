@@ -24,15 +24,15 @@
 
 	<div v-if="mGlobal.url.params.ty==='view'">
 		<dl>
-			<dt>{{mView[1]}}</dt>
-			<dd>{{mView[2]}}</dd>
+			<dt>{{mShow.tt}}</dt>
+			<dd>{{mShow.co}}</dd>
 			<button @click="$setParams({ty:'form',sn:mGlobal.url.params.sn});">编辑</button>
 		</dl>
 	</div>
 
 	<div v-if="mGlobal.url.params.ty==='form'">
-		<input v-model="mView[1]" />
-		<input v-model="mView[2]" />
+		<input v-model="mShow.tt" />
+		<input v-model="mShow.co" />
 		<button @click="$setParams({ty:'view',sn:mGlobal.url.params.sn});">预览</button>
 	</div>
 </template>

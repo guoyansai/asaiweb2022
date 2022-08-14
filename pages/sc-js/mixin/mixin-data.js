@@ -39,8 +39,13 @@ export default {
 		mData() {
 			return this.mGlobal.dataModel;
 		},
-		mView() {
-			return this.lists[this.mGlobal.url.params.sn] || [];
+		mShow() {
+			let tmpShows = {};
+			const showArr = this.lists[this.mGlobal.url.params.sn] || [];
+			Object.keys(this.mDb.info.md).forEach(el => {
+				tmpShows[el] = this.mgfVal(showArr, el)
+			});
+			return tmpShows;
 		},
 		lists() {
 			if (this.mGlobal.dataModel && this.mGlobal.dataModel.ll) {
@@ -64,6 +69,17 @@ export default {
 		},
 		mgListArr() {
 			return this.$getList(Object.values(this.mgLists));
+		},
+	},
+	methods: {
+		mgfIndex(key) {
+			return this.mgMdArr.findIndex((el) => el[0] === key)
+		},
+		mgfVal(item, key) {
+			if (this.mgfIndex(key) > -1) {
+				return item[this.mgfIndex(key)];
+			}
+			return "";
 		},
 	},
 };

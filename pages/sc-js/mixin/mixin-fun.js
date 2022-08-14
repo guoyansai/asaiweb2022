@@ -3,15 +3,6 @@ import mixinData from "./mixin-data.js";
 export default {
 	mixins: [mixinData],
 	methods: {
-		mgfIndex(key) {
-			return this.mgMdArr.findIndex((el) => el[0] === key)
-		},
-		mgfVal(item, key) {
-			if (this.mgfIndex(key) > -1) {
-				return item[this.mgfIndex(key)];
-			}
-			return "";
-		},
 		mgfGo(item) {
 			const ur = this.mgfVal(item, "ur");
 			if (ur) {
@@ -28,5 +19,18 @@ export default {
 				});
 			}
 		},
+		mgfShow(key) {
+			if (this.mShow[key]) {
+				return `${this.mgMds[key]}:${this.mShow[key]}`;
+			}
+			return '';
+		},
+		mgfValue(item, key) {
+			let tmpVal = this.mgfValue(item, key).replace(/<[^>]*>/g, '')
+			if (tmpVal.length > 200) {
+				tmpVal = tmpVal.substr(0, 198) + '...'
+			}
+			return tmpVal
+		}
 	}
 }

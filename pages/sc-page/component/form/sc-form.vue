@@ -1,8 +1,8 @@
 <template>
 	<div class="form" v-if="mGlobal.url.params.ty === 'form'">
-		<li><label>标题：</label><input v-model="mView[1]" /></li>
+		<li><label>标题：</label><input v-model="mShow.tt" /></li>
 		<li>
-			<label>内容：</label><textarea class="textarea" v-model="mView[2]"></textarea>
+			<label>内容：</label><textarea class="textarea" v-model="mShow.co"></textarea>
 		</li>
 	</div>
 </template>
