@@ -1,8 +1,6 @@
 <template>
-	<div class="form-item">
-		<label>{{label}}</label>
-		<input type="text" v-model="customText" />
-	</div>
+	<label>{{label}}</label>
+	<textarea class="textarea" v-model="customText"></textarea>
 </template>
 
 <script>

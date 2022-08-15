@@ -1,9 +1,11 @@
-import saInput from './sa-input'
-import saModel from './sa-model'
+import saInput from './sa-input';
+import saTextarea from './sa-textarea';
+import saObjInput from './sa-obj-input';
 
 export default {
 	components: {
 		saInput,
-		saModel,
+		saTextarea,
+		saObjInput,
 	}
 }

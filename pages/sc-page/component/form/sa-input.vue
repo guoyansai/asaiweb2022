@@ -1,17 +1,25 @@
 <template>
-	<div class="form-item" v-if="scitem">
-		<label :for="scitem.nm">
-			{{scitem.mt}}
-		</label>
-		<input :id="scitem.nm" :name="scitem.nm" :placeholder="scitem.mc" type="text" v-model="scitem.fv" />
-	</div>
+	<label>{{label}}</label>
+	<input type="text" v-model="customText" />
 </template>
 
 <script>
 	export default {
 		props: {
-			scitem: {},
+			label: '',
+			modelValue: '',
 		},
+		emits: ['update:modelValue'],
+		computed: {
+			customText: {
+				get() {
+					return this.modelValue
+				},
+				set(value) {
+					this.$emit('update:modelValue', value)
+				}
+			}
+		}
 	}
 </script>
 

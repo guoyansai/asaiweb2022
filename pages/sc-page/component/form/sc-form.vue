@@ -1,8 +1,8 @@
 <template>
 	<div class="form" v-if="mGlobal.url.params.ty === 'form'">
-		<li><label>标题：</label><input v-model="mShow.tt" /></li>
-		<li>
-			<label>内容：</label><textarea class="textarea" v-model="mShow.co"></textarea>
+		<li v-for="item in mgMdArr" :key="item[0]">
+			<saTextarea v-if="item[0]==='co'" :label="item[1]" v-model="mShow[item[0]]"></saTextarea>
+			<saInput v-else :label="item[1]" v-model="mShow[item[0]]"></saInput>
 		</li>
 	</div>
 </template>
