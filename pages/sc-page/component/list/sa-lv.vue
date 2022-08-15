@@ -7,7 +7,7 @@
 		props: ['sn'],
 		computed: {
 			getLv() {
-				return this.dataObj[this.sn] ? 2 : 3
+				return this.mrDatas[this.sn] ? 2 : 3
 			}
 		}
 	}

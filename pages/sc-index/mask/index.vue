@@ -14,8 +14,8 @@
 			close() {
 				this.mGlobal.index.mask = ""
 				if (this.isUni) {
-					if (this.downTask.cur) {
-						this.downTask.cur = '';
+					if (this.mrTasks.cur) {
+						this.mrTasks.cur = '';
 						this.mGlobal.index.progress = "";
 					}
 				}

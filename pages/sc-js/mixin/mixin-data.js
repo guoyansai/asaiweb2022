@@ -1,28 +1,30 @@
-import scJson from "../../sc-json/json.js";
+import scCo from "../../sc-json/co.json";
 
 export default {
 	data() {
 		return {
-			downTask: {
-				cur: '',
-				progress: {}
+			mCo: scCo,
+			mRequest: {
+				tasks: {
+					cur: "",
+					progress: {},
+				},
+				datas: {},
 			},
-			dataObj: {},
-			mJson: scJson,
 		};
 	},
 	computed: {
 		mDb() {
-			return this.mJson.db;
+			return this.mCo.db;
 		},
 		mApi() {
-			return this.mJson.config.api;
+			return this.mCo.config.api;
 		},
 		mGlobal() {
-			return this.mJson.config.global;
+			return this.mCo.config.global;
 		},
 		mMenus() {
-			return this.mJson.config.menu;
+			return this.mCo.config.menu;
 		},
 		mMenu() {
 			return this.mMenus[this.mGlobal.url.dir];
@@ -31,39 +33,51 @@ export default {
 			return Object.entries(this.mMenus);
 		},
 		mUrl() {
-			return this.mJson.config.api.url.keys[this.mJson.config.api.url.key];
+			return this.mCo.config.api.url.keys[this.mCo.config.api.url.key];
 		},
 		isUni() {
 			return this.mApi.type === "uni";
 		},
-		mData() {
-			return this.mGlobal.dataModel;
-		},
 		mShow() {
 			let tmpShows = {};
 			const showArr = this.lists[this.mGlobal.url.params.sn] || [];
-			Object.keys(this.mDb.info.md).forEach(el => {
-				tmpShows[el] = this.mgfVal(showArr, el)
+			Object.keys(this.mDb.info.md).forEach((el) => {
+				tmpShows[el] = this.mgfVal(showArr, el);
 			});
 			return tmpShows;
 		},
+
+		mData: {
+			get() {
+				return this.mGlobal.data;
+			},
+			set(val) {
+				this.mGlobal.data = val;
+			}
+		},		
+		mrTasks() {
+			return this.mRequest.tasks;
+		},
+		mrDatas() {
+			return this.mRequest.datas;
+		},
+
 		lists() {
-			if (this.mGlobal.dataModel && this.mGlobal.dataModel.ll) {
-				return this.mGlobal.dataModel.ll || {};
+			if (this.mData && this.mData.ll) {
+				return this.mData.ll || {};
 			}
 			return {};
 		},
 
-
 		mgMds() {
-			return (this.mGlobal.dataModel && this.mGlobal.dataModel.md) || {};
+			return (this.mData && this.mData.md) || {};
 		},
 		mgMdArr() {
 			return Object.entries(this.mgMds);
 		},
 		mgLists() {
-			if (this.mGlobal.dataModel && this.mGlobal.dataModel.ll) {
-				return this.mGlobal.dataModel.ll || {};
+			if (this.mData && this.mData.ll) {
+				return this.mData.ll || {};
 			}
 			return {};
 		},
@@ -75,16 +89,16 @@ export default {
 			if (this.mData.hd) {
 				return {
 					...this.mGlobal.index.header,
-					...this.mData.hd
+					...this.mData.hd,
 				};
 			} else {
 				return this.mGlobal.index.header;
 			}
-		}
+		},
 	},
 	methods: {
 		mgfIndex(key) {
-			return this.mgMdArr.findIndex((el) => el[0] === key)
+			return this.mgMdArr.findIndex((el) => el[0] === key);
 		},
 		mgfVal(item, key) {
 			if (this.mgfIndex(key) > -1) {

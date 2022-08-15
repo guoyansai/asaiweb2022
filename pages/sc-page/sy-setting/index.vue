@@ -16,7 +16,7 @@
 			<saInput label="超时" v-model="mApi.timeout"></saInput>
 		</li>
 		<li>
-			<saInput label="缓存前缀" v-model="mApi.dataStart"></saInput>
+			<saInput label="缓存前缀" v-model="mApi.datastart"></saInput>
 		</li>
 		<li>
 			<saInput label="项目类型" v-model="mApi.type"></saInput>
