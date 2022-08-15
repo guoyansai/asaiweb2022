@@ -1,6 +1,6 @@
 /* 调色板
 
-#003338|#288c78|#61736f|#ccddd8|#eff5f8
+#003338|#288c78|#61736f|#ccddd8|#eff5f8|#fffff8
 
  */
 
@@ -46,6 +46,7 @@ iframe {
 html {
 	height: 100%;
 	font-size: 16px;
+	background-color: #fffff8;
 }
 
 body {
@@ -53,6 +54,7 @@ body {
 	font: 400 1em/1.8 "Microsoft Yahei", "PingFang SC", "Avenir", "Segoe UI",
 		"Hiragino Sans GB", STHeiti, "Microsoft Sans Serif", "WenQuanYi Micro Hei",
 		sans-serif;
+	background-color: #fffff8;
 }
 
 a {
@@ -67,8 +69,12 @@ a:hover {
 
 header {
 	display: flex;
-	padding: 3px 12px;
 	align-items: center;
+	padding: 0 12px;
+	background-repeat: no-repeat;
+	background-position: center center;	
+    background-size: cover;
+	overflow: hidden;
 }
 
 header dt {
@@ -264,9 +270,10 @@ header img {
 .show h1,
 .show dt,
 .show dd,
-.show article{
+.show article {
 	padding: 6px 12px;
 }
+
 .show dt,
 .show dd {
 	display: block;

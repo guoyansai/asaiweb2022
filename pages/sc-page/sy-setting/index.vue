@@ -9,12 +9,24 @@
 		</li>
 		<li>
 			<label>数据源：</label>
-			<radio value="0" :checked="mApi.typeUni===0" @click="mApi.typeUni=0" />下载模式
+			<radio value="0" :checked="mApi.typeUni===0" @click="mApi.typeUni=0" />下载模式 　
 			<radio value="1" :checked="mApi.typeUni===1" @click="mApi.typeUni=1" />接口请求
 		</li>
-		<li><label>超时：</label><input type="number" v-model="mApi.timeout" /></li>
-		<li><label>缓存前缀：</label><input v-model="mApi.dataStart" /></li>
-		<li><label>项目类型：</label><input v-model="mApi.type" /></li>
+		<li>
+			<saInput label="超时" v-model="mApi.timeout"></saInput>
+		</li>
+		<li>
+			<saInput label="缓存前缀" v-model="mApi.dataStart"></saInput>
+		</li>
+		<li>
+			<saInput label="项目类型" v-model="mApi.type"></saInput>
+		</li>
+		<li>
+			<saInput label="导航高度" v-model="mGlobal.index.header.height"></saInput>
+		</li>
+		<li>
+			<saInput label="背景图片" v-model="mGlobal.index.header.backgroundImage"></saInput>
+		</li>
 	</div>
 	<div class="btn">
 		<button @click="showMask()">显示遮罩</button>

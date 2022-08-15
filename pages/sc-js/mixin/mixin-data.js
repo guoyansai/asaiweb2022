@@ -70,6 +70,17 @@ export default {
 		mgListArr() {
 			return this.$getList(Object.values(this.mgLists));
 		},
+
+		mHeader() {
+			if (this.mData.hd) {
+				return {
+					...this.mGlobal.index.header,
+					...this.mData.hd
+				};
+			} else {
+				return this.mGlobal.index.header;
+			}
+		}
 	},
 	methods: {
 		mgfIndex(key) {
