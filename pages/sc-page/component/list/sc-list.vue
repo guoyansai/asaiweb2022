@@ -15,8 +15,8 @@
 		mixins: [mixinList],
 		computed: {
 			curList() {
-				if (this.mData && this.mData.ty && this.mData.ty.ls) {
-					return 'saList' + this.mData.ty.ls
+				if (this.mData && this.mData.ty && this.mData.ty.ll) {
+					return 'saList' + this.mData.ty.ll
 				} else {
 					return 'saListart'
 				}

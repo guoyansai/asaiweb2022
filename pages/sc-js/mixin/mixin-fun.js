@@ -34,6 +34,12 @@ export default {
 				}
 			}
 			return tmpVal
+		},
+		mgfPic(item, key){
+			let tmpVal = this.mgfValue(item, key);
+			tmpVal=tmpVal.replace(/[^\u4e00-\u9fa5]/g,'<Br>')
+			tmpVal=tmpVal.replace(/(<Br>)+/g,'<Br>')
+			return tmpVal;
 		}
 	}
 }
