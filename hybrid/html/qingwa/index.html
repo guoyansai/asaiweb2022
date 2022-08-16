@@ -1,0 +1,1943 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <title>喂青蛙,青蛙吃蚊子,蚊子杀手游戏</title>
+  <meta name="keywords" content="喂青蛙,青蛙吃蚊子,蚊子杀手游戏">
+  <meta name="description" content="喂青蛙,青蛙吃蚊子,蚊子杀手游戏">
+  <meta name="copyright" content="阿赛工作室,郭言赛,asai.cc">
+
+  <style>
+    /* NOTE: The styles were added inline because Prefixfree needs access to your styles and they must be inlined if they are on local disk! */
+    @keyframes squiggly {
+      0% {
+        filter: url("#squiggly-0");
+      }
+
+      25% {
+        filter: url("#squiggly-1");
+      }
+
+      50% {
+        filter: url("#squiggly-3");
+      }
+
+      100% {
+        filter: url("#squiggly-4");
+      }
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #fff;
+      color: #000;
+      font-size: 2.5vh;
+    }
+
+    body {
+      font-family: arial;
+    }
+
+    body.dark {
+      color: #fff;
+    }
+
+    .card {
+      overflow: hidden;
+      max-width: 20em;
+      padding: 1em;
+      margin: 0 auto 1em;
+      background: rgba(255, 255, 255, 0.25);
+      border: 1px solid #000;
+      border-radius: 0.25em;
+    }
+
+    .btn {
+      display: block;
+      margin: 0 auto 0.5em;
+      padding: 1em;
+      max-width: 20em;
+      font-weight: bold;
+      letter-spacing: 1px;
+      text-decoration: none !important;
+      text-transform: uppercase;
+      text-shadow: none !important;
+      background: #fff;
+      transition: all 0.2s;
+      border: 1px solid rgba(0, 0, 0, 0.5);
+      border-radius: 4px;
+      color: #000;
+    }
+
+    .checkbox {
+      display: inline-block;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    .checkbox input {
+      display: none;
+    }
+
+    .checkbox span {
+      display: block;
+      padding: 1em;
+      background: #fff;
+      border: 1px solid #bbb;
+      border-radius: 4px;
+      color: #000;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+
+    .checkbox input:checked+span {
+      border-color: #000;
+    }
+
+    .play .text {
+      font-size: 2em;
+    }
+
+    .scoreboard .scoreboard-list {
+      display: inline-block;
+      padding: 0;
+      margin: 0;
+      text-align: right;
+    }
+
+    .game .hud {
+      padding: 0 1rem;
+      font-size: 1.5rem;
+      letter-spacing: 1px;
+    }
+
+    .dark .game .hud {
+      text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1), 0 -1px 0 rgba(0, 0, 0, 0.1), 1px 0 0 rgba(0, 0, 0, 0.1), -1px 0 0 rgba(0, 0, 0, 0.1), 1px 1px 0 rgba(0, 0, 0, 0.1), -1px -1px 0 rgba(0, 0, 0, 0.1), -1px 1px 0 rgba(0, 0, 0, 0.1), 1px -1px 0 rgba(0, 0, 0, 0.1);
+    }
+
+    .game .hud .label {
+      display: block;
+      font-size: 0.6em;
+      font-weight: normal;
+      text-transform: uppercase;
+    }
+
+    .game .hud .value {
+      font-size: 2em;
+      font-weight: bold;
+      line-height: 1;
+    }
+
+    .game .time {
+      float: left;
+    }
+
+    .game .score {
+      float: right;
+    }
+
+    .dark .win {
+      text-shadow: 0 1px 0 black, 0 -1px 0 black, 1px 0 0 black, -1px 0 0 black, 1px 1px 0 black, -1px -1px 0 black, -1px 1px 0 black, 1px -1px 0 black;
+    }
+
+    .win .score {
+      float: left;
+    }
+
+    .win .best {
+      float: right;
+    }
+
+    .win .label {
+      display: block;
+      font-size: 0.6em;
+      font-weight: normal;
+      text-transform: uppercase;
+    }
+
+    .win .value {
+      font-size: 2em;
+      font-weight: bold;
+      line-height: 1;
+    }
+
+    .win .highscore {
+      display: block;
+      clear: both;
+    }
+
+    .win .highscore.is-hidden {
+      display: none;
+    }
+
+    .screen {
+      position: fixed;
+      z-index: 10;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 100%;
+      padding: 1em;
+      overflow: hidden;
+      text-align: center;
+      visibility: hidden;
+      opacity: 0;
+      transform: translateY(-1em);
+      transition: all 0.2s 0.1s;
+    }
+
+    .screen.is-active {
+      visibility: visible;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .screen.game {
+      padding-left: 0;
+      padding-right: 0;
+      background: none;
+    }
+
+    .screen h1 {
+      text-transform: uppercase;
+    }
+
+    .sky {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      transition: all 0.5s;
+      background: #fff;
+      cursor: pointer;
+    }
+
+    .outlines .sky {
+      background: #fff;
+    }
+
+    .light .sky {
+      background: #aedef7;
+    }
+
+    .dark .sky {
+      background: #002;
+    }
+
+    .sky:before {
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      background: linear-gradient(to bottom, rgba(255, 255, 255, 0.0001), #fff);
+      opacity: 0.5;
+      content: '';
+      transition: all 0.2s;
+    }
+
+    .dark .sky:before {
+      opacity: 0.3;
+    }
+
+    @keyframes twinkle {
+      0% {
+        border-left-color: white;
+        border-right-color: rgba(255, 255, 255, 0);
+      }
+
+      33.3334% {
+        border-left-color: rgba(255, 255, 255, 0);
+        border-right-color: white;
+      }
+
+      66.6667% {
+        border-left-color: rgba(255, 255, 255, 0);
+        border-right-color: white;
+      }
+
+      100% {
+        border-left-color: white;
+        border-right-color: rgba(255, 255, 255, 0);
+      }
+    }
+
+    .stars {
+      position: fixed;
+      left: 2em;
+      right: 2em;
+      top: 4em;
+      height: 2px;
+      transform: rotate(40deg);
+      border-width: 0 2px;
+      border-style: solid;
+      border-color: #fff;
+      opacity: 0;
+      transform: translateY(-5em);
+      transition: all 0.5s;
+      will-change: opacity;
+      animation: twinkle 6s infinite alternate;
+    }
+
+    .dark .stars {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .stars:before,
+    .stars:after {
+      position: fixed;
+      top: 6em;
+      left: 2em;
+      right: 0em;
+      height: inherit;
+      border: inherit;
+      transform: rotate(-15deg);
+      opacity: 0.5;
+      content: '';
+      will-change: opacity;
+    }
+
+    .stars:before {
+      animation: twinkle 3s infinite alternate-reverse;
+    }
+
+    .stars:after {
+      top: 0.5em;
+      left: 3em;
+      right: 6em;
+      opacity: 1;
+      transform: rotate(-30deg);
+      animation: twinkle 6s infinite alternate;
+    }
+
+    .moon {
+      position: fixed;
+      bottom: 20em;
+      left: 50%;
+      width: 10em;
+      height: 10em;
+      background: #fff;
+      border-radius: 50%;
+      transition: all 0.5s ease-in-out;
+      transform: translateY(2em);
+      box-shadow: 0 0 4em #fff, 0 0 12em #fff, 0 0 0 6em rgba(211, 230, 235, 0.025), 0 0 0 12em rgba(211, 230, 235, 0.025), 0 0 0 18em rgba(211, 230, 235, 0.025);
+      opacity: 0;
+    }
+
+    .moon:before,
+    .moon:after {
+      position: absolute;
+      top: 20%;
+      left: 10%;
+      width: 30%;
+      height: 30%;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.05);
+      box-shadow: inset 0 0 1em rgba(0, 0, 0, 0.1);
+      content: '';
+      opacity: 0.1;
+    }
+
+    .moon:after {
+      top: auto;
+      left: auto;
+      bottom: 10%;
+      right: 10%;
+      width: 50%;
+      height: 50%;
+      opacity: 0.1;
+    }
+
+    .dark .moon {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .mountains {
+      opacity: 0.3;
+    }
+
+    .dark .mountains {
+      opacity: 0.9;
+    }
+
+    .mountain {
+      position: fixed;
+      left: -100%;
+      bottom: -3em;
+      width: 200%;
+      height: 14em;
+      background: #fff;
+      border-radius: 0 100% 0 0;
+      transition: all 0.5s ease-in-out;
+    }
+
+    .light .mountain {
+      background: #a4c18b;
+    }
+
+    .dark .mountain {
+      background: #0a0a2a;
+    }
+
+    .mountain--2 {
+      left: auto;
+      right: -10%;
+      height: 10em;
+      border-radius: 100% 0 0 0;
+    }
+
+    .grass {
+      display: none;
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 8em;
+      background: #fff;
+      transition: all 0.5s ease-in-out;
+    }
+
+    .light .grass {
+      background: #a7cc67;
+    }
+
+    .dark .grass {
+      background: #0f0f2f;
+    }
+
+    .water {
+      position: fixed;
+      z-index: 2;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 3em;
+      transition: all 0.5s ease-in-out;
+      background: #fff;
+    }
+
+    .light .water {
+      background: #5f96d5;
+    }
+
+    .dark .water {
+      background: #0f0f2f;
+    }
+
+    .tree {
+      position: absolute;
+      z-index: 3;
+      right: 38%;
+      top: -6.8em;
+      width: 1.5em;
+      height: 10em;
+      transition: all 0.5s;
+      background: #fff;
+      transform: scale(0.2, 0.2);
+      transform-origin: 50% 100%;
+    }
+
+    .light .tree {
+      background: #6f4817;
+    }
+
+    .dark .tree {
+      background: #0a0a2a;
+    }
+
+    .tree:before,
+    .tree:after {
+      position: absolute;
+      left: 50%;
+      bottom: 2em;
+      display: inline-block;
+      width: 0;
+      transform: translateX(-50%);
+      transition: all 0.5s ease-in-out;
+      border-width: 0 6em 12em;
+      border-style: solid;
+      border-color: transparent;
+      border-radius: 0 0 100% 100% / 0 0 1em 1em;
+      border-bottom-color: #fff;
+      content: '';
+    }
+
+    .light .tree:before,
+    .light .tree:after {
+      border-bottom-color: #2d5e3b;
+    }
+
+    .dark .tree:before,
+    .dark .tree:after {
+      border-bottom-color: #0a0a2a;
+    }
+
+    .tree:after {
+      width: 0;
+      bottom: 9em;
+      border-width: 0 3em 6em;
+    }
+
+    .tree--2 {
+      left: auto;
+      right: 1.5em;
+      top: -5.9em;
+      transform: scale(0.2, 0.2);
+    }
+
+    .tree--3 {
+      top: -5.5em;
+      right: 47%;
+      transform: scale(0.4, 0.4);
+    }
+
+    .lily {
+      @extends .shadow;
+      position: fixed;
+      z-index: 3;
+      left: 50%;
+      bottom: 0.5em;
+      height: 1.5em;
+      width: 12em;
+      transform: translateX(-50%);
+      background: #fff;
+      border: 1px solid #000;
+      border-bottom: 0;
+      border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+    }
+
+    .light .lily {
+      background: #777;
+    }
+
+    .dark .lily {
+      background: #223;
+    }
+
+    .lily--2 {
+      left: -9em;
+      bottom: 5em;
+      border: none;
+      animation-delay: 2s;
+      opacity: 0.6;
+      transform: scale(0.5, 0.3);
+    }
+
+    .lily--3 {
+      right: -7em;
+      left: auto;
+      bottom: 6em;
+      border: none;
+      animation-delay: -2s;
+      opacity: 0.4;
+      transform: scale(0.2, 0.15);
+    }
+
+    .shadow,
+    .fly,
+    .fly:before,
+    .fly:after,
+    .player .body,
+    .player .belly,
+    .player .arms .arm,
+    .player .legs .leg,
+    .player .eyes .eye,
+    .player .tongue-inner {
+      box-shadow: none;
+    }
+
+    .flies {
+      display: flex;
+      flex-wrap: wrap;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .flies .path {
+      flex: 1 1 50%;
+      padding: 1em 0;
+      text-align: center;
+      transition: transform 0.2s;
+      will-change: transform;
+    }
+
+    .flies .path:nth-child(odd) {
+      transform: translateX(-100%);
+    }
+
+    .flies .path:nth-child(even) {
+      transform: translateX(100%);
+    }
+
+    .flies .path.is-active:nth-child(odd) {
+      transform: translateX(-20%);
+    }
+
+    .flies .path.is-active:nth-child(even) {
+      transform: translateX(20%);
+    }
+
+    .flies .path.is-hidden {
+      visibility: hidden;
+    }
+
+    .target {
+      display: inline-block;
+      width: 4em;
+      height: 4em;
+      line-height: 4em;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 50%;
+    }
+
+    .fly {
+      z-index: 99;
+      display: inline-block;
+      width: 0.8em;
+      height: 0.8em;
+      border-radius: 50%;
+      background: #000;
+      border: 1px solid #000;
+      will-change: transform;
+      transform: translateY(50%);
+    }
+
+    .fly:before,
+    .fly:after {
+      position: absolute;
+      z-index: -1;
+      bottom: 50%;
+      width: 0.8em;
+      height: 0.5em;
+      border-radius: 60%;
+      background: #fff;
+      border: 1px solid #000;
+      will-change: transform;
+      content: '';
+    }
+
+    .fly:before {
+      right: 60%;
+      transform: rotate(15deg);
+      transform-origin: 100% 50%;
+      animation: flapLeft 0.08s infinite;
+    }
+
+    .fly:after {
+      left: 60%;
+      transform: rotate(-15deg);
+      transform-origin: 0% 50%;
+      animation: flapRight 0.08s infinite;
+    }
+
+    .fly--dead {
+      animation: none;
+    }
+
+    @keyframes fly {
+      from {
+        transform: translateX(-30em);
+      }
+
+      to {
+        transform: translateX(30em);
+      }
+    }
+
+    @keyframes flapLeft {
+      from {
+        transform: rotate(-15deg);
+      }
+
+      to {
+        transform: rotate(25deg);
+      }
+    }
+
+    @keyframes flapRight {
+      from {
+        transform: rotate(25deg);
+      }
+
+      to {
+        transform: rotate(-15deg);
+      }
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateX(-50%) translateY(0);
+      }
+
+      50% {
+        transform: translateX(-50%) translateY(0.2em);
+      }
+
+      100% {
+        transform: translateX(-50%) translateY(0);
+      }
+    }
+
+    .player {
+      z-index: 99999;
+      position: absolute;
+      left: 50%;
+      bottom: 2em;
+      display: inline-block;
+      font-size: 0.9rem;
+      transform: translateX(-50%);
+    }
+
+    .player .body {
+      position: relative;
+      width: 6.5em;
+      height: 9.75em;
+      transform: translateY(0);
+      transition: all 0.2s;
+      background: #fff;
+      border-radius: 4em 4em 4em 4em / 3em 3em 2em 2em;
+      border: 1px solid black;
+      will-change: transform;
+    }
+
+    .light .player .body {
+      background: #9fb761;
+    }
+
+    .dark .player .body {
+      background: #7f9761;
+    }
+
+    .player.is-active .body {
+      animation: body 0.25s;
+    }
+
+    .player .belly {
+      position: absolute;
+      z-index: 1;
+      left: 50%;
+      height: 50%;
+      bottom: -0.5em;
+      left: 0.25em;
+      right: 0.25em;
+      background: #fff;
+      border-bottom: 1px solid #000;
+      border-radius: 0 0 50% 50% / 0 0 1em 1em;
+    }
+
+    .light .player .belly {
+      background: #f8efdf;
+    }
+
+    .dark .player .belly {
+      background: #f8efdf;
+    }
+
+    .player .crown {
+      display: none;
+      z-index: -10;
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      margin-bottom: 1px;
+      border-width: 2em 1.5em 0;
+      border-style: solid;
+      border-color: transparent gold gold;
+      transform: translateX(-50%);
+    }
+
+    .player .crown:before {
+      position: absolute;
+      bottom: 0;
+      left: -1em;
+      border-width: 0 1em 2em;
+      border-style: solid;
+      border-color: gold transparent;
+      content: '';
+    }
+
+    .player .arms {
+      position: absolute;
+      z-index: 2;
+      left: 0;
+      right: 0;
+      bottom: -0.5em;
+      will-change: transform;
+    }
+
+    .player .arms .arm {
+      position: absolute;
+      bottom: 0em;
+      width: 2.5em;
+      height: 4em;
+      background: #fff;
+      border: 1px solid black;
+    }
+
+    .light .player .arms .arm {
+      background: #9fb761;
+    }
+
+    .dark .player .arms .arm {
+      background: #7f9761;
+    }
+
+    .player .arms .arm:before {
+      position: absolute;
+      top: -2.5em;
+      width: 1em;
+      height: 2.75em;
+      background: #fff;
+      border: 1px solid black;
+      border-bottom: none;
+      content: '';
+    }
+
+    .light .player .arms .arm:before {
+      background: #9fb761;
+    }
+
+    .dark .player .arms .arm:before {
+      background: #7f9761;
+    }
+
+    .player .arms .arm .hand {
+      position: absolute;
+      bottom: -0.25em;
+      width: 2em;
+      height: 0.5em;
+      font-size: 1.25em;
+      background: #fff;
+      border: 1px solid black;
+      border-radius: 50% 50% 0 0 / 100% 100% 0 0 !important;
+    }
+
+    .light .player .arms .arm .hand {
+      background: #9fb761;
+    }
+
+    .dark .player .arms .arm .hand {
+      background: #7f9761;
+    }
+
+    .player .arms .arm .hand .toe {
+      position: absolute;
+      bottom: -0.25em;
+      width: 0.5em;
+      height: 0.5em;
+      background: #fff;
+      border: 1px solid black;
+      border-radius: 50%;
+    }
+
+    .light .player .arms .arm .hand .toe {
+      background: #9fb761;
+    }
+
+    .dark .player .arms .arm .hand .toe {
+      background: #7f9761;
+    }
+
+    .player .arms .arm .hand .toe:first-child {
+      left: -0.25em;
+    }
+
+    .player .arms .arm .hand .toe:nth-child(2n) {
+      z-index: 2;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .player .arms .arm .hand .toe:last-child {
+      right: -0.25em;
+    }
+
+    .player .arms .arm--left {
+      left: -1em;
+      margin-left: -2px;
+      border-radius: 0 100% 0 70%;
+    }
+
+    .player .arms .arm--left:before {
+      left: -1px;
+      border-right: none;
+      border-radius: 100% 0 0 0;
+    }
+
+    .player .arms .arm--left .hand {
+      left: 0.5em;
+      border-left: 0;
+      border-radius: 0 100% 0 0;
+    }
+
+    .player .arms .arm--right {
+      right: -1em;
+      margin-right: -2px;
+      border-radius: 100% 0 70% 0;
+    }
+
+    .player .arms .arm--right:before {
+      right: -1px;
+      border-left: none;
+      border-radius: 0 100% 0 0;
+    }
+
+    .player .arms .arm--right .hand {
+      right: 0.5em;
+      border-right: 0;
+      border-radius: 100% 0 0 0;
+    }
+
+    .player.is-active .arms {
+      animation: arms 0.25s;
+    }
+
+    .player .legs {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -0.5em;
+    }
+
+    .player .legs .leg {
+      position: absolute;
+      z-index: -1;
+      bottom: 0;
+      width: 6em;
+      height: 5em;
+      transform: rotate(0);
+      transform-origin: 50% 100%;
+      transition: all 0.2s;
+      background: #fff;
+      border: 1px solid black;
+      will-change: transform;
+    }
+
+    .light .player .legs .leg {
+      background: #718644;
+    }
+
+    .dark .player .legs .leg {
+      background: #516644;
+    }
+
+    .player .legs .leg--left {
+      left: -2.5em;
+      border-radius: 25% 75% 25% 75%;
+    }
+
+    .player .legs .leg--right {
+      right: -2.5em;
+      border-radius: 75% 25% 75% 25%;
+    }
+
+    .player.is-active .leg--left {
+      animation: leftLeg 0.25s;
+    }
+
+    .player.is-active .leg--right {
+      animation: rightLeg 0.25s;
+    }
+
+    .player .eyes {
+      position: absolute;
+      z-index: -5;
+      top: 0em;
+      left: 0em;
+      right: 0em;
+    }
+
+    .player .eyes .eye {
+      position: absolute;
+      top: 0em;
+      display: inline-block;
+      width: 2.3em;
+      height: 2.3em;
+      background: #fff;
+      border: 1px solid black;
+      border-radius: 50%;
+      overflow: hidden;
+    }
+
+    .player .eyes .eye--left {
+      left: -0em;
+    }
+
+    .player .eyes .eye--right {
+      right: -0em;
+    }
+
+    .player .eyes .eye:before,
+    .player .eyes .eye:after {
+      position: absolute;
+      z-index: 6;
+      left: 0;
+      width: 100%;
+      height: 50%;
+      transform: translateY(1px);
+      transition: all 0.2s;
+      background: #fff;
+      border-top: 1px solid #000;
+      content: '';
+      will-change: transform;
+    }
+
+    .light .player .eyes .eye:before,
+    .light .player .eyes .eye:after {
+      background: #718644;
+    }
+
+    .dark .player .eyes .eye:before,
+    .dark .player .eyes .eye:after {
+      background: #516644;
+    }
+
+    .player .eyes .eye:before {
+      bottom: 100%;
+      margin-bottom: 1px;
+    }
+
+    .player .eyes .eye:after {
+      top: 100%;
+    }
+
+    .player .eyes .eye:hover:after {
+      transform: translateY(-98%);
+    }
+
+    .player .eyes .pupil {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0.4rem;
+      height: 0.4rem;
+      margin: -0.2em 0 0 -0.2em;
+      transform: translate(0, 0);
+      transition: all 0.2s;
+      background: #000;
+      border-radius: 4em;
+      will-change: transform;
+      overflow: hidden;
+    }
+
+    .player .mouth {
+      position: absolute;
+      z-index: 6;
+      top: 3.25em;
+      left: 0.5em;
+      right: 0.5em;
+      height: 2.25em;
+      background: #000;
+      border-radius: 0;
+      border: 1px solid black;
+      border-top: 0;
+      border-bottom: 0;
+    }
+
+    .player .mouth:before {
+      position: absolute;
+      top: 1em;
+      left: 0.5em;
+      right: 0.5em;
+      bottom: 0;
+      border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+      background: #fff;
+      content: '';
+    }
+
+    .light .player .mouth:before {
+      background: #c8725b;
+    }
+
+    .dark .player .mouth:before {
+      background: #a8525b;
+    }
+
+    .player .mouth .top-lip {
+      position: absolute;
+      left: -0.25em;
+      right: -0.25em;
+      bottom: 100%;
+      height: 0;
+      background: #fff;
+      border-bottom: 1px solid #000;
+    }
+
+    .light .player .mouth .top-lip {
+      background: #9fb761;
+    }
+
+    .dark .player .mouth .top-lip {
+      background: #7f9761;
+    }
+
+    .player .mouth .bottom-lip {
+      position: absolute;
+      z-index: 10;
+      top: -1px;
+      left: -0.25em;
+      right: -0.25em;
+      height: 2.5em;
+      margin-left: -1px;
+      margin-right: -1px;
+      transform: translateY(0);
+      transition: all 0.25s;
+      background: #fff;
+      border-top: 1px solid #000;
+      will-change: transform;
+      border-radius: 0;
+      content: '';
+    }
+
+    .light .player .mouth .bottom-lip {
+      background: #f8efdf;
+    }
+
+    .dark .player .mouth .bottom-lip {
+      background: #f8efdf;
+    }
+
+    .player .mouth .bottom-lip:after {
+      display: none;
+      position: absolute;
+      top: 0.5em;
+      left: 1.5em;
+      right: 1.5em;
+      height: 0.25em;
+      border-bottom: 1px solid #000;
+      opacity: 0.1;
+      content: '';
+    }
+
+    .player .tongue {
+      pointer-events: none;
+      position: absolute;
+      z-index: 8;
+      bottom: 0.5em;
+      left: 50%;
+      width: 4em;
+      height: 0;
+      margin-left: -2em;
+      overflow: hidden;
+      transform: rotate(0);
+      transform-origin: 50% 100%;
+      will-change: transform;
+    }
+
+    .player .tongue-inner {
+      position: absolute;
+      left: 1em;
+      right: 1em;
+      top: 1em;
+      bottom: -1em;
+      transform: translateY(100%);
+      transition: all 0.1s ease-in-out;
+      background: #fff;
+      border: 1px solid black;
+      border-bottom: 0;
+      border-radius: 4em 4em 4em 4em / 4em 4em 60em 60em;
+      box-sizing: border-box;
+      text-align: center;
+      content: '';
+      will-change: transform;
+    }
+
+    .light .player .tongue-inner {
+      background: #c8725b;
+    }
+
+    .dark .player .tongue-inner {
+      background: #a8525b;
+    }
+
+    .player .tongue-inner:before {
+      position: absolute;
+      top: -0.5em;
+      left: -0.5em;
+      right: -0.5em;
+      min-height: 3em;
+      max-height: 6em;
+      height: 50%;
+      background: #fff;
+      border-radius: 50%;
+      border: 1px solid black;
+      border-bottom: none;
+      content: '';
+    }
+
+    .light .player .tongue-inner:before {
+      background: #c8725b;
+    }
+
+    .dark .player .tongue-inner:before {
+      background: #a8525b;
+    }
+
+    .player .tongue .fly {
+      visibility: hidden;
+      margin-top: -1em;
+      font-size: 1.1rem;
+    }
+
+    .player .tongue .fly.is-active {
+      animation: dead-fly 0.25s;
+    }
+
+    .player .tongue .fly.is-active2 {
+      animation: dead-fly2 0.25s;
+    }
+
+    .player .tongue .fly:before,
+    .player .tongue .fly:after {
+      top: 0em;
+    }
+
+    .player.is-shooting-down .eyes {
+      z-index: 8;
+    }
+
+    .player.is-shooting-down .mouth {
+      z-index: 6;
+    }
+
+    .player.is-shooting-down .tongue {
+      z-index: 6;
+      bottom: 1.5em;
+    }
+
+    .player.is-shooting-down .top-lip {
+      z-index: 8;
+      height: 1em;
+    }
+
+    .player.is-shooting-down .bottom-lip {
+      z-index: 4;
+    }
+
+    .player.is-active .tongue-inner {
+      animation: shoot 0.25s;
+    }
+
+    .player.is-active .mouth .bottom-lip {
+      animation: mouth 0.25s;
+    }
+
+    @keyframes dead-fly {
+      0% {
+        visibility: hidden;
+      }
+
+      49% {
+        visibility: hidden;
+      }
+
+      50% {
+        visibility: visible;
+      }
+
+      99% {
+        visibility: visible;
+      }
+
+      100% {
+        visibility: hidden;
+      }
+    }
+
+    @keyframes dead-fly2 {
+      0% {
+        visibility: hidden;
+      }
+
+      49% {
+        visibility: hidden;
+      }
+
+      50% {
+        visibility: visible;
+      }
+
+      99% {
+        visibility: visible;
+      }
+
+      100% {
+        visibility: hidden;
+      }
+    }
+
+    @keyframes shoot {
+      0% {
+        transform: translateY(105%);
+      }
+
+      50% {
+        transform: translateY(0);
+      }
+
+      100% {
+        transform: translateY(105%);
+      }
+    }
+
+    @keyframes body {
+      0% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-1em);
+      }
+
+      100% {
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes leftLeg {
+      0% {
+        transform: rotate(0);
+      }
+
+      50% {
+        transform: rotate(-10deg);
+      }
+
+      100% {
+        transform: rotate(0);
+      }
+    }
+
+    @keyframes rightLeg {
+      0% {
+        transform: rotate(0);
+      }
+
+      50% {
+        transform: rotate(10deg);
+      }
+
+      100% {
+        transform: rotate(0);
+      }
+    }
+
+    @keyframes arms {
+      0% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(1em);
+      }
+
+      100% {
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes mouth {
+      0% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(1.9em);
+      }
+
+      100% {
+        transform: translateY(0);
+      }
+    }
+  </style>
+
+  <script>
+/**
+ * StyleFix 1.0.3 & PrefixFree 1.0.7
+ * @author Lea Verou
+ * MIT license
+ */(function () { function t(e, t) { return [].slice.call((t || document).querySelectorAll(e)) } if (!window.addEventListener) return; var e = window.StyleFix = { link: function (t) { try { if (t.rel !== "stylesheet" || t.hasAttribute("data-noprefix")) return } catch (n) { return } var r = t.href || t.getAttribute("data-href"), i = r.replace(/[^\/]+$/, ""), s = t.parentNode, o = new XMLHttpRequest, u; o.onreadystatechange = function () { o.readyState === 4 && u() }; u = function () { var n = o.responseText; if (n && t.parentNode && (!o.status || o.status < 400 || o.status > 600)) { n = e.fix(n, !0, t); if (i) { n = n.replace(/url\(\s*?((?:"|')?)(.+?)\1\s*?\)/gi, function (e, t, n) { return /^([a-z]{3,10}:|\/|#)/i.test(n) ? e : 'url("' + i + n + '")' }); var r = i.replace(/([\\\^\$*+[\]?{}.=!:(|)])/g, "\\$1"); n = n.replace(RegExp("\\b(behavior:\\s*?url\\('?\"?)" + r, "gi"), "$1") } var u = document.createElement("style"); u.textContent = n; u.media = t.media; u.disabled = t.disabled; u.setAttribute("data-href", t.getAttribute("href")); s.insertBefore(u, t); s.removeChild(t); u.media = t.media } }; try { o.open("GET", r); o.send(null) } catch (n) { if (typeof XDomainRequest != "undefined") { o = new XDomainRequest; o.onerror = o.onprogress = function () { }; o.onload = u; o.open("GET", r); o.send(null) } } t.setAttribute("data-inprogress", "") }, styleElement: function (t) { if (t.hasAttribute("data-noprefix")) return; var n = t.disabled; t.textContent = e.fix(t.textContent, !0, t); t.disabled = n }, styleAttribute: function (t) { var n = t.getAttribute("style"); n = e.fix(n, !1, t); t.setAttribute("style", n) }, process: function () { t('link[rel="stylesheet"]:not([data-inprogress])').forEach(StyleFix.link); t("style").forEach(StyleFix.styleElement); t("[style]").forEach(StyleFix.styleAttribute) }, register: function (t, n) { (e.fixers = e.fixers || []).splice(n === undefined ? e.fixers.length : n, 0, t) }, fix: function (t, n, r) { for (var i = 0; i < e.fixers.length; i++)t = e.fixers[i](t, n, r) || t; return t }, camelCase: function (e) { return e.replace(/-([a-z])/g, function (e, t) { return t.toUpperCase() }).replace("-", "") }, deCamelCase: function (e) { return e.replace(/[A-Z]/g, function (e) { return "-" + e.toLowerCase() }) } }; (function () { setTimeout(function () { t('link[rel="stylesheet"]').forEach(StyleFix.link) }, 10); document.addEventListener("DOMContentLoaded", StyleFix.process, !1) })() })(); (function (e) { function t(e, t, r, i, s) { e = n[e]; if (e.length) { var o = RegExp(t + "(" + e.join("|") + ")" + r, "gi"); s = s.replace(o, i) } return s } if (!window.StyleFix || !window.getComputedStyle) return; var n = window.PrefixFree = { prefixCSS: function (e, r, i) { var s = n.prefix; n.functions.indexOf("linear-gradient") > -1 && (e = e.replace(/(\s|:|,)(repeating-)?linear-gradient\(\s*(-?\d*\.?\d*)deg/ig, function (e, t, n, r) { return t + (n || "") + "linear-gradient(" + (90 - r) + "deg" })); e = t("functions", "(\\s|:|,)", "\\s*\\(", "$1" + s + "$2(", e); e = t("keywords", "(\\s|:)", "(\\s|;|\\}|$)", "$1" + s + "$2$3", e); e = t("properties", "(^|\\{|\\s|;)", "\\s*:", "$1" + s + "$2:", e); if (n.properties.length) { var o = RegExp("\\b(" + n.properties.join("|") + ")(?!:)", "gi"); e = t("valueProperties", "\\b", ":(.+?);", function (e) { return e.replace(o, s + "$1") }, e) } if (r) { e = t("selectors", "", "\\b", n.prefixSelector, e); e = t("atrules", "@", "\\b", "@" + s + "$1", e) } e = e.replace(RegExp("-" + s, "g"), "-"); e = e.replace(/-\*-(?=[a-z]+)/gi, n.prefix); return e }, property: function (e) { return (n.properties.indexOf(e) ? n.prefix : "") + e }, value: function (e, r) { e = t("functions", "(^|\\s|,)", "\\s*\\(", "$1" + n.prefix + "$2(", e); e = t("keywords", "(^|\\s)", "(\\s|$)", "$1" + n.prefix + "$2$3", e); return e }, prefixSelector: function (e) { return e.replace(/^:{1,2}/, function (e) { return e + n.prefix }) }, prefixProperty: function (e, t) { var r = n.prefix + e; return t ? StyleFix.camelCase(r) : r } }; (function () { var e = {}, t = [], r = {}, i = getComputedStyle(document.documentElement, null), s = document.createElement("div").style, o = function (n) { if (n.charAt(0) === "-") { t.push(n); var r = n.split("-"), i = r[1]; e[i] = ++e[i] || 1; while (r.length > 3) { r.pop(); var s = r.join("-"); u(s) && t.indexOf(s) === -1 && t.push(s) } } }, u = function (e) { return StyleFix.camelCase(e) in s }; if (i.length > 0) for (var a = 0; a < i.length; a++)o(i[a]); else for (var f in i) o(StyleFix.deCamelCase(f)); var l = { uses: 0 }; for (var c in e) { var h = e[c]; l.uses < h && (l = { prefix: c, uses: h }) } n.prefix = "-" + l.prefix + "-"; n.Prefix = StyleFix.camelCase(n.prefix); n.properties = []; for (var a = 0; a < t.length; a++) { var f = t[a]; if (f.indexOf(n.prefix) === 0) { var p = f.slice(n.prefix.length); u(p) || n.properties.push(p) } } n.Prefix == "Ms" && !("transform" in s) && !("MsTransform" in s) && "msTransform" in s && n.properties.push("transform", "transform-origin"); n.properties.sort() })(); (function () { function i(e, t) { r[t] = ""; r[t] = e; return !!r[t] } var e = { "linear-gradient": { property: "backgroundImage", params: "red, teal" }, calc: { property: "width", params: "1px + 5%" }, element: { property: "backgroundImage", params: "#foo" }, "cross-fade": { property: "backgroundImage", params: "url(a.png), url(b.png), 50%" } }; e["repeating-linear-gradient"] = e["repeating-radial-gradient"] = e["radial-gradient"] = e["linear-gradient"]; var t = { initial: "color", "zoom-in": "cursor", "zoom-out": "cursor", box: "display", flexbox: "display", "inline-flexbox": "display", flex: "display", "inline-flex": "display" }; n.functions = []; n.keywords = []; var r = document.createElement("div").style; for (var s in e) { var o = e[s], u = o.property, a = s + "(" + o.params + ")"; !i(a, u) && i(n.prefix + a, u) && n.functions.push(s) } for (var f in t) { var u = t[f]; !i(f, u) && i(n.prefix + f, u) && n.keywords.push(f) } })(); (function () { function s(e) { i.textContent = e + "{}"; return !!i.sheet.cssRules.length } var t = { ":read-only": null, ":read-write": null, ":any-link": null, "::selection": null }, r = { keyframes: "name", viewport: null, document: 'regexp(".")' }; n.selectors = []; n.atrules = []; var i = e.appendChild(document.createElement("style")); for (var o in t) { var u = o + (t[o] ? "(" + t[o] + ")" : ""); !s(u) && s(n.prefixSelector(u)) && n.selectors.push(o) } for (var a in r) { var u = a + " " + (r[a] || ""); !s("@" + u) && s("@" + n.prefix + u) && n.atrules.push(a) } e.removeChild(i) })(); n.valueProperties = ["transition", "transition-property"]; e.className += " " + n.prefix; StyleFix.register(n.prefixCSS) })(document.documentElement);
+  </script>
+
+</head>
+
+<body>
+
+  <div class="environment">
+    <div class="sky"></div>
+    <div class="stars"></div>
+    <div class="sun"></div>
+    <div class="moon"></div>
+    <div class="mountains">
+      <div class="mountain">
+        <div class="trees">
+          <div class="tree"></div>
+          <div class="tree tree--2"></div>
+          <div class="tree tree--3"></div>
+          <div class="tree tree--4"></div>
+        </div>
+      </div>
+      <div class="mountain mountain--2"></div>
+    </div>
+    <div class="water"></div>
+    <div class="lily lilly-1"></div>
+  </div>
+
+  <div class="player">
+
+    <div class="legs">
+      <div class="leg leg--left">
+      </div>
+      <div class="leg leg--right">
+      </div>
+    </div>
+
+    <div class="body">
+      <div class="crown"></div>
+      <div class="belly"></div>
+      <div class="arms">
+        <div class="arm arm--left">
+          <div class="hand">
+            <div class="toe"></div>
+            <div class="toe"></div>
+            <div class="toe"></div>
+          </div>
+        </div>
+        <div class="arm arm--right">
+          <div class="hand">
+            <div class="toe"></div>
+            <div class="toe"></div>
+            <div class="toe"></div>
+          </div>
+        </div>
+      </div>
+      <div class="mouth">
+        <div class="top-lip"></div>
+        <div class="bottom-lip"></div>
+        <div class="tongue">
+          <div class="tongue-inner">
+            <div class="fly is-dead"></div>
+          </div>
+        </div>
+      </div>
+      <div class="eyes">
+        <div class="eye eye--left">
+          <div class="pupil"></div>
+        </div>
+        <div class="eye eye--right">
+          <div class="pupil"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="screen menu">
+    <h1>喂青蛙</h1>
+    <a href="#" class="btn play" onClick="play()">
+      <span class="text">开始</span>
+      <br>
+      <span>最好: <span class="js-best">0</span></span>
+    </a>
+    <a href="#" class="btn" onClick="settings()">设置</a>
+  </div>
+
+  <div class="screen game">
+    <div class="hud">
+      <div class="time">
+        <span class="label">时间</span>
+        <span class="value js-time">30</span>
+      </div>
+
+      <div class="score">
+        <span class="label">分数</span>
+        <span class="value js-score">0</span>
+      </div>
+    </div>
+
+    <div class="flies">
+      <div class="path">
+        <div class="target">
+          <div class="fly"></div>
+        </div>
+      </div>
+      <div class="path">
+        <div class="target">
+          <div class="fly"></div>
+        </div>
+      </div>
+      <div class="path">
+        <div class="target">
+          <div class="fly"></div>
+        </div>
+      </div>
+      <div class="path">
+        <div class="target">
+          <div class="fly"></div>
+        </div>
+      </div>
+      <div class="path">
+        <div class="target">
+          <div class="fly"></div>
+        </div>
+      </div>
+      <div class="path">
+        <div class="target">
+          <div class="fly"></div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+  <div class="screen win">
+    <h1>完成</h1>
+    <div class="card">
+      <h3 class="highscore js-highscore is-hidden">新高分！</h3>
+
+      <div class="score">
+        <span class="label">分数</span>
+        <span class="value js-score">30</span>
+      </div>
+
+      <div class="best">
+        <span class="label">最好</span>
+        <span class="value js-best">0</span>
+      </div>
+
+    </div>
+    <a href="#" class="btn" onClick="play()">再玩一次</a>
+    <a href="#" class="btn btn--clear" onClick="menu()">返回菜单</a>
+  </div>
+
+  <div class="screen settings">
+    <h1>设置</h1>
+
+    <div class="card">
+      <label class="checkbox">
+        <input type="radio" name="theme" value="light" checked onClick="toggleTheme(this.value)">
+        <span>白天时间</span>
+      </label>
+      <label class="checkbox">
+        <input type="radio" name="theme" value="dark" onClick="toggleTheme(this.value)">
+        <span>晚上时间</span>
+      </label>
+    </div>
+
+    <a href="#" class="btn js-toggle-music" onClick="toggleMusic()">打开音乐</a>
+
+    <a href="#" class="btn" onClick="menu()">返回</a>
+  </div>
+
+  <div class="screen scoreboard">
+    <h1>记分牌</h1>
+    <div class="card">
+      <ol class="scoreboard-list js-scoreboard"></ol>
+    </div>
+
+    <a href="#" class="btn" onClick="menu()">返回</a>
+  </div>
+
+  <audio id="music" src="qingwa.mp3"></audio>
+
+  <script>
+    // Please excuse the mess, I need to do some tidying
+
+    var activeScreen = document.querySelector('.screen.is-active');
+    var menuScreen = document.querySelector('.screen.menu');
+    var gameScreen = document.querySelector('.screen.game');
+    var winScreen = document.querySelector('.screen.win');
+    var settingsScreen = document.querySelector('.screen.settings');
+    var scoreboardScreen = document.querySelector('.screen.scoreboard');
+    var scoreBoard = document.querySelector('.js-scoreboard');
+
+    var player = document.querySelector('.player');
+    var tongue = document.querySelector('.tongue');
+    var eyes = document.querySelectorAll('.eye');
+    var pupils = document.querySelectorAll('.pupil');
+    var deadFly = document.querySelector('.tongue .fly');
+
+    var paths = document.querySelectorAll('.path');
+    var targets = document.querySelectorAll('.target');
+
+    var scoreEls = document.querySelectorAll('.js-score');
+    var bestEls = document.querySelectorAll('.js-best');
+    var timerEl = document.querySelector('.js-time');
+    var highscoreEl = document.querySelector('.js-highscore');
+    var timerIntervalId;
+
+    // Audio
+    var musicPlaying = false;
+    var musicButton = document.querySelector('.js-toggle-music')
+    var music = document.querySelector('#music');
+
+    var state = {};
+    var hidden = [];
+    var theme;
+    var scores = [];
+    var shooting = false;
+    var playing = false;
+    var transitioning = false;
+    var lastPath = false;
+
+    var storage = window.localStorage;
+
+    var clickOrTap = ((window.document.documentElement.ontouchstart !== null) ? 'click' : 'touchstart');
+
+    init();
+
+    function init() {
+      prepPaths();
+      loadStorage();
+      renderBest();
+      toggleScreen(menuScreen);
+    }
+    function prepPaths() {
+      for (var i = 0; i < paths.length; i++) {
+        paths[i].setAttribute('data-id', i);
+      }
+    }
+    function loadStorage() {
+      theme = storage.getItem('theme');
+
+      if (!theme) {
+        theme = 'light';
+      }
+
+      scores = storage.getItem('scores');
+
+      if (!scores) {
+        scores = [];
+      } else {
+        scores = JSON.parse(scores);
+      }
+
+      toggleTheme(theme);
+      renderScoreBoard();
+    }
+
+    function renderScoreBoard() {
+      var html = '';
+
+      for (var i = 0; i < 10; i++) {
+        html += "<li>";
+        html += scores[i] || '-';
+        html += "</li>";
+      }
+
+      scoreBoard.innerHTML = html;
+
+    }
+
+    function setState() {
+      state = {
+        time: 30,
+        score: 0
+      }
+    }
+
+    function toggleMusic() {
+      musicPlaying = !musicPlaying;
+      if (musicPlaying) {
+        music.play();
+        musicButton.textContent = "Stop Music";
+      } else {
+        music.pause();
+        music.currentTime = 0;
+        musicButton.textContent = "Play Music";
+      }
+
+    }
+
+    function play() {
+      playing = true;
+      setState();
+      renderScore();
+      toggleScreen(gameScreen);
+      peep();
+      peep();
+      peep();
+      peep();
+      startTimer();
+    }
+
+    function win() {
+      playing = false;
+      var prevBest = scores[0] || 0;
+      scores.push(state.score);
+      scores.sort(function (a, b) {
+        return b - a;
+      });
+      if (scores.length > 10) {
+        scores.pop();
+      }
+      saveScores();
+      var best = scores[0] || 0;
+      if (state.score > prevBest) {
+        best = state.score;
+        highscoreEl.classList.remove('is-hidden');
+      } else {
+        highscoreEl.classList.add('is-hidden');
+      }
+      renderBest(best);
+      renderScoreBoard();
+      toggleScreen(winScreen);
+    }
+
+    function renderBest() {
+      for (var i = 0; i < bestEls.length; i++) {
+        bestEls[i].textContent = scores[0];
+      }
+    }
+
+    function saveScores() {
+      storage.setItem('scores', JSON.stringify(scores));
+    }
+
+    function menu() {
+      toggleScreen(menuScreen);
+    }
+
+    function settings() {
+      toggleScreen(settingsScreen);
+    }
+
+    function scoreboard() {
+      toggleScreen(scoreboardScreen);
+    }
+
+    function startTimer() {
+      // Set the time before starting timer
+      timerEl.textContent = state.time;
+
+      timerIntervalId = setInterval(function (e) {
+        state.time -= 1;
+        timerEl.textContent = state.time;
+
+        if (state.time <= 0) {
+          clearInterval(timerIntervalId);
+          win();
+        }
+      }, 1000);
+    }
+
+    function score(value) {
+      state.score += value || 1;
+
+      renderScore();
+    }
+    function renderScore() {
+      for (var i = 0; i < scoreEls.length; i++) {
+        scoreEls[i].textContent = state.score;
+      }
+    }
+
+    function toggleScreen(screen) {
+      if (activeScreen) {
+        activeScreen.classList.remove('is-active');
+      }
+
+      screen.classList.add('is-active');
+      activeScreen = screen;
+    }
+
+    function toggleTheme(value) {
+      document.body.classList.remove(theme);
+      document.body.classList.add(value);
+      theme = value;
+
+      storage.setItem('theme', value);
+    }
+
+    // Game Logic
+    // Events
+    window.onmousemove = eyesFollow;
+    window.document.addEventListener(clickOrTap, shoot);
+    for (var i = 0; i < targets.length; i++) {
+      targets[i].addEventListener(clickOrTap, hit);
+    }
+
+    function shoot(e) {
+      eyesFollow(e);
+      // deadFly.classList.remove('is-active');
+
+      player.classList.remove('is-active');
+      tongue.style.height = 0 + "px";
+      tongue.style.transform = "rotate(" + 0 + "deg)";
+
+      var tongueX = tongue.getBoundingClientRect().left + (tongue.offsetWidth);
+      var tongueY = tongue.getBoundingClientRect().bottom;
+      var touch = getTouch(e);
+      var clickX = touch.x + (tongue.offsetWidth / 2);
+      var clickY = touch.y;
+
+      shooting = true;
+      transitioning = true;
+
+      var angle = getAngle(tongueX, tongueY, clickX, clickY);
+      var height = getHeight(tongueX, tongueY, clickX, clickY);
+
+      if (angle > 0 && angle < 180) {
+        player.classList.add('is-shooting-down');
+      } else {
+        player.classList.remove('is-shooting-down');
+      }
+
+      player.classList.add('is-active');
+      tongue.style.height = height + "px";
+      tongue.style.transform = "rotate(" + (angle + 90) + "deg)";
+    }
+    function hit(e) {
+      var path = this.parentNode;
+      var id = path.getAttribute('data-id');
+
+      if (!e.isTrusted || hidden.includes(id)) {
+        return;
+      }
+      if (state.score % 2 == 0) {
+        deadFly.classList.add('is-active2');
+        deadFly.classList.remove('is-active');
+      } else {
+        deadFly.classList.add('is-active');
+        deadFly.classList.remove('is-active2');
+      }
+      path.classList.remove('is-active');
+      path.classList.add('is-hidden');
+      hidden.push(id);
+
+      // Show dead fly on tongue
+      //deadFly.classList.add('is-active');
+      // console.log('show dead fly');
+
+      setTimeout(function () {
+        var id = hidden.shift();
+        paths[id].classList.remove('is-hidden');
+      }, 1000);
+
+      score();
+    }
+
+    function eyesFollow(e) {
+      var touch = getTouch(e);
+      moveEye({ x: touch.x, y: touch.y }, eyes[0], pupils[0]);
+      moveEye({ x: touch.x, y: touch.y }, eyes[1], pupils[1]);
+    }
+
+    function moveEye(mouse, eye, pupil) {
+      var left = 0;
+      var top = 0;
+      var eyeRadius = eye.offsetWidth / 2;
+      var pupilRadius = pupil.offsetWidth / 2;
+
+      var leftOffset = eye.getBoundingClientRect().left;
+      var topOffset = eye.getBoundingClientRect().top;
+
+      var center = [eye.getBoundingClientRect().left + eyeRadius, eye.getBoundingClientRect().top + eyeRadius];
+
+      var dist = getDistance([mouse.x, mouse.y], center);
+
+      if (dist <= eyeRadius) {
+        left = mouse.x - leftOffset - eyeRadius;
+        top = mouse.y - topOffset - eyeRadius;
+      } else {
+        var x = mouse.x - center[0];
+        var y = mouse.y - center[1];
+        var radians = Math.atan2(y, x);
+        left = (Math.cos(radians) * (eyeRadius - pupilRadius));
+        top = (Math.sin(radians) * (eyeRadius - pupilRadius));
+      }
+
+      // if (top > 0) {
+      //   eye.classList.add('down');
+      //   eye.classList.remove('up');
+      //   console.log('down');
+      // } else {
+      //   eye.classList.add('up');
+      //   eye.classList.remove('down');
+      //   console.log('up');
+      // }
+
+      pupil.style.transform = "translate(" + left + "px, " + top + "px)";
+    }
+
+    function getRandomPath(lanes) {
+      const idx = Math.floor(Math.random() * paths.length);
+      const path = paths[idx];
+      if (path === lastPath || paths[idx].classList.contains('is-hidden')) {
+        // console.log('Ah nah thats the same one bud');
+        return getRandomPath(paths);
+      }
+      lastPath = path;
+      return path;
+    }
+
+    function peep() {
+      const time = getRandomTime(600, 1200);
+      const path = getRandomPath(paths);
+      path.classList.add('is-active');
+      setTimeout(function () {
+        path.classList.remove('is-active');
+        if (playing) {
+          peep();
+        }
+      }, time);
+    }
+
+    // Utility
+    function getRandomTime(min, max) {
+      return Math.round(Math.random() * (max - min) + min);
+    }
+
+    function getDistance(dot1, dot2) {
+      var x1 = dot1[0],
+        y1 = dot1[1],
+        x2 = dot2[0],
+        y2 = dot2[1];
+
+      return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
+    }
+
+    function getAngle(cx, cy, ex, ey) {
+      var dy = ey - cy;
+      var dx = ex - cx;
+      var theta = (Math.atan2(dy, dx)) * 180 / Math.PI;
+
+      return theta;
+    }
+
+    function getHeight(x1, y1, x2, y2) {
+      var a = x1 - x2;
+      var b = y1 - y2;
+
+      return Math.sqrt(a * a + b * b);
+    }
+
+    function getTouch(e) {
+      if (e.touches) {
+        return {
+          x: e.touches[0].clientX,
+          y: e.touches[0].clientY
+        }
+      } else {
+        return {
+          x: e.clientX,
+          y: e.clientY
+        }
+      }
+    }
+  </script>
+
+</body>
+
+</html>

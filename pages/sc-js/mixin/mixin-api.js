@@ -8,7 +8,6 @@ export default {
 			return this.scApi(vUrl, vParams, vConfig);
 		},
 		$apiJson(vConfig) {
-			this.mGlobal.index.mask = "数据拉取中...";
 			const config = vConfig ? vConfig : {};
 			if (
 				this.mMenus &&
@@ -154,6 +153,9 @@ export default {
 			}
 			return this.mApi.url.keys[this.mApi.url.key] + vUrl;
 		},
+		scUrlNew(url) {
+			return url + `?${Date.now()}`;
+		},
 		scParams(vParams) {
 			return vParams;
 		},
@@ -195,7 +197,12 @@ export default {
 				if (objRes) {
 					console.log(666.001, objRes);
 					objRes.lv = 1;
-					resolve(objRes);
+					this.uniApiRequestVer(url, params, config, dataKey, objRes).then(
+						res => {
+							resolve(res)
+						}).catch(err => {
+						reject(err)
+					})
 				} else {
 					uni.getStorage({
 						key: dataKey,
@@ -205,46 +212,94 @@ export default {
 							console.log(666.002, objRes);
 							this.scSetData(dataKey, objRes);
 							objRes.lv = 2;
-							resolve(objRes);
+							this.uniApiRequestVer(url, params, config, dataKey, objRes).then(
+								res => {
+									resolve(res)
+								}).catch(err => {
+								reject(err)
+							})
 						},
 						fail: (errSto) => {
-							this.mGlobal.index.mask = "正在从网络拉取数据...";
-							this.uniLight(true);
-							let uniRequest;
-							if (this.mApi.typeUni) {
-								uniRequest = this.uniApiJson(url, params, config);
-							} else {
-								uniRequest = this.uniDownJson(url, params, config);
-							}
-							uniRequest
-								.then((res) => {
-									objRes = this.scToObj(res);
-									objRes = this.scRes(objRes.data);
-									console.log(666.003, objRes);
-									uni.setStorage({
-										key: dataKey,
-										data: objRes,
-										success: () => {},
-										complete: () => {
-											this.scSetData(dataKey, objRes);
-											objRes.lv = 3;
-											resolve(objRes);
-										},
-									});
-								})
-								.catch((err) => {
-									console.log(666.0012, err);
-									reject(err);
-								});
+							this.uniApiRequest(url, params, config, dataKey).then(res => {
+								resolve(res)
+							}).catch(err => {
+								reject(err)
+							})
 						},
 					});
+				}
+			});
+		},
+		uniApiRequestVer(url, params, config, dataKey, curRes) {
+			return new Promise((resolve, reject) => {
+				this.uniApiJsonVer(url, params, config).then(res => {
+					if (res && res.ver && res.ver > curRes.ver) {
+						this.uniApiRequest(url, params, config, dataKey).then(ress => {
+							resolve(ress)
+						}).catch(err => {
+							reject(err)
+						})
+					} else {
+						resolve(curRes)
+					}
+				}).catch(err => {
+					reject(err)
+				})
+			});
+		},
+		uniApiRequest(url, params, config, dataKey) {
+			return new Promise((resolve, reject) => {
+				let objRes;
+				this.mGlobal.index.mask = "正在从网络拉取数据...";
+				this.uniLight(true);
+				let uniRequest;
+				if (this.mApi.typeUni) {
+					uniRequest = this.uniApiJson(url, params, config);
+				} else {
+					uniRequest = this.uniDownJson(url, params, config);
+				}
+				uniRequest
+					.then((res) => {
+						objRes = this.scToObj(res);
+						objRes = this.scRes(objRes.data);
+						console.log(666.003, objRes);
+						uni.setStorage({
+							key: dataKey,
+							data: objRes,
+							success: () => {},
+							complete: () => {
+								this.scSetData(dataKey, objRes);
+								objRes.lv = 3;
+								resolve(objRes);
+							},
+						});
+					})
+					.catch((err) => {
+						console.log(666.0012, err);
+						reject(err);
+					});
+			});
+		},
+		uniApiJsonVer(url, params, config) {
+			return new Promise((resolve, reject) => {
+				if (this.mApi.typeFetch) {
+					this.mGlobal.index.mask = "正在核验数据是否需要升级...";
+					this.uniApiJson(url.slice(0, -7) + 'ver.json', params, config).then(res => {
+						resolve(this.scRes(this.scToObj(res).data))
+					}).catch((err) => {
+						reject(err);
+					})
+				} else {
+					resolve({
+						ver: 0
+					})
 				}
 			});
 		},
 		uniApiJson(url, params, config) {
 			return new Promise((resolve, reject) => {
 				uni.request({
-					url: url,
+					url: this.scUrlNew(url),
 					data: params,
 					method: config.method || "POST", // 'GET'||'POST'
 					header: config.header,
@@ -270,7 +325,7 @@ export default {
 				}
 				this.mrTasks.cur = dataKey;
 				this.mrTasks[dataKey] = uni.downloadFile({
-					url: url,
+					url: this.scUrlNew(url),
 					data: params,
 					method: "GET",
 					header: config.header,

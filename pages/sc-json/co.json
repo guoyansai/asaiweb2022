@@ -1,177 +1,178 @@
 {
-  "ver": 20210320222758,
-  "tt": "啾噗配置文件",
-  "sn": "www909pub",
-  "config": {
-    "api": {
-      "type": "uni",
-      "typeUni": 0,
-      "url": {
-        "key": "fu",
-        "keys": {
-          "fu": "http://appdata.fu.asai.cc/data",
-          "gitee": "http://guoyansai.gitee.io/appcmsdata/data",
-          "github": "http://appdata.github.asai.cc/data"
-        }
-      },
-      "timeout": 60000000,
-      "dataStart": "SC-"
-    },
-    "global": {
-      "data": {},
-      "haha": "试试看",
-      "index": {
-        "header": {
-          "height": "58px",
-          "backgroundImage": "url('http://www.asai.cc/img/b5.jpg')"
-        }
-      },
-      "url": {
-        "dir": "index",
-        "menu": "",
-        "params": {
-          "ty": "list",
-          "sn": "",
-          "sp": 0,
-          "st": 0,
-          "sl": 0,
-          "ss": "",
-          "ps": 20,
-          "pg": 1,
-          "pa": 0,
-          "pc": 1
-        }
-      }
-    },
-    "menu": {
-      "index": {
-        "title": "首页",
-        "type": 0,
-        "file": "sySetting",
-        "url": {
-          "dir": "index",
-          "menu": ""
-        }
-      },
-      "pub909": {
-        "title": "啾噗",
-        "type": 0,
-        "file": "sySetting",
-        "url": {
-          "dir": "pub909",
-          "menu": ""
-        }
-      },
-      "info": {
-        "title": "书库",
-        "type": 11,
-        "file": "scInfo",
-        "url": {
-          "dir": "info",
-          "menu": "",
-          "params": {
-            "ty": "list",
-            "sn": "",
-            "sp": 0,
-            "st": 0,
-            "sl": 0,
-            "ss": "",
-            "ps": 20,
-            "pg": 1,
-            "pa": 0,
-            "pc": 1
-          }
-        }
-      },
-      "joy": {
-        "title": "娱乐",
-        "type": 0,
-        "file": "test",
-        "url": {
-          "dir": "joy",
-          "menu": ""
-        }
-      },
-      "test": {
-        "title": "互动",
-        "type": 0,
-        "file": "test",
-        "url": {
-          "dir": "test",
-          "menu": "",
-          "params": {
-            "ty": "list",
-            "sn": "",
-            "sp": 0,
-            "st": 0,
-            "sl": 0,
-            "ss": "",
-            "ps": 20,
-            "pg": 1,
-            "pa": 0,
-            "pc": 1
-          }
-        }
-      },
-      "book": {
-        "title": "留言",
-        "type": 0,
-        "file": "sySetting",
-        "url": {
-          "dir": "book",
-          "menu": ""
-        }
-      },
-      "setting": {
-        "title": "设置",
-        "type": 0,
-        "file": "sySetting",
-        "url": {
-          "dir": "setting",
-          "menu": ""
-        }
-      }
-    }
-  },
-  "db": {
-    "info": {
-      "ty": {
-        "ll": {
-          "art": "文章",
-          "ask": "问题",
-          "one": "短句",
-          "pic": "图片",
-          "lip": "图文",
-          "pub": "瀑布"
-        },
-        "ls": {
-          "art": "文章",
-          "ask": "问题",
-          "one": "短句",
-          "pic": "图片",
-          "pro": "商品"
-        },
-        "le": {
-          "art": "文章",
-          "ask": "问题",
-          "one": "短句",
-          "pic": "图片",
-          "pro": "商品"
-        }
-      },
-      "md": {
-        "id": "编号",
-        "sn": "编码",
-        "tt": "标题",
-        "co": "内容",
-        "mo": "备注",
-        "ic": "图标",
-        "us": "用户",
-        "ur": "网址",
-        "cd": "创建",
-        "rd": "更新",
-        "xy": "状态"
-      }
-    }
-  }
+	"ver": 20210320222758,
+	"tt": "啾噗配置文件",
+	"sn": "www909pub",
+	"config": {
+		"api": {
+			"type": "uni",
+			"typeFetch": 0,
+			"typeUni": 0,
+			"url": {
+				"key": "fu",
+				"keys": {
+					"fu": "http://appdata.fu.asai.cc/data",
+					"gitee": "http://guoyansai.gitee.io/appcmsdata/data",
+					"github": "http://appdata.github.asai.cc/data"
+				}
+			},
+			"timeout": 60000000,
+			"dataStart": "SC-"
+		},
+		"global": {
+			"data": {},
+			"haha": "试试看",
+			"index": {
+				"header": {
+					"height": "58px",
+					"backgroundImage": "url('http://www.asai.cc/img/b5.jpg')"
+				}
+			},
+			"url": {
+				"dir": "index",
+				"menu": "",
+				"params": {
+					"ty": "list",
+					"sn": "",
+					"sp": 0,
+					"st": 0,
+					"sl": 0,
+					"ss": "",
+					"ps": 20,
+					"pg": 1,
+					"pa": 0,
+					"pc": 1
+				}
+			}
+		},
+		"menu": {
+			"index": {
+				"title": "首页",
+				"type": 0,
+				"file": "sySetting",
+				"url": {
+					"dir": "index",
+					"menu": ""
+				}
+			},
+			"pub909": {
+				"title": "啾噗",
+				"type": 0,
+				"file": "sySetting",
+				"url": {
+					"dir": "pub909",
+					"menu": ""
+				}
+			},
+			"info": {
+				"title": "书库",
+				"type": 11,
+				"file": "scInfo",
+				"url": {
+					"dir": "info",
+					"menu": "",
+					"params": {
+						"ty": "list",
+						"sn": "",
+						"sp": 0,
+						"st": 0,
+						"sl": 0,
+						"ss": "",
+						"ps": 20,
+						"pg": 1,
+						"pa": 0,
+						"pc": 1
+					}
+				}
+			},
+			"joy": {
+				"title": "娱乐",
+				"type": 0,
+				"file": "test",
+				"url": {
+					"dir": "joy",
+					"menu": ""
+				}
+			},
+			"test": {
+				"title": "互动",
+				"type": 0,
+				"file": "test",
+				"url": {
+					"dir": "test",
+					"menu": "",
+					"params": {
+						"ty": "list",
+						"sn": "",
+						"sp": 0,
+						"st": 0,
+						"sl": 0,
+						"ss": "",
+						"ps": 20,
+						"pg": 1,
+						"pa": 0,
+						"pc": 1
+					}
+				}
+			},
+			"book": {
+				"title": "留言",
+				"type": 0,
+				"file": "sySetting",
+				"url": {
+					"dir": "book",
+					"menu": ""
+				}
+			},
+			"setting": {
+				"title": "设置",
+				"type": 0,
+				"file": "sySetting",
+				"url": {
+					"dir": "setting",
+					"menu": ""
+				}
+			}
+		}
+	},
+	"db": {
+		"info": {
+			"ty": {
+				"ll": {
+					"art": "文章",
+					"ask": "问题",
+					"one": "短句",
+					"pic": "图片",
+					"lip": "图文",
+					"pub": "瀑布"
+				},
+				"ls": {
+					"art": "文章",
+					"ask": "问题",
+					"one": "短句",
+					"pic": "图片",
+					"pro": "商品"
+				},
+				"le": {
+					"art": "文章",
+					"ask": "问题",
+					"one": "短句",
+					"pic": "图片",
+					"pro": "商品"
+				}
+			},
+			"md": {
+				"id": "编号",
+				"sn": "编码",
+				"tt": "标题",
+				"co": "内容",
+				"mo": "备注",
+				"ic": "图标",
+				"us": "用户",
+				"ur": "网址",
+				"cd": "创建",
+				"rd": "更新",
+				"xy": "状态"
+			}
+		}
+	}
 }

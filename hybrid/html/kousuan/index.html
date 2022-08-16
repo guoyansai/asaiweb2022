@@ -1,0 +1,193 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>口算题,计算题,在线加减乘除</title>
+    <meta name="keywords" content="口算题,计算题,在线加减乘除">
+    <meta name="description" content="口算题,计算题,在线加减乘除">
+    <meta name="copyright" content="阿赛工作室,郭言赛,asai.cc">
+    <style>
+        .asaijsk {
+            width: 100%;
+        }
+
+        .asaijssh,
+        .asaijsin {
+            width: 100%;
+            height: 58px;
+            font-size: 36px;
+        }
+
+        .inftd {
+            text-align: center;
+        }
+
+        .inptbig {
+            font-size: 28px;
+        }
+
+        .inpj {
+            border: 0px;
+            width: 20px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .inpt1,
+        .inpt2,
+        .inpt3,
+        .inpt30,
+        .inpt31 {
+            width: 100%;
+            text-align: center;
+            height: 38px;
+            font-size: 22px;
+        }
+
+        .inpt1,
+        .inpt3,
+        .inpt30,
+        .inpt31 {
+            border: 0px;
+        }
+
+        .inpt1 {
+            letter-spacing: 6px;
+        }
+
+        .inpt3 {
+            display: none;
+        }
+
+        .inpt30 {
+            color: #0C0;
+            display: block;
+        }
+
+        .inpt31 {
+            color: #F00;
+            display: block;
+        }
+
+        .inftr {
+            background-color: #F5F5F5;
+        }
+
+        .inftr .inpt1,
+        .inftr .inpt3,
+        .inftr .inpt30,
+        .inftr .inpt31,
+        .inftr .inpj {
+            background-color: #F5F5F5;
+        }
+
+        .inpx {
+            width: 5%;
+            text-align: center;
+        }
+
+        #asaijskshow {
+            width: 100%;
+        }
+    </style>
+    <script>
+        function asaiksSC() {
+            var asaiksshow = '<table class="asaijsk" border="0" cellpadding="5" cellspacing="0" align="center"><tr class="inftr"><td colspan="5" align="center">耗时：<input class="inpj" type="text" name="jsh" id="jsh" value="0">时<input class="inpj" type="text" name="jsm" id="jsm" value="0">分<input class="inpj" type="text" name="jss" id="jss" value="0">秒</td></tr><tr class="inftr"><td class="inftd" width="18%"></td><td class="inftd" width="38%"></td><td class="inftd"></td><td class="inftd" width="18%"></td><td class="inftd"></td></tr>';
+            var asaiksna = Number(document.getElementById("ksxa").value);
+            var asaiksnb = Number(document.getElementById("ksxb").value);
+            var asaiksa, asaiksb, asaiksf, asaiksc, asaiksy, asaiksz;
+            var asaiksx = '';
+            for (var asaiksi = 1; asaiksi < 21; asaiksi++) {
+                asaiksf = document.getElementById("ksxf").value;
+                asaiksa = asaiksna + Math.ceil(Math.random() * asaiksnb);
+                asaiksb = asaiksna + Math.ceil(Math.random() * asaiksnb);
+                if (asaiksf == "/" || asaiksf == "-") {
+                    if (asaiksa < asaiksb) {
+                        asaiksc = asaiksb;
+                        asaiksb = asaiksa;
+                        asaiksa = asaiksc;
+                    }
+                }
+                asaiksy = asaiksa + asaiksf + asaiksb;
+                asaiksz = eval(asaiksy);
+                if (asaiksf == "/" & asaiksa % asaiksb !== 0) { asaiksi = asaiksi - 1; } else {
+                    if (asaiksx.indexOf(asaiksy + '=') == -1) {
+                        asaiksx = asaiksx + asaiksy + '=';
+                        if (asaiksi % 2 == 0) { asaiksshow = asaiksshow + '<tr class="inftr">'; } else { asaiksshow = asaiksshow + '<tr>'; }
+                        asaiksshow = asaiksshow + '<td class="inftd">第' + asaiksi + '题</td><td class="inftd"><input class="inpt1" type="text" readonly id="jst' + asaiksi + '" value="' + asaiksy.replace('*', '×').replace('/', '÷') + '"></td><td class="inftd inptbig">=</td><td class="inftd"><input class="inpt2" type="number" id="jsj' + asaiksi + '" value=""></td><td class="inftd inptbig"><input class="inpt3" type="text" readonly id="jsx' + asaiksi + '" value="' + asaiksz + '"></td></tr>';
+                    } else {
+                        asaiksi = asaiksi - 1;
+                    }
+                }
+            }
+            asaiksshow = asaiksshow + '<tr><td colspan="5"><input type="button" value="提交打分" id="result" onclick="asaiksFR()" class="asaijsin"></td></tr></table>';
+            document.getElementById("asaijskshow").innerHTML = asaiksshow;
+        }
+
+        function asaiksFR() {
+            var asaikszf = 0;
+            for (var asaiksi = 1; asaiksi < 21; asaiksi++) {
+                var asaiksjid = document.getElementById("jsj" + asaiksi);
+                var asaiksxid = document.getElementById("jsx" + asaiksi);
+                var asaiksj = asaiksjid.value;
+                var asaiksx = asaiksxid.value;
+                if (asaiksj == asaiksx) {
+                    asaikszf = asaikszf + 5;
+                    asaiksxid.value = "对";
+                    asaiksxid.className = "inpt30";
+                } else {
+                    asaiksxid.className = "inpt31";
+                }
+            }
+            alert("本次得分：" + asaikszf + " 分，耗时：" + document.getElementById("jsh").value + "时" + document.getElementById("jsm").value + "分" + document.getElementById("jss").value + "秒。");
+        }
+    </script>
+</head>
+
+<body>
+    <script type="text/javascript">
+        var int = self.setInterval("ksjsq()", 1000);
+        function ksjsq() {
+            var ksjs = parseInt(document.getElementById("jss").value);
+            if (ksjs > 59) {
+                var ksjm = parseInt(document.getElementById("jsm").value);
+                if (ksjm > 59) {
+                    var ksjh = parseInt(document.getElementById("jsh").value);
+                    document.getElementById("jsh").value = ksjh + 1;
+                    document.getElementById("jsm").value = 0;
+                    document.getElementById("jss").value = 0;
+                }
+                else {
+                    document.getElementById("jsm").value = ksjm + 1;
+                    document.getElementById("jss").value = 0;
+                }
+            } else { document.getElementById("jss").value = ksjs + 1; }
+
+        }
+    </script>
+    <table class="asaijsk" border="0" cellpadding="5" cellspacing="0" align="center">
+        <tr class="inftr">
+            <td align="center">
+                <h1>口算题</h1>
+                <input class="inpx" type="number" id="ksxa" value="0">
+                —
+                <input class="inpx" type="number" id="ksxb" value="10"><input type="hidden" id="ksxf" value="+"><br><br>
+                <input type="radio" id="ksxx1" value="+" name="ksxx" onClick="ksxf.value=this.value" checked><label
+                    for="ksxx1">加</label>
+                <input type="radio" id="ksxx2" value="-" name="ksxx" onClick="ksxf.value=this.value"><label
+                    for="ksxx2">减</label>
+                <input type="radio" id="ksxx3" value="*" name="ksxx" onClick="ksxf.value=this.value"><label
+                    for="ksxx3">乘</label>
+                <input type="radio" id="ksxx4" value="/" name="ksxx" onClick="ksxf.value=this.value"><label
+                    for="ksxx4">除</label><br><br>
+                <input type="button" style="height:28px;" value="生成口算题" onclick="asaiksSC()"><br><br>
+            </td>
+        </tr>
+    </table>
+    <div id="asaijskshow"></div>
+</body>
+
+</html>

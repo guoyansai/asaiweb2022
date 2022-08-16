@@ -13,10 +13,15 @@
 			<radio value="1" :checked="mApi.typeUni===1" @click="mApi.typeUni=1" />接口请求
 		</li>
 		<li>
+			<label>自动更新：</label>
+			<radio value="0" :checked="mApi.typeFetch===0" @click="mApi.typeFetch=0" />关闭更新 　
+			<radio value="1" :checked="mApi.typeFetch===1" @click="mApi.typeFetch=1" />打开更新
+		</li>
+		<li>
 			<saInput label="超时" v-model="mApi.timeout"></saInput>
 		</li>
 		<li>
-			<saInput label="缓存前缀" v-model="mApi.datastart"></saInput>
+			<saInput label="缓存前缀" v-model="mApi.dataStart"></saInput>
 		</li>
 		<li>
 			<saInput label="项目类型" v-model="mApi.type"></saInput>
