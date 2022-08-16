@@ -145,7 +145,7 @@ header img {
 	margin-top: 8px;
 	width: 90px;
 	height: 160px;
-	padding: 6px 12px;
+	padding: 6px;
 	overflow: hidden;
 	text-align: center;
 	cursor: pointer;
@@ -153,7 +153,29 @@ header img {
 	box-shadow: #ccddd8 -2px 0 2px;
 	display: flex;
 	flex-direction: column;
-	justify-items: center;
+	justify-content: center;
+	align-items: center;
+}
+
+.list li dl dt {
+	width: 100%;
+	height: auto;
+	box-shadow: inset #ccddd8 0 0 20px;
+	margin-bottom: 6px;
+}
+
+.list li dl dd {
+	width: 100%;
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 6px;
+	word-break: keep-all;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .list dl {
