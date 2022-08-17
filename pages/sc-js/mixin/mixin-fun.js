@@ -5,7 +5,7 @@ export default {
 	methods: {
 		mgfGo(item) {
 			const ur = this.mgfVal(item, "ur");
-			if (ur) {
+			if (ur && ur.indexOf('http') === -1) {
 				this.$setUrl(
 					this.mGlobal.url.dir,
 					ur.replace(`/${this.mGlobal.url.dir}/`, "") + item[0], {
@@ -35,10 +35,10 @@ export default {
 			}
 			return tmpVal
 		},
-		mgfPic(item, key){
+		mgfPic(item, key) {
 			let tmpVal = this.mgfValue(item, key);
-			tmpVal=tmpVal.replace(/[^\u4e00-\u9fa5]/g,'<Br>')
-			tmpVal=tmpVal.replace(/(<Br>)+/g,'<Br>')
+			tmpVal = tmpVal.replace(/[^\u4e00-\u9fa5]/g, '<Br>')
+			tmpVal = tmpVal.replace(/(<Br>)+/g, '<Br>')
 			return tmpVal;
 		}
 	}

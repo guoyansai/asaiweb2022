@@ -2,11 +2,19 @@
 	"pages": [{
 		"path": "pages/index",
 		"style": {
-			"navigationBarTitleText": "uni-app"
+			"navigationBarTitleText": "啾噗"
 		}
 	}],
 	"globalStyle": {
-		"navigationStyle": "custom"
+		"enablePullDownRefresh": true,
+		"onReachBottomDistance": 88,
+		"pageOrientation": "auto",
+		"animationType": "fade-in",
+		"animationDuration": 120,
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "啾噗",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
 	},
 	"uniIdRouter": {}
 }

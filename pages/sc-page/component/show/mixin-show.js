@@ -3,6 +3,7 @@ import saShowask from './sa-show-ask';
 import saShowone from './sa-show-one';
 import saShowpic from './sa-show-pic';
 import saShowpro from './sa-show-pro';
+import saShowweb from './sa-show-web';
 
 export default {
 	components: {
@@ -11,5 +12,6 @@ export default {
 		saShowone,
 		saShowpic,
 		saShowpro,
+		saShowweb,
 	}
 }
