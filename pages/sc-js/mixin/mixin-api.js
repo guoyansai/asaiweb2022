@@ -29,12 +29,17 @@ export default {
 			}
 		},
 		$getUrl() {
-			const locations = (
-				((location || {}).hash || "").substring(2) + "//"
-			).split("/");
-			this.mGlobal.url.dir = this.paramsCode(locations[0], 1);
-			this.mGlobal.url.menu = this.paramsCode(locations[1], 1);
-			Object.assign(this.mGlobal.url.params, this.paramsUrl(locations[2]));
+			if (this.isUni) {
+				const route = this.uniRoute();
+				this.mGlobal.url.dir = this.paramsCode(route.options.dir, 1);
+				this.mGlobal.url.menu = this.paramsCode(route.options.menu, 1);
+			} else {
+				const locations = (
+					((location || {}).hash || "//////").substring(2)).split("/");
+				this.mGlobal.url.dir = this.paramsCode(locations[0], 1);
+				this.mGlobal.url.menu = this.paramsCode(locations[1], 1);
+				Object.assign(this.mGlobal.url.params, this.paramsUrl(locations[2]));
+			}
 			if (this.mGlobal.url.dir) {
 				this.$apiJson();
 			}
@@ -46,14 +51,29 @@ export default {
 				this.mGlobal.url.menu = menu;
 				this.$apiJson();
 			}
-			if (location) {
-				location.href =
-					"/#/" +
-					this.paramsCode(dir, 0) +
-					"/" +
-					this.paramsCode(menu, 0) +
-					"/" +
-					this.paramsObj(this.mGlobal.url.params);
+			if (this.isUni) {
+				const route = this.uniRoute();
+				// switchTab redirectTo navigateTo
+				uni.switchTab({
+					url: route.path +
+						'?dir=' +
+						this.paramsCode(dir, 0) +
+						"&menu=" +
+						this.paramsCode(menu, 0) +
+						"&param=" +
+						this.paramsObj(this.mGlobal.url.params)
+				});
+
+			} else {
+				if (location) {
+					location.href =
+						"/#/" +
+						this.paramsCode(dir, 0) +
+						"/" +
+						this.paramsCode(menu, 0) +
+						"/" +
+						this.paramsObj(this.mGlobal.url.params);
+				}
 			}
 		},
 		$setParams(params) {
@@ -114,6 +134,11 @@ export default {
 				);
 			}
 			return tmpLists;
+		},
+		uniRoute() {
+			const routes = getCurrentPages();
+			console.log(666.0000001, routes[routes.length - 1].$page)
+			return routes[routes.length - 1].$page;
 		},
 		// 接口请求综合部分--------
 		scApi(vUrl, vParams, vConfig) {

@@ -1,20 +1,84 @@
 {
-	"pages": [{
-		"path": "pages/index",
-		"style": {
-			"navigationBarTitleText": "啾噗"
+	"pages": [
+		//pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index",
+			"style": {
+				"navigationBarTitleText": "啾噗"
+			}
+		},
+		{
+			"path": "pages/tools",
+			"style": {
+				"navigationBarTitleText": "工具"
+			}
+		},
+		{
+			"path": "pages/love",
+			"style": {
+				"navigationBarTitleText": "聊吧"
+			}
+		},
+		{
+			"path": "pages/others",
+			"style": {
+				"navigationBarTitleText": "推荐"
+			}
+		},
+		{
+			"path": "pages/setting",
+			"style": {
+				"navigationBarTitleText": "更多"
+			}
+		},
+		{
+			"path": "pages/err",
+			"style": {
+				"navigationBarTitleText": "错误"
+			}
 		}
-	}],
+	],
 	"globalStyle": {
-		"enablePullDownRefresh": true,
-		"onReachBottomDistance": 88,
-		"pageOrientation": "auto",
-		"animationType": "fade-in",
-		"animationDuration": 120,
 		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "啾噗",
+		"navigationBarTitleText": "uni-app",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8"
 	},
-	"uniIdRouter": {}
+	"tabBar": {
+		"borderStyle": "#D8D8D8",
+		"backgroundColor": "#F8F8F8",
+		"color": "#999999",
+		"selectedColor": "#1188DD",
+		"list": [{
+				"pagePath": "pages/index",
+				"iconPath": "pages/sc-static/ico/ico-mags.png",
+				"selectedIconPath": "pages/sc-static/ico/ico-mags-cur.png",
+				"text": "啾噗"
+			},
+			{
+				"pagePath": "pages/tools",
+				"iconPath": "pages/sc-static/ico/ico-tools.png",
+				"selectedIconPath": "pages/sc-static/ico/ico-tools-cur.png",
+				"text": "工具"
+			},
+			{
+				"pagePath": "pages/love",
+				"iconPath": "pages/sc-static/ico/ico-love.png",
+				"selectedIconPath": "pages/sc-static/ico/ico-love-cur.png",
+				"text": "聊吧"
+			},
+			{
+				"pagePath": "pages/others",
+				"iconPath": "pages/sc-static/ico/ico-others.png",
+				"selectedIconPath": "pages/sc-static/ico/ico-others-cur.png",
+				"text": "推荐"
+			},
+			{
+				"pagePath": "pages/setting",
+				"iconPath": "pages/sc-static/ico/ico-setting.png",
+				"selectedIconPath": "pages/sc-static/ico/ico-setting-cur.png",
+				"text": "更多"
+			}
+		]
+	}
 }
