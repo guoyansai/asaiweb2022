@@ -1,7 +1,7 @@
 <template>
 	<dl v-for="item in mgListArr" :key="item[0]" @click="showMo[item[0]]=!showMo[item[0]]">
 		<dt><span @click="mgfGo(item)">{{ mgfValue(item, "co") }}</span></dt>
-		<dd v-if="showMo[item[0]]">{{ mgfValue(item, "co") }}</dd>
+		<dd v-if="showMo[item[0]]">{{ mgfValue(item, "mo") }}</dd>
 	</dl>
 </template>
 

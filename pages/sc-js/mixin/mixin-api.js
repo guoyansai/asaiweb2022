@@ -5,6 +5,7 @@ export default {
 	methods: {
 		// $对外函数体--------
 		$api(vUrl, vParams, vConfig) {
+			console.log(666.333,vUrl, vParams, vConfig)
 			return this.scApi(vUrl, vParams, vConfig);
 		},
 		$apiJson(vConfig) {
@@ -33,12 +34,13 @@ export default {
 				const route = this.uniRoute();
 				this.mGlobal.url.dir = this.paramsCode(route.options.dir, 1);
 				this.mGlobal.url.menu = this.paramsCode(route.options.menu, 1);
+				Object.assign(this.mGlobal.url.params, this.paramsUrl(route.options.params));
 			} else {
-				const locations = (
-					((location || {}).hash || "//////").substring(2)).split("/");
-				this.mGlobal.url.dir = this.paramsCode(locations[0], 1);
-				this.mGlobal.url.menu = this.paramsCode(locations[1], 1);
-				Object.assign(this.mGlobal.url.params, this.paramsUrl(locations[2]));
+				const route = this.vueRoute();
+				console.log(666.123, route)
+				this.mGlobal.url.dir = this.paramsCode(route.query.dir, 1);
+				this.mGlobal.url.menu = this.paramsCode(route.query.menu, 1);
+				Object.assign(this.mGlobal.url.params, this.paramsUrl(route.query.params));
 			}
 			if (this.mGlobal.url.dir) {
 				this.$apiJson();
@@ -60,20 +62,21 @@ export default {
 						this.paramsCode(dir, 0) +
 						"&menu=" +
 						this.paramsCode(menu, 0) +
-						"&param=" +
+						"&params=" +
 						this.paramsObj(this.mGlobal.url.params)
 				});
-
 			} else {
-				if (location) {
-					location.href =
-						"/#/" +
-						this.paramsCode(dir, 0) +
-						"/" +
-						this.paramsCode(menu, 0) +
-						"/" +
-						this.paramsObj(this.mGlobal.url.params);
-				}
+				const route = this.vueRoute();
+				console.log(666.123, route)
+				this.$router.push(
+					route.path +
+					'?dir=' +
+					this.paramsCode(dir, 0) +
+					"&menu=" +
+					this.paramsCode(menu, 0) +
+					"&params=" +
+					this.paramsObj(this.mGlobal.url.params)
+				)
 			}
 		},
 		$setParams(params) {
@@ -134,6 +137,9 @@ export default {
 				);
 			}
 			return tmpLists;
+		},
+		vueRoute() {
+			return this.$route;
 		},
 		uniRoute() {
 			const routes = getCurrentPages();
@@ -452,7 +458,7 @@ export default {
 		},
 		paramsUrl(str) {
 			const tmpObj = {};
-			const arr = this.paramsSafe(str).split("_");
+			const arr = (this.paramsSafe(str) || '').split("_");
 			const len = arr.length;
 			if (len > 1) {
 				for (let i = 0; i < len; i++) {
