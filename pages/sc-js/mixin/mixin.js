@@ -9,7 +9,12 @@ export default {
 				dir,
 				menu,
 				params
-			} = item.url;
+			} = item.url
+			|| {
+				dir:'',
+				menu:'',
+				params:{},
+				};
 			this.$setUrl(dir, menu, params);
 		},
 	}

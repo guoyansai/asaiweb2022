@@ -9,9 +9,8 @@
 		components: {
 			index
 		},
-		onLoad() {
-			this.mGlobal.url.dir = 'info';
-			this.mGlobal.url.menu = 'c-l-link';
+		onShow() {
+			this.$setUrl('info', 'h5', {});
 		},
 	};
 </script>

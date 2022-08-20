@@ -8,8 +8,8 @@ export default {
 			if (ur && ur.indexOf('http') === -1) {
 				this.$setUrl(
 					this.mGlobal.url.dir,
-					ur.replace(`/${this.mGlobal.url.dir}/`, "") + item[0], {
-						ty: "list",
+					(ur.replace(`/${this.mGlobal.url.dir}/`, "") + item[0]), {
+						ty: "list"
 					}
 				);
 			} else {

@@ -5,69 +5,69 @@ export default {
 	methods: {
 		// $对外函数体--------
 		$api(vUrl, vParams, vConfig) {
-			console.log(666.333,vUrl, vParams, vConfig)
 			return this.scApi(vUrl, vParams, vConfig);
 		},
 		$apiJson(vConfig) {
 			const config = vConfig ? vConfig : {};
-			if (
-				this.mMenus &&
-				this.mMenus[this.mGlobal.url.dir] &&
-				+this.mMenus[this.mGlobal.url.dir].type > 10
-			) {
-				this.$api(
-					`${this.mUrl}/${this.mGlobal.url.dir}${
-            this.mGlobal.url.menu ? "/" + this.mGlobal.url.menu : ""
-          }/co.json`, {}, {
-						method: "get",
-						...config,
-					}
-				).then((res) => {
-					this.mData = res || {};
-				}).finally(() => {
-					this.mGlobal.index.mask = "";
-				});
-			}
+			this.mGlobal.url.dir = this.mGlobal.url.dir || 'info';
+			this.$api(
+				`${this.mUrl}
+					/
+					${this.mGlobal.url.dir}
+					${this.mGlobal.url.menu ? "/" + this.mGlobal.url.menu : ""}
+		  /co.json`, {}, {
+					method: "get",
+					...config,
+				}
+			).then((res) => {
+				this.mData = res || {};
+			}).finally(() => {
+				this.mGlobal.index.mask = "";
+			});
 		},
 		$getUrl() {
-			if (this.isUni) {
-				const route = this.uniRoute();
-				this.mGlobal.url.dir = this.paramsCode(route.options.dir, 1);
-				this.mGlobal.url.menu = this.paramsCode(route.options.menu, 1);
-				Object.assign(this.mGlobal.url.params, this.paramsUrl(route.options.params));
+			const route = this.vueRoute();
+			const dir = this.paramsCode(route.query.dir, 1);
+			const menu = this.paramsCode(route.query.menu, 1);
+			if (!this.checkSameStr(this.mGlobal.url.path, route.path)) {
+				this.mGlobal.url.path = route.path;
+				Object.assign(this.mGlobal.url.params, this.mParams, this.paramsUrl(route.query.params));
 			} else {
-				const route = this.vueRoute();
-				console.log(666.123, route)
-				this.mGlobal.url.dir = this.paramsCode(route.query.dir, 1);
-				this.mGlobal.url.menu = this.paramsCode(route.query.menu, 1);
 				Object.assign(this.mGlobal.url.params, this.paramsUrl(route.query.params));
 			}
-			if (this.mGlobal.url.dir) {
+			if (this.checkSameStr(this.mGlobal.url.menu, menu) || this.checkSameStr(this.mGlobal.url.dir, dir)) {
+				this.mGlobal.url.menu = menu;
+				this.mGlobal.url.dir = dir;
+				this.$apiJson();
+			}
+			console.log(666.333, Object.keys(this.mData).length)
+			if (Object.keys(this.mData).length < 1) {
 				this.$apiJson();
 			}
 		},
 		$setUrl(dir, menu, params) {
-			Object.assign(this.mGlobal.url.params, params);
-			if (this.mGlobal.url.menu !== menu || this.mGlobal.url.dir !== dir) {
+			const route = this.vueRoute();
+			let canGo = false;
+			if (!this.checkSameObj(this.mGlobal.url.params, params)) {
+				if (!this.checkSameStr(this.mGlobal.url.path, route.path)) {
+					this.mGlobal.url.path = route.path;
+					Object.assign(this.mGlobal.url.params, this.mParams, params);
+				} else {
+					Object.assign(this.mGlobal.url.params, params);
+				}
+				canGo = true;
+			}
+			console.log(666.1001, dir, menu, params)
+			if (!this.checkSameStr(this.mGlobal.url.menu, menu) || !this.checkSameStr(this.mGlobal.url.dir, dir)) {
+				canGo = true;
 				this.mGlobal.url.dir = dir;
 				this.mGlobal.url.menu = menu;
 				this.$apiJson();
 			}
-			if (this.isUni) {
-				const route = this.uniRoute();
-				// switchTab redirectTo navigateTo
-				uni.switchTab({
-					url: route.path +
-						'?dir=' +
-						this.paramsCode(dir, 0) +
-						"&menu=" +
-						this.paramsCode(menu, 0) +
-						"&params=" +
-						this.paramsObj(this.mGlobal.url.params)
-				});
-			} else {
-				const route = this.vueRoute();
-				console.log(666.123, route)
+			if (Object.keys(this.mData).length < 1) {
+				this.$apiJson();
+			}
+			if (canGo) {
 				this.$router.push(
 					route.path +
 					'?dir=' +
@@ -145,6 +145,24 @@ export default {
 			const routes = getCurrentPages();
 			console.log(666.0000001, routes[routes.length - 1].$page)
 			return routes[routes.length - 1].$page;
+		},
+		checkSameObj(p1, p2) {
+			let tmp = true
+			if (p1 && p2) {
+				Object.entries(p2).forEach(el => {
+					if (tmp && p1[el[0]] != el[1]) {
+						tmp = false;
+					}
+				})
+			}
+			return tmp
+		},
+		checkSameStr(p1, p2) {
+			let tmp = true
+			if (p1 && p2) {
+				return (p1 + '') === (p2 + '')
+			}
+			return tmp
 		},
 		// 接口请求综合部分--------
 		scApi(vUrl, vParams, vConfig) {
@@ -243,12 +261,13 @@ export default {
 							console.log(666.002, objRes);
 							this.scSetData(dataKey, objRes);
 							objRes.lv = 2;
-							this.uniApiRequestVer(url, params, config, dataKey, objRes).then(
-								res => {
-									resolve(res)
-								}).catch(err => {
-								reject(err)
-							})
+							this.uniApiRequestVer(url, params, config, dataKey, objRes)
+								.then(
+									res => {
+										resolve(res)
+									}).catch(err => {
+									reject(err)
+								})
 						},
 						fail: (errSto) => {
 							this.uniApiRequest(url, params, config, dataKey).then(res => {
@@ -377,11 +396,15 @@ export default {
 										fileEntry.file((file) => {
 											const fileReader = new plus.io
 												.FileReader();
-											fileReader.readAsText(file, "utf-8");
+											fileReader.readAsText(file,
+												"utf-8");
 											fileReader.onloadend = (e) => {
 												const rVal = {
-													data: JSON.parse(e
-														.target.result),
+													data: JSON
+														.parse(e
+															.target
+															.result
+														),
 												};
 												resolve(rVal);
 											};

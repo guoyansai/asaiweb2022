@@ -2,6 +2,12 @@
 	"pages": [
 		//pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
+			"path": "pages/mags",
+			"style": {
+				"navigationBarTitleText": "啾噗"
+			}
+		},
+		{
 			"path": "pages/index",
 			"style": {
 				"navigationBarTitleText": "啾噗"
@@ -41,16 +47,16 @@
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
-		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8"
+		"navigationBarBackgroundColor": "#f1f7f8",
+		"backgroundColor": "#f1f7f8"
 	},
 	"tabBar": {
-		"borderStyle": "#D8D8D8",
-		"backgroundColor": "#F8F8F8",
-		"color": "#999999",
-		"selectedColor": "#1188DD",
+		"borderStyle": "#ddeef8",
+		"backgroundColor": "#f1f7f8",
+		"color": "#557788",
+		"selectedColor": "#007aff",
 		"list": [{
-				"pagePath": "pages/index",
+				"pagePath": "pages/mags",
 				"iconPath": "static/ico/ico-mags.png",
 				"selectedIconPath": "static/ico/ico-mags-cur.png",
 				"text": "啾噗"

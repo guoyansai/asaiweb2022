@@ -1,6 +1,7 @@
 /* 调色板
 
 #003338|#288c78|#61736f|#ccddd8|#eff5f8|#fffff8
+#112238|#007aff|#557788|#ddeef8|#f1f7f8|#fffff8
 
  */
 
@@ -58,12 +59,12 @@ body {
 }
 
 a {
-	color: #003338;
+	color: #112238;
 	text-decoration: none;
 }
 
 a:hover {
-	color: #288c78;
+	color: #007aff;
 }
 
 
@@ -113,7 +114,7 @@ header img {
 .form li textarea,
 .form li picker {
 	flex-grow: 1;
-	border: #ccddd8 1px solid;
+	border: #ddeef8 1px solid;
 	padding: 6px 12px;
 }
 
@@ -132,9 +133,8 @@ header img {
 }
 
 .list {
-	border-top: #ccddd8 1px solid;
+	border-top: #ddeef8 1px solid;
 }
-
 .list li {
 	display: flex;
 	justify-content: space-around;
@@ -149,8 +149,8 @@ header img {
 	overflow: hidden;
 	text-align: center;
 	cursor: pointer;
-	border: #ccddd8 1px solid;
-	box-shadow: #ccddd8 -2px 0 2px;
+	border: #ddeef8 1px solid;
+	box-shadow: #ddeef8 -2px 0 2px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -160,7 +160,7 @@ header img {
 .list li dl dt {
 	width: 100%;
 	height: auto;
-	box-shadow: inset #ccddd8 0 0 20px;
+	box-shadow: inset #ddeef8 0 0 20px;
 	margin-bottom: 6px;
 }
 
@@ -178,22 +178,37 @@ header img {
 	text-overflow: ellipsis;
 }
 
+.list ul,
 .list dl {
 	padding: 6px 12px;
 	cursor: pointer;
-	border-bottom: #ccddd8 1px solid;
+	border-bottom: #ddeef8 1px solid;
 }
-
+.list ul dl{
+	padding: 0 0;
+	border-bottom-width: 0;
+}
+.list ul{
+	display: flex;
+}
+.list ul dl{
+	flex-grow: 1;
+}
+.list ul li img{
+	width: 120px;
+	max-height: 120px;
+	padding-right: 12px;
+}
 .list dl:hover {
-	background-color: #eff5f8;
+	background-color: #f1f7f8;
 }
 
 .list dl dt {
-	color: #288c78;
+	color: #007aff;
 }
 
 .list dl dd {
-	color: #61736f;
+	color: #557788;
 	font-size: small;
 }
 
@@ -213,7 +228,7 @@ header img {
 .search picker {
 	display: inline-block;
 	height: 26px;
-	border: 1px solid #ccddd8;
+	border: 1px solid #ddeef8;
 	margin: 0px 6px;
 	padding: 0 8px;
 	font-size: small;
@@ -227,7 +242,7 @@ header img {
 	width: 58px;
 	max-width: 58px;
 	text-align: center;
-	border: 1px solid #ccddd8;
+	border: 1px solid #ddeef8;
 	margin: 0px 6px;
 	font-size: small;
 }
@@ -235,7 +250,7 @@ header img {
 .page span,
 .list em,
 .show em {
-	border: 1px solid #ccddd8;
+	border: 1px solid #ddeef8;
 	display: inline-block;
 	height: 26px;
 	padding: 0 6px;
@@ -245,7 +260,7 @@ header img {
 
 .cur {
 	font-weight: bold;
-	background-color: #eff5f8;
+	background-color: #f1f7f8;
 }
 
 .mask,
@@ -268,19 +283,19 @@ header img {
 }
 
 .mask {
-	background-color: #eff5f888;
+	background-color: #f1f7f888;
 }
 
 .mask dl {
-	border: 1px solid #ccddd8;
-	background-color: #eff5f8aa;
+	border: 1px solid #ddeef8;
+	background-color: #f1f7f8aa;
 	padding: 20px;
 	border-radius: 6px;
 }
 
 .mask dt {
 	font-size: 14px;
-	color: #288c78;
+	color: #007aff;
 }
 
 .mask dd {
@@ -292,9 +307,9 @@ header img {
 }
 
 .toast span {
-	color: #61736f;
-	background-color: #eff5f8ff;
-	box-shadow: #ccddd8 2px 2px 2px;
+	color: #557788;
+	background-color: #f1f7f8ff;
+	box-shadow: #ddeef8 2px 2px 2px;
 	padding: 28px;
 	border-radius: 6px;
 	font-size: 12px;
@@ -324,13 +339,13 @@ header img {
 }
 
 .show dt {
-	border-top: #ccddd8 1px solid;
-	border-bottom: #ccddd8 1px solid;
-	color: #61736f;
+	border-top: #ddeef8 1px solid;
+	border-bottom: #ddeef8 1px solid;
+	color: #557788;
 }
 
 .show dd {
-	color: #288c78;
+	color: #007aff;
 }
 
 .show .pic {
@@ -338,6 +353,6 @@ header img {
 	text-align: center;
 }
 
-.show .pic img {
+.show img {
 	max-width: 100%;
 }

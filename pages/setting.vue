@@ -9,8 +9,8 @@
 		components: {
 			index
 		},
-		onLoad() {
-			this.mGlobal.url.dir = 'sySetting'
+		onShow() {
+			this.$setUrl('setting', '', {});
 		},
 	};
 </script>

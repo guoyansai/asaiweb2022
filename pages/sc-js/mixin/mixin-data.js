@@ -3,6 +3,9 @@ import scCo from "../../sc-json/co.json";
 export default {
 	data() {
 		return {
+			mParams: {
+				...scCo.config.global.url.params
+			},
 			mCo: scCo,
 			mRequest: {
 				tasks: {
@@ -54,7 +57,7 @@ export default {
 			set(val) {
 				this.mGlobal.data = val;
 			}
-		},		
+		},
 		mrTasks() {
 			return this.mRequest.tasks;
 		},

@@ -2,7 +2,7 @@
 	<dl class="page" v-if="params.pa">
 		<span @click="toPage(1)" v-if="params.pg > 3">首页</span>
 		<span @click="toPage(params.pg - 1)" v-if="params.pg > 1">上一页</span>
-		<span v-for="i in arrPage" :key="'page' + i" @click="toPage(i)" :class="{ curPage: i === +params.pg }">
+		<span v-for="i in arrPage" :key="'page' + i" @click="toPage(i)" :class="{ cur: i === +params.pg }">
 			{{ i }}
 		</span>
 		<span @click="toPage(params.pg + 1)" v-if="params.pg < params.pc">下一页</span>

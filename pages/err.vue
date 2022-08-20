@@ -21,9 +21,6 @@ export default {
     indexToast,
     page,
   },
-  onLoad() {
-    this.$getUrl();
-  },
 };
 </script>
 

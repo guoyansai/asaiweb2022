@@ -3,7 +3,6 @@
 </template>
 
 <script>
-	import test from "./test/index.vue";
 	import scInfo from "./sc-info/index.vue";
 	import sySetting from "./sy-setting/index.vue";
 
@@ -11,7 +10,6 @@
 		components: {
 			scInfo,
 			sySetting,
-			test,
 		},
 		computed: {
 			curFile() {
